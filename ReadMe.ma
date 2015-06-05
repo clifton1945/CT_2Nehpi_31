@@ -20,6 +20,14 @@ It's this impossible till now use of possessing the entire text that excites me.
     I'm back here now after styming at calculating significant words/phrases in Python and NLTK. I believe I need to SEE the effect when looking for THE SIGNIFICANT things to point out while reading. I have a much better understanding of NLTK tools. And with JSON I have a way to PROCESS in python and pass data to JS/HTML/CSS. If I need to. Maybe JS will be enough.
 
 PLAN see about the power of Regex in JS
+TODO can use
+    if (/(bapt[^\s]*)/i.test(subject)) {
+        // Successful match
+    } else {
+        // Match attempt failed
+     }
+ OR
+ result = subject.replace(/(bapt[^\s]*)/ig, "<span id='1'>$&</span>");
 TODO    HTML how link to a file of my text instead of in index.html
 TODO    how <a>nchor to another file.html
 
