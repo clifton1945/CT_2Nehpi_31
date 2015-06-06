@@ -16,7 +16,16 @@ Two area will build two frameworks:
 
 It's this impossible till now use of possessing the entire text that excites me. A reader at any verse DOES NOT know what will follow. The author MAY NOT HAVE known either. But we DO know! We have the entire text no matter where we serially.
 
-2015-06-05 11:36:22
+#######################################################################
+2015-06-06 10:23:05 comments on loading JSON from local.
+
+>> You can place your json to js file and save it to global variable. It is not asynchronous, but it can help.
+>> Another way to do it is to start a local HTTP server on your directory. On Ubuntu and MacOs with Python installed, it's a one-liner.
+Go to the directory containing your web files, and :
+python -m SimpleHTTPServer
+Then connect to http://localhost:8000/index.html with any web browser to test your page.
+
+2015-06-05 11:36:22   Overview and Status
     I'm back here now after styming at calculating significant words/phrases in Python and NLTK. I believe I need to SEE the effect when looking for THE SIGNIFICANT things to point out while reading. I have a much better understanding of NLTK tools. And with JSON I have a way to PROCESS in python and pass data to JS/HTML/CSS. If I need to. Maybe JS will be enough.
 
 PLAN see about the power of Regex in JS
@@ -31,6 +40,3 @@ TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
 
 TODO    HTML how link to a file of my text instead of in index.html
 TODO    how <a>nchor to another file.html
-
-2015-04-20 14:14:23
-C:/Users/CLIF/WebstormProjects/CT_2Nehpi_31/ReadMe.ma
