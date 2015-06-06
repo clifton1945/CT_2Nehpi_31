@@ -4,12 +4,12 @@
     color: greenyellow;
 }
 .bap {
-    color: blue;
+    color: green;
     font-weight: bold;
 }
 .expand {
-    font-size: xx-large;
+    font-size:smaller;
     font-weight: bolder;
-    color: red;
-    background-color: beige;
+    color: blue;
+    background-color: cornsilk;
 }

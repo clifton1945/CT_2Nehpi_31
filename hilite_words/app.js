@@ -19,35 +19,20 @@ function countThisWord (targetArr) {
 
     var text = $('div').text();
 
-    // make regex for each targetArr item.
-    var nTargets = targetArr.length;
-    while(nTargets--) {
-        // put ALL of these target Words into an Array ..
-        var targetWord = targetArr[nTargets];
-        // USING RegEx
-        var targetRegEx = new RegExp(targetWord, "img");
-        var x = text.search(targetRegEx);
-        MyLog(targetRegEx + " @ ndx:" + x);
-        // USING jQuery inArray
-/*
-        var trgtNdx = $.inArray( targetWord, wordsA, 0 );
-        MyLog(targetWord + " @ ndx:" + trgtNdx);
-*/
-
-    }
+    result = text.replace(/(bapt[^\s,-]+)/ig, "<span id='bap'>$&</span>");
 }
+
 
 function click_a_verse () {
     $('p').click(function () {
         $(this).toggle(1000, function () {
             //$(this).load('test_page_1.html');
-            alert(" toggled() a verse. BUT seeable after this alert.");
+            //alert(" toggled() a verse. BUT seeable after this alert.");
             $(this).addClass('expand');
-            $(this).toggle(2000);
+            $(this).toggle(1000);
         })
     });
     $('button').click( function() {
-        //window.open('test_page_1.html');
         $('#1').load('test_page_1.html');
     })
 }
@@ -58,4 +43,4 @@ var main = function () {
     //countThisWord(['bapti', 'brother', "Jacob", "Holy Ghost"]);
 };
 
-$(document).ready(main);
+//$(document).ready(main);
