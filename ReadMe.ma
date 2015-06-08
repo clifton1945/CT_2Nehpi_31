@@ -39,6 +39,3 @@ TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
      }
  OR
  result = subject.replace(/(bapt[^\s,-]+)/ig, "<span id='bap'>$&</span>");
-
-TODO    HTML how link to a file of my text instead of in index.html
-TODO    how <a>nchor to another file.html
