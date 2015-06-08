@@ -30,7 +30,6 @@ Then connect to http://localhost:8000/index.html with any web browser to test yo
 2015-06-05 11:36:22   Overview and Status
     I'm back here now after styming at calculating significant words/phrases in Python and NLTK. I believe I need to SEE the effect when looking for THE SIGNIFICANT things to point out while reading. I have a much better understanding of NLTK tools. And with JSON I have a way to PROCESS in python and pass data to JS/HTML/CSS. If I need to. Maybe JS will be enough.
 
-PLAN see about the power of Regex in JS
 TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
     if (/(bapt[^\s,-]+)/i.test(subject)) {
         // Successful match
@@ -39,3 +38,9 @@ TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
      }
  OR
  result = subject.replace(/(bapt[^\s,-]+)/ig, "<span id='bap'>$&</span>");
+
+
+ 2015-06-08 18:34:08  Learn_jQuery_2Nep31    a working header and verses 2Nep31 loads.
+ PLAN NEXT toggle css
+ PLAN NEXT OPEN AND CLOSE the two html files: verses and header
+ PLAN NEXT see about the power of Regex in JS
