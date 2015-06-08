@@ -1,24 +1,9 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>The jQuery 2Nep31</title>
+    <title>jQuery and 2Nep31 </title>
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
     </script>
-    <script type="text/javascript" language="javascript">
-        $(document).ready(function() {
-            $("#stage").click(function () {
-                $('#stage').load('../2Nep31_1_Header.html');
-                console.log("Finished #stage.click in $(document).ready(function).");
-            });
-
-            $("#driver").click(function () {
-                $('#mydiv').load('../2Nep31_1.html');
-                console.log("Finished #driver.click in $(document).ready(function).");
-            });
-
-        })
-    </script>
-
 </head>
 
 <body>
@@ -29,11 +14,12 @@
         Click on this to STAGE > 2Nep31_1 Header data.
     </div>
 
-
     <br><input type="button" id="driver" value="Load 2Nep31 verses Data" />
     <div id="mydiv">
         <br>Click on THIS to see 3Nep31_1.
     </div>
+
+    <script src="app.js"></script>
 </body>
 
 </html>
