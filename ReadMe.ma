@@ -40,7 +40,7 @@ TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
  result = subject.replace(/(bapt[^\s,-]+)/ig, "<span id='bap'>$&</span>");
 
 
- 2015-06-08 18:34:08  Learn_jQuery_2Nep31    a working header and verses 2Nep31 loads.
+ 2015-06-08 18:34:08  Learn_jQuery_2Nep31    a working header and verses 2Nep31 loads.  Now split js code into app.js
  PLAN NEXT toggle css
  PLAN NEXT OPEN AND CLOSE the two html files: verses and header
  PLAN NEXT see about the power of Regex in JS
