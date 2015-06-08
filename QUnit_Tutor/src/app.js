@@ -18,8 +18,7 @@ function countThisWord (targetArr) {
     // make Array of Words in this Chapter of Text.
 
     var text = $('div').text();
-
-    result = text.replace(/(bapt[^\s,-]+)/ig, "<span id='bap'>$&</span>");
+    var result = text.replaceAll(/(bapt[^\s,-]+)/ig, "<span id='bap'>$&</span>");
 }
 
 

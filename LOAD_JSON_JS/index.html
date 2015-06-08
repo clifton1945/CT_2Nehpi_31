@@ -1,44 +1,62 @@
 <!DOCTYPE html>
+
 <html>
+<head>
+</head>
 <body>
+    <div id="id01"></div>
+    <div id="id02"></div>
 
-<div id="id01"></div>
-<script>
-    var myArray = [
-        {
-            "display": "JavaScript Tutorial",
-            "url": "http://www.w3schools.com/js/default.asp"
-        },
-        {
-            "display": "jQuery Tutorial",
-            "url": "http://www.w3schools.com/jquery/default.asp"
-        },
-        {
-            "display": "HTML Tutorial",
-            "url": "http://www.w3schools.com/html/default.asp"
-        },
-        {
-            "display": "CSS Tutorial",
-            "url": "http://www.w3schools.com/css/default.asp"
-        }
-    ];
+    <a href="http://jquery.com/">jQuery</a>
+    <script src="jquery-2.1.4.js"></script>
 
-    myFunction(myArray);
+    <script>
+        var b = "hey, I hope to see this.";
+        document.getElementById("id01").innerHTML = b;
 
-//    function myFunction(arr) {
-//        var out = "";
-//        var i;
-//        for(i = 0; i < arr.length; i++) {
-//            out += '<a href="' + arr[i].url + '">' +
-//                    arr[i].display + '</a><br>';
-//        }
-//        document.getElementById("id01").innerHTML = out;
-//    }
 
-</script>
+        var a = aFunction(b);
+//        var a = " AND THIS ONE TOO!";
+        document.getElementById("id02").innerHTML = a;
+//        var myArray = anArray();
+//        //    var myArray = [
+//        //        {
+//        //            "display": "JavaScript Tutorial",
+//        //            "url": "http://www.w3schools.com/js/default.asp"
+//        //        },
+//        //        {
+//        //            "display": "jQuery Tutorial",
+//        //            "url": "http://www.w3schools.com/jquery/default.asp"
+//        //        },
+//        //        {
+//        //            "display": "HTML Tutorial",
+//        //            "url": "http://www.w3schools.com/html/default.asp"
+//        //        },
+//        //        {
+//        //            "display": "CSS Tutorial",
+//        //            "url": "http://www.w3schools.com/css/default.asp"
+//        //        }
+//        //    ];
+//        //
+//        myFunction(myArray);
+//        //
+//        //    function myFunction(arr) {
+//        //        var out = "";
+//        //        var i;
+//        //        for(i = 0; i < arr.length; i++) {
+//        //            out += '<a href="' + arr[i].url + '">' +
+//        //                    arr[i].display + '</a><br>';
+//        //        }
+//        //        document.getElementById("id01").innerHTML = out;
+//        //    }
 
-<script src="../jquery-2.1.4.js"></script>
-<script src="app.js"></script>  <!-- this replaces myFunction() def on this page -->
+    </script>
+    <!--<script src="custom.js"></script>-->
+    <script src="app2.js"></script>
+    <!--<script src="jquery-2.1.4.js"></script>-->
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+
+
 
 </body>
 </html>
