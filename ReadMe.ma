@@ -18,7 +18,9 @@ It's this impossible till now use of possessing the entire text that excites me.
 
 #######################################################################
 2015-06-06 10:23:05 comments on loading JSON from local.
-
+>> $.getJSON( "test.js", function( json ) {
+     console.log( "JSON Data: " + json.users[ 3 ].name );
+    });  // NOTE from me  - this is putting JSON data in a var in a .js file.
 >> You can place your json to js file and save it to global variable. It is not asynchronous, but it can help.
 >> Another way to do it is to start a local HTTP server on your directory. On Ubuntu and MacOs with Python installed, it's a one-liner.
 Go to the directory containing your web files, and :

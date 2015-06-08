@@ -19,9 +19,8 @@ function countThisWord (targetArr) {
 
     var text = $('div').text();
 
-    result = text.replace(/(bapt[^\s,-]+)/ig, "<span id='bap'>$&</span>");
+    var result = text.replace(/(bapt[^\s,-]+)/ig, "<span id='bap'>$&</span>");
 }
-
 
 function click_a_verse () {
     $('p').click(function () {

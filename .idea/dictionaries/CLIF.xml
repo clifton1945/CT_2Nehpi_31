@@ -2,7 +2,9 @@
   <dictionary name="CLIF">
     <words>
       <w>clif</w>
+      <w>filepath</w>
       <w>nephi</w>
+      <w>sltl</w>
     </words>
   </dictionary>
 </component>
