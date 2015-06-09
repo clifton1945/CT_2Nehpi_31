@@ -27,7 +27,8 @@ Go to the directory containing your web files, and :
 python -m SimpleHTTPServer
 Then connect to http://localhost:8000/index.html with any web browser to test your page.
 
-2015-06-05 11:36:22   Overview and Status
+2015-06-05 11:36:22
+Overview and Status
     I'm back here now after styming at calculating significant words/phrases in Python and NLTK. I believe I need to SEE the effect when looking for THE SIGNIFICANT things to point out while reading. I have a much better understanding of NLTK tools. And with JSON I have a way to PROCESS in python and pass data to JS/HTML/CSS. If I need to. Maybe JS will be enough.
 
 TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
@@ -39,8 +40,8 @@ TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
  OR
  result = subject.replace(/(bapt[^\s,-]+)/ig, "<span id='bap'>$&</span>");
 
-
- 2015-06-08 18:34:08  Learn_jQuery_2Nep31
+ 2015-06-08 18:34:08
+ in Learn_jQuery_2Nep31
     This was a long day. I finally discovered, answered, learned  the questions:
  DONE Now split js code into app.js
  >>> How shift <script> .... </script>  to separate app.js file. Though I knew it just needed a
@@ -52,7 +53,13 @@ TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
  >>> How LOAD, and then UNLOAD, a text or html file file into a main page. in jQqery use $(selector).load( file) and $(selector).html = "" to unload or clear the selector.
 
 
- 2015-06-09 07:06:12   An understanding in bed this AM: Just like the BoM and D&C - both chronological recorded steps of experience the Lord wants us to know -  this file CAN BE a record, chroonoloogical, unedited fundamentally, of LEARNING. Maybe as I discover how to 'LOOK AHEAD' or at least 'LOOK BACK' on this learning experience I can grock how to do it for BoM and scriptures. And I may add the AA big book is another exact type of God shoowing the steps.
- PLAN READ / PROGRESS sentence by sentence thru text.
+ 2015-06-09 07:06:12
+    An understanding in bed this AM: Just like the BoM and D&C - both chronological recorded steps of experience the Lord wants us to know -  this file CAN BE a record, chroonoloogical, unedited fundamentally, of LEARNING. Maybe as I discover how to 'LOOK AHEAD' or at least 'LOOK BACK' on this learning experience I can grock how to do it for BoM and scriptures. And I may add the AA big book is another exact type of God shoowing the steps.
+ PLAN LEARN USING JSON data
+    PUT json converted txt of sentlst_toklst somewhere by python.
+    GET that txt and convert it back?? as a dict of lists of lists??
+    MANIPULATE that object in app.js ??
+    step thru a few sentences at a time by loop thru JSON data??
+ PLAN READ / PROGRESS sentence by sentence.
  PLAN NEXT toggle css highlights ON when coming to key word each new sentence. ANd then toggle - or dim - until the word is extinct.
  PLAN NEXT see about the power of Regex in JS
