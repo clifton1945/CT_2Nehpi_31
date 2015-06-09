@@ -40,8 +40,19 @@ TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
  result = subject.replace(/(bapt[^\s,-]+)/ig, "<span id='bap'>$&</span>");
 
 
- 2015-06-08 18:34:08  Learn_jQuery_2Nep31    a working header and verses 2Nep31 loads.
+ 2015-06-08 18:34:08  Learn_jQuery_2Nep31
+    This was a long day. I finally discovered, answered, learned  the questions:
  DONE Now split js code into app.js
- PLAN NEXT toggle css
- PLAN NEXT OPEN AND CLOSE the two html files: verses and header
+ >>> How shift <script> .... </script>  to separate app.js file. Though I knew it just needed a
+    <script src="app.js"></script> right before  the  </body> tag in the html file,
+    it REQUIRED $(document).ready(function() {...  in place to allow the js code to be loaded!.
+    That was frustrating to learn, I took hours proving alll the code was correct, passing inspection, but never working!
+ DONE a working header and verses 2Nep31 loads.
+ DONE NEXT OPEN AND CLOSE the two html files: verses and header
+ >>> How LOAD, and then UNLOAD, a text or html file file into a main page. in jQqery use $(selector).load( file) and $(selector).html = "" to unload or clear the selector.
+
+
+ 2015-06-09 07:06:12   An understanding in bed this AM: Just like the BoM and D&C - both chronological recorded steps of experience the Lord wants us to know -  this file CAN BE a record, chroonoloogical, unedited fundamentally, of LEARNING. Maybe as I discover how to 'LOOK AHEAD' or at least 'LOOK BACK' on this learning experience I can grock how to do it for BoM and scriptures. And I may add the AA big book is another exact type of God shoowing the steps.
+ PLAN READ / PROGRESS sentence by sentence thru text.
+ PLAN NEXT toggle css highlights ON when coming to key word each new sentence. ANd then toggle - or dim - until the word is extinct.
  PLAN NEXT see about the power of Regex in JS
