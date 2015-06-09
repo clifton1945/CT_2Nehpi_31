@@ -64,4 +64,4 @@ TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
  PLAN NEXT toggle css highlights ON when coming to key word each new sentence. ANd then toggle - or dim - until the word is extinct.
  PLAN NEXT see about the power of Regex in JS
 2015-06-09 08:23:50
-LEARNED selector.html('something here.') NOT selector.html = 'something'
+    LEARNED selector.html('something here.') NOT selector.html = 'something'
