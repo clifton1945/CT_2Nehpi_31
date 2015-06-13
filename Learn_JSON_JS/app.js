@@ -8,6 +8,7 @@ $(document).ready(function() {
 
     // pull actual data from another dir.
     var url = 'http://localhost:63342/CT_2Nehpi_31/Learn_JSON_JS/sls.txt';
+
     x = $.ajax({
         type: "GET",
         crossOrigin: true,
@@ -22,18 +23,14 @@ $(document).ready(function() {
         }
     });
 
-
-    console.log("AND windows.dat:  " + window.dat);// this returns just the default 'default'.
-
     function globDat(dat) {
         globals['sliced'] = dat.slice(0, 50);
         globals['all'] = "short slice from globDat(dat)> " + globals.sliced;
         return dat
     }
-
     function aa(){
         globals['a'] = 123;
-        globals[123] = 'qweqwe';
+        globals[123] = 'This is a hard coded value.';
     }
     function w(){
         console.log("globals.a >> " + globals.a);
