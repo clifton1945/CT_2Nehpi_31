@@ -1,21 +1,40 @@
 $(document).ready(function() {
+    var x;
     var jsonfilepath = "C:\\Users\\CLIF\\My Projects\\.PyCharm30\\SeeScriptures\\dat\\sltl.json";
+    var tstObj = ["this str is a list object.", "one", "two"];
+    var tstJSON = '["this str is a list object.", "one", "two"]';
+    var id03  = $("#id03");
 
-    var somedat = "[u'1', u'And', u'now', u'I', u',', u'Nephi', u',', u'make', u'an', u'end', u'of', u'my', u'prophesying', u'unto', u'you', u',', u'my', u'beloved', u'brethren', u'.']";
+    var a0 = id03.load('http://localhost:63342/CT_2Nehpi_31/Learn_JSON_JS/sls.txt');
+    console.log('sls.txt' + ' was performed.');
+    var b = id03.text();
+    var c = id03.val();
+    var d = id03.html();
 
-    console.log("just successfully logged somedat >> " + somedat);
-
-    $("#id01").html(somedat)
-    console.log("just successfully put somedat into #id01.");
-
+    var url = 'http://localhost:63342/CT_2Nehpi_31/Learn_JSON_JS/sls.txt';
+    var x = $.ajax({
+        type: "POST",
+        crossOrigin: true,
+        crossDomain: true,
+        data: "String",
+        url: url,
+        success: function (data) {
+            console.log("#id02 is sliced is >> " + data.slice(125, 175));
+            $("#id02").html(data.slice(125, 175));
+        }
+    });
+    console.log("return:  slice(31, 60) >> " + "NONE DARN IT");
 
 
     var aFunction = function (x) {
-        console.log("IN aFunction()");
-        var a = "I'm in aFunction.";
-        $("#id02").html(a + ", " + x);
+        var msg = ("IN aFunction()");
+        var a = "I'm in aFunction ";
+        var b = x.html();
+        msg = msg + b;
+        console.log(msg)
     };
 
-    aFunction(jsonfilepath);
+    aFunction(id03);
 
 });
+
