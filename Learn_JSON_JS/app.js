@@ -1,40 +1,50 @@
 $(document).ready(function() {
-    var x;
-    var jsonfilepath = "C:\\Users\\CLIF\\My Projects\\.PyCharm30\\SeeScriptures\\dat\\sltl.json";
-    var tstObj = ["this str is a list object.", "one", "two"];
-    var tstJSON = '["this str is a list object.", "one", "two"]';
-    var id03  = $("#id03");
+    // this un var-ed declaration makes it global.
+    globals = {
+        "all": "",
+        "sliced": "",
+        "something_else": ""
+    };
 
-    var a0 = id03.load('http://localhost:63342/CT_2Nehpi_31/Learn_JSON_JS/sls.txt');
-    console.log('sls.txt' + ' was performed.');
-    var b = id03.text();
-    var c = id03.val();
-    var d = id03.html();
-
+    // pull actual data from another dir.
     var url = 'http://localhost:63342/CT_2Nehpi_31/Learn_JSON_JS/sls.txt';
-    var x = $.ajax({
-        type: "POST",
+    x = $.ajax({
+        type: "GET",
         crossOrigin: true,
         crossDomain: true,
         data: "String",
         url: url,
         success: function (data) {
-            console.log("#id02 is sliced is >> " + data.slice(125, 175));
-            $("#id02").html(data.slice(125, 175));
+            var ret  = globDat(data);
+            $("#id02").html(globals.sliced);
+            $("#id03").html(globals.all);
+            return data;
         }
     });
-    console.log("return:  slice(31, 60) >> " + "NONE DARN IT");
 
 
-    var aFunction = function (x) {
-        var msg = ("IN aFunction()");
-        var a = "I'm in aFunction ";
-        var b = x.html();
-        msg = msg + b;
-        console.log(msg)
-    };
+    console.log("AND windows.dat:  " + window.dat);// this returns just the default 'default'.
 
-    aFunction(id03);
+    function globDat(dat) {
+        globals['sliced'] = dat.slice(0, 50);
+        globals['all'] = "short slice from globDat(dat)> " + globals.sliced;
+        return dat
+    }
 
+    function aa(){
+        globals['a'] = 123;
+        globals[123] = 'qweqwe';
+    }
+    function w(){
+        console.log("globals.a >> " + globals.a);
+        console.log("globals.all >> " + globals.all);
+        console.log("globals.sliced >> " + globals.sliced);
+        //alert(globals.123); //will not work
+        console.log("globals.123 >> " + globals[123]); //that's OK.
+    }
+    aa();
+    //globDat(" and this is some text added in the globDat() invocation.");
+
+    w();
 });
 
