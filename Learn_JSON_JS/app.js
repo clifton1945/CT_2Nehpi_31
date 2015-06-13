@@ -1,5 +1,6 @@
 $(document).ready(function() {
     // this un var-ed declaration makes it global.
+    //noinspection JSUndeclaredVariable
     globals = {
         "all": "",
         "sliced": "",
@@ -9,14 +10,14 @@ $(document).ready(function() {
     // pull actual data from another dir.
     var url = 'http://localhost:63342/CT_2Nehpi_31/Learn_JSON_JS/sls.txt';
 
-    x = $.ajax({
+    $.ajax({
         type: "GET",
         crossOrigin: true,
         crossDomain: true,
         data: "String",
         url: url,
         success: function (data) {
-            var ret  = globDat(data);
+            globDat(data);
             $("#id02").html(globals.sliced);
             $("#id03").html(globals.all);
             return data;
