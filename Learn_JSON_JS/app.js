@@ -7,11 +7,13 @@ $(document).ready(function() {
         "something_else": ""
     };
 
-    // pull actual data from another dir.
+    // pull actual data.
     var file_name = 'cd_sentlst_str.json';
 
+
+    // pull actual data from another dir.
     var url = 'http://localhost:63342/CT_2Nehpi_31/Learn_JSON_JS/' + file_name;
-    // WANT to directly access fill in pyton project.
+    // WANT to directly access fill in python project.
     // TODO FIX so far this doesn't work
     var url1 = 'http://localhost:63342//C://Users/CLIF//My Projects//.PyCharm30//SeeScriptures//dat//' + file_name;
 
@@ -24,9 +26,14 @@ $(document).ready(function() {
         success: function (data) {
             globDat(data);
             $("#id02").html(globals.sent02);
-            $("#id03").html(globals.sentLst[0]);
-            return data;
+            $("#id03").html(globals.sentLst);
+            //return data;
         }
+    });
+
+    $.getJSON(file_name, function(jd) {
+        $('#id01').html(jd[6]);
+        $('#id02').html(jd[9]);
     });
 
     function globDat(dat) {
@@ -36,6 +43,7 @@ $(document).ready(function() {
         console.log("globals.sentLst.length > " + globals['sentLst'].length);
         return dat
     }
+
     function w(){
         console.log("globals.sent02 >>> " + globals['sent02']);
         console.log("globals.sentLst.length >>> " + globals['sentLst'].length);
