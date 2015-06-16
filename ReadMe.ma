@@ -55,13 +55,20 @@ TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
 
  2015-06-09 07:06:12
     An understanding in bed this AM: Just like the BoM and D&C - both chronological recorded steps of experience the Lord wants us to know -  this file CAN BE a record, chroonoloogical, unedited fundamentally, of LEARNING. Maybe as I discover how to 'LOOK AHEAD' or at least 'LOOK BACK' on this learning experience I can grock how to do it for BoM and scriptures. And I may add the AA big book is another exact type of God showing the steps.
- PLAN LEARN USING JSON data
+ DONE:  LEARN USING JSON data
     PUT json converted txt of sentlst_toklst somewhere by python.
     GET that txt and convert it back?? as a dict of lists of lists??
     MANIPULATE that object in app.js ??
     step thru a few sentences at a time by loop thru JSON data??
- PLAN READ / PROGRESS sentence by sentence.
- PLAN NEXT toggle css highlights ON when coming to key word each new sentence. ANd then toggle - or dim - until the word is extinct.
- PLAN NEXT see about the power of Regex in JS
+
 2015-06-09 08:23:50
     LEARNED selector.html('something here.') NOT selector.html = 'something'
+
+2015-06-16
+Yeah, I have a way to invoke $.getJSON(file_data.json, function(received_back_data){ } AND then use the data IN inner or outer functions to manipulate the html and calc the data.
+The example code in in this project: CT_2Nephi_31\Learn_getJSON_var.
+
+PLAN
+ PLAN READ / PROGRESS sentence by sentence; MODIFY Font Size before and after the few sentences being read.
+ PLAN NEXT toggle css highlights ON when coming to key word each new sentence. ANd then toggle - or dim - until the word is extinct.
+ PLAN NEXT see about the power of Regex in JS

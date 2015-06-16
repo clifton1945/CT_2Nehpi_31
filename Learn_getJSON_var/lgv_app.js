@@ -21,7 +21,7 @@ $(document).ready(function() {
             msg += '\n   dataType: ' + that.dataType;
             msg += '\n   url: ' + that.url;
             console.log(msg);
-        }();
+        }();  // invoked here
     });
 
     // use as an external function to apps.js
