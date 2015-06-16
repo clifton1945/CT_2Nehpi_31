@@ -26,18 +26,11 @@ $(document).ready(function() {
 
     // use as an external function to apps.js
     // since most work will be added here
-    function modify_page(dat, msg) {
+    function modify_page(dat) {
         $('#id01').html(dat[8]);
         $('#id02').html(dat[9]);
-        msg += "  added in modify_page. ";
-        console.log( 'sample of dat >>\n' + dat[0].slice(0, 30));
+        console.log( 'sample of dat >>\n' + dat[0].slice(0, 35));
     }
-    //
-    //function log(dat, that) {
-    //    var msg = 'IN getJSON():';
-    //    msg += '\n   dataType: ' + that.dataType;  // 'that' is .getJSON().this
-    //    msg += '\n   now #id01: \n' + dat[8];  // dat is .getJSON.jd
-    //}
 });
 
 
