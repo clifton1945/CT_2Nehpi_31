@@ -10,10 +10,9 @@ $(document).ready(function() {
     file_name = 'cd_sentlst_str.json';
     //
     function tst(dat, that) {
-        // 'that' becomes .getJSON().this
-
         var msg = 'IN getJSON():';
-        msg += 'dataType.' + that.dataType;
+        msg += 'dataType.' + that.dataType;  // 'that' is .getJSON().this
+        msg += '#id01 now = ' + dat[8];  // dat is .getJSON.jd
         console.log(msg);
     }
 
