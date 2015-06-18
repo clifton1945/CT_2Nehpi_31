@@ -10,22 +10,25 @@ $(document).ready(function() {
     // the way to get file.file data.
     $.getJSON(file_name, function(jd) {
         var log, that, msg;
-        msg = 'IN getJSON() {';
         that = this;  // accessible to inner functions
+        msg = 'IN >> $.getJSON';
 
         modify_page(jd, msg);  // does the work on the page.
 
-        // create an inner function for use of parent msg.
-        //    NOTE: msg is not passed in.
-        log = function log() {
+        // create an inner function using parent msg, that.
+        log = function log() {  // NOTE: msg is not passed in.
+            msg += '.log():';
             msg += '\n   dataType: ' + that.dataType;
             msg += '\n   url: ' + that.url;
             console.log(msg);
         }();  // invoked here
+
+        return function() {
+            return jd;
+        }
     });
 
-    // use as an external function to apps.js
-    // since most work will be added here
+    // since most work will be added here make this external function to apps.js
     function modify_page(dat) {
         $('#id01').html(dat[8]);
         $('#id02').html(dat[9]);
