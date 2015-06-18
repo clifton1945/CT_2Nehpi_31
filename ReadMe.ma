@@ -68,7 +68,13 @@ TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
 Yeah, I have a way to invoke $.getJSON(file_data.json, function(received_back_data){ } AND then use the data IN inner or outer functions to manipulate the html and calc the data.
 The example code in in this project: CT_2Nephi_31\Learn_getJSON_var.
 
+2015-06-18
+//a working prototype that could be used to work on passed in file json data.
+// BUT have not figured out how to get data OUTSIDE OF THE $.getJSON() call.
+Still it's workable enough to begin using jQuery to manipulate text and sd what HF suggests.
+
+TODO READ / PROGRESS sentence by sentence; MODIFY Font Size before and after the few sentences being read.
+
 PLAN
- PLAN READ / PROGRESS sentence by sentence; MODIFY Font Size before and after the few sentences being read.
  PLAN NEXT toggle css highlights ON when coming to key word each new sentence. ANd then toggle - or dim - until the word is extinct.
  PLAN NEXT see about the power of Regex in JS
