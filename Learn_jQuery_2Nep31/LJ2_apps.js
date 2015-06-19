@@ -8,16 +8,19 @@ $(document).ready(function() {
     };
 
     $("#stage").click(function () {
-        $('#stage').load('../2Nep31_1_Header.html');
+        $("#stage").load('../2Nep31_1_Header.html');
         console.log("Finished #stage.click in $(document).ready(function).");
     });
 
     $("#driver").click(function () {
-        if ($("#mydiv").contents().length > 0) {
-            $("#mydiv").html("");
+        var $md = $("#mydiv");
+        if ($md.contents().length > 0) {
+            $md.html("");
+            $("#driver").val("LOAD.");
             console.log("UNLOADED #mydiv.");
         } else {
-            $("#mydiv").load('../2Nep31_1.html');
+            $md.load('../2Nep31_1.html');
+            $("#driver").val("UNLOAD.");
             console.log("LOADED #mydiv.");
         }
     });
