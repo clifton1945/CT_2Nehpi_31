@@ -16,9 +16,10 @@ $(document).ready(function() {
         that = this;  // accessible to inner functions
         msg = 'IN >> $.getJSON';
 
-        // create an inner function using parent's msg, that.
+        // use an outside function and pass in data.
         modify_page(jd);  // does the work on the page.
 
+        // create an inner function using parent's msg, that.
         log = function log() {  // NOTE: msg & that are not passed in.
             msg += '.log():';
             msg += '\n   dataType: ' + that.dataType;
@@ -31,7 +32,8 @@ $(document).ready(function() {
         //return dat;
     });
 
-    // since most work will be added here make this external function to apps.js
+    // since most work will be added here,
+    // make this external function to apps.js
     function modify_page(dat) {
         $('#id01').html(dat[8]);
         $('#id02').html(dat[9]);
