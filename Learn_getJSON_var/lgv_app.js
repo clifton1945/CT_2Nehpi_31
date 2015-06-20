@@ -9,27 +9,29 @@ $(document).ready(function() {
     var file_name, dat, x ;
     file_name = '../cd_sentlst_str.json';
 
-    // the way to get file.file data.
-    $.getJSON(file_name, function success(jd) {
-        var log, that, msg;
+    // Assign handlers immediately after making the request,
+    // and remember the jqxhr object for this request
+    var jqxhr = $.getJSON( file_name, function(jsdat) {
+        console.log( "success" );
+    })
+        .done(function(jsdat) {
+            console.log( "second success\n" + jsdat[0] );
+            modify_page(jsdat);
+            dat = jsdat;
+        })
+        .fail(function() {
+            console.log( "error" );
+        })
+        .always(function() {
+            console.log( "complete\n  does this fire after .done??\n  YES" );
+        });
 
-        that = this;  // accessible to inner functions
-        msg = 'IN >> $.getJSON';
+// Perform other work here ...
 
-        // use an outside function and pass in data.
-        modify_page(jd);  // does the work on the page.
-
-        // create an inner function using parent's msg, that.
-        log = function log() {  // NOTE: msg & that are not passed in.
-            msg += '.log():';
-            msg += '\n   dataType: ' + that.dataType;
-            msg += '\n   url: ' + that.url;
-            console.log(msg);
-        }();
-        //dat = function() {
-        //    return jd;
-        //}();
-        //return dat;
+// Set another completion function for the request above
+    jqxhr.complete(function() {
+        console.log( "second jqxhr call.complete\n" +
+            "using the global var dat >>\n  " + dat[2] );
     });
 
     // since most work will be added here,
