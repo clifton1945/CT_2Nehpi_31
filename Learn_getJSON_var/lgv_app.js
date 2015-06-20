@@ -6,12 +6,13 @@
 //
 $(document).ready(function() {
     // USE actual data.
-    var file_name, dat, x ;
+    var file_name, dat;
     file_name = '../cd_sentlst_str.json';
 
     // Assign handlers immediately after making the request,
     // and remember the jqxhr object for this request
-    var jqxhr = $.getJSON( file_name, function(jsdat) {
+    //noinspection JSCheckFunctionSignatures,JSCheckFunctionSignatures,JSCheckFunctionSignatures,JSCheckFunctionSignatures
+    var jqxhr = $.getJSON(file_name, function () {
         console.log( "success" );
     })
         .done(function(jsdat) {
@@ -39,7 +40,7 @@ $(document).ready(function() {
     function modify_page(dat) {
         $('#id01').html(dat[8]);
         $('#id02').html(dat[9]);
-        msg = 'sample of dat >>\n' + dat[0].slice(0, 35);
+        var msg = 'sample of dat >>\n' + dat[0].slice(0, 35);
         console.log(msg);
     }
 
