@@ -18,7 +18,7 @@ $(document).ready(function() {
             $header.val("LOAD Nep31_1_Header.html");
         } else {
             $hdiv.load('../2Nep31_1_Header.html');
-            $header.val = "UNLOAD Nep31_1_Header.html";
+            $header.val("UNLOAD Nep31_1_Header.html");
             console.log("Finished #header.click in $(document).ready(function).");
         }
     });
@@ -32,6 +32,4 @@ $(document).ready(function() {
             console.log("Finished #verses.click in $(document).ready(function).");
         }
     });
-
-
 });
