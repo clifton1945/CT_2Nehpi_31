@@ -18,22 +18,14 @@ $(document).ready(function() {
         .done(function(jsdat) {
             console.log( "second success\n" + jsdat[0] );
             modify_page(jsdat);
-            dat = jsdat;
+            dat = jsdat;  // global dat
         })
         .fail(function() {
-            console.log( "error" );
+            console.log( "error: jqxhr = $.getJSON()" );
         })
         .always(function() {
             console.log( "complete\n  does this fire after .done??\n  YES" );
         });
-
-// Perform other work here ...
-
-// Set another completion function for the request above
-    jqxhr.complete(function() {
-        console.log( "second jqxhr call.complete\n" +
-            "using the global var dat >>\n  " + dat[2] );
-    });
 
     // since most work will be added here,
     // make this external function to apps.js
@@ -43,6 +35,14 @@ $(document).ready(function() {
         var msg = 'sample of dat >>\n' + dat[0].slice(0, 35);
         console.log(msg);
     }
+
+
+// Set another completion function for the request above
+    jqxhr.complete(function() {
+        console.log( "second jqxhr call.complete\n" +
+            "using the global var dat >>\n  " + dat[2] );
+    });
+
 
 
 });
