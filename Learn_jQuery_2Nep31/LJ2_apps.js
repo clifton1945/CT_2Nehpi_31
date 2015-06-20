@@ -3,14 +3,13 @@
  */
 
 $(document).ready(function() {
-    $.fn.exists = function () {
-        return this.length !== 0;
-    };
 
     var $header = $("#header"),
         $hdiv = $("#hdiv"),
         $verses = $("#verses"),
         $vdiv = $("#vdiv");
+
+
 
     $header.click(function () {
         if ($hdiv.contents().length > 0) {
