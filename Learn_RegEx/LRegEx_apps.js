@@ -14,10 +14,9 @@ $(document).ready(function() {
         console.log( "xhr.state>> " + xhr.state );
     })
         .done(function(data) {
-            txt = data;
             dat = data;  // set global var when .done
-            modify_page(data);  // call to outside function.
-            mod_a_water(data);
+            modify_page();  // call to outside function.
+            mod_a_water();
         })
         .fail(function() {
             console.log( "error: in >>\n" +
@@ -33,7 +32,7 @@ $(document).ready(function() {
     });
 
     // use regex
-    function mod_a_water(dat) {
+    function mod_a_water() {
         var trgt = dat;
         var reg = /water/ig;
         var arr = trgt.match(reg);
@@ -46,7 +45,7 @@ $(document).ready(function() {
 
     // since most work will be added here,
     // make this external function to apps.js
-    function modify_page(dat) {
+    function modify_page() {
         var sample = dat.slice(1000, 1150);
         $hiddiv.html(sample);
         var msg = 'outer func[modify_page()] invoked inner .done()\n    sample of dat >>\n' + sample;
