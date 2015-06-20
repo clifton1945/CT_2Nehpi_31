@@ -7,16 +7,17 @@
 $(document).ready(function() {
     var $hiddiv = $("#hiddiv"),
         nameHtml = '../2Nep31_1.html',
-        nameCss = '../2Nep31_1.css',
-        dat, txt, htm, val;
-
-    var jqxhr = $.get(nameHtml, function () {
-        console.log( "success" );
+        dat, txt;
+    var jqxhr = $.get(nameHtml, '', function (data, status, xhr) {
+        console.log("data>> " +  data.slice(99, 400) );
+        console.log( "status>> " + status );
+        console.log( "xhr.state>> " + xhr.state );
     })
-        .done(function(jsdat) {
-            //console.log( "second success\n" + jsdat );
-            modify_page(jsdat);  // call to outside function.
-            dat = jsdat;  // set global var AFTER .done
+        .done(function(data) {
+            txt = data;
+            dat = data;  // set global var when .done
+            modify_page(data);  // call to outside function.
+            mod_a_water(data);
         })
         .fail(function() {
             console.log( "error: in >>\n" +
@@ -27,17 +28,28 @@ $(document).ready(function() {
         });
 
     // Set another completion function for the request above
-    jqxhr.complete(function() {
-        var x = dat;
-        console.log( "inside second jqxhr.complete()")
+    jqxhr.done(function() {
+        console.log( "inside second jqxhr.done()")
     });
+
+    // use regex
+    function mod_a_water(dat) {
+        var trgt = dat;
+        var reg = /water/ig;
+        var arr = trgt.match(reg);
+        var msg = "";
+        msg += "in mod_a_water() >> \n   there are (" + arr.length + ")" + reg;
+        console.log(msg);
+
+    }
 
 
     // since most work will be added here,
     // make this external function to apps.js
     function modify_page(dat) {
-        var sample = dat.slice(1000, 1500);
+        var sample = dat.slice(1000, 1150);
         $hiddiv.html(sample);
         var msg = 'outer func[modify_page()] invoked inner .done()\n    sample of dat >>\n' + sample;
         console.log(msg);
-    }});
+    }
+});
