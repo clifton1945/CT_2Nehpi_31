@@ -9,35 +9,30 @@ $(document).ready(function() {
         globalDat;
 
     var jqxhr = $.get(nameHtml, '', function (data, status, xhr) {
-        //console.log("data>> " +  data.slice(99, 400) );
-        //console.log( "status>> " + status );
-        //console.log( "xhr.state>> " + xhr.state );
     })
         .done(function(data) {
             globalDat = data;  // set global var when .done
-            regexMatch();
         })
         .fail(function() {
             console.log( "error: in >>\n" +
                 "var jqxhr = $.getJSON(file_name, function ()");
-        })
-        .always(function() {
-            //console.log( "complete\n  does this fire after .done??\n  YES" );
         });
 
+    jqxhr.done( function() {
+        regexMatch(/bapti/ig, globalDat);
+        regexMatch(/water/ig, globalDat);
+    });
+
     // use regex
-    function regexMatch() {
-        var reObj,  myArray, msg, trgt, mod;
-        trgt = 'water';
-        mod = "ig";
-        reObj = new RegExp(trgt, mod);
-        //matched = globalDat.match(reObj);
-        //ret = reObj.exec(globalDat);
+    function regexMatch(re, text) {
+        var reObj, hits, msg, delta;
+        reObj = new RegExp(re);
 
-
-        msg = 'Found ' + trgt + '/' + mod + '@ \n';
-        while ((myArray = reObj.exec(globalDat)) !== null) {
-            msg += '<br>[' + myArray.index + ']';
+        msg = 'Found ' + re +  '@ \n';
+        delta = 0;
+        while ((hits = reObj.exec(text)) !== null) {
+            delta = hits.index - delta;
+            msg += '<br>[' + hits.index + ', ' + delta + ']';
             //msg += '<br>Next match[' + reObj.lastIndex + ']';
             console.log(msg);
         }
@@ -46,7 +41,4 @@ $(document).ready(function() {
         console.log(msg);
         $("#hiddiv").html(msg);
     }
-
-
-
 });
