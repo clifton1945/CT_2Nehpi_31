@@ -9,9 +9,6 @@ $(document).ready(function() {
     var file_name, dat;
     file_name = '../cd_sentlst_str.json';
 
-    // Assign handlers immediately after making the request,
-    // and remember the jqxhr object for this request
-    //noinspection JSCheckFunctionSignatures
     var jqxhr = $.getJSON(file_name, function () {
         console.log( "success" );
     })
@@ -27,6 +24,9 @@ $(document).ready(function() {
         .always(function() {
             console.log( "complete\n  does this fire after .done??\n  YES" );
         });
+    // Assign handlers immediately after making the request,
+    // and remember the jqxhr object for this request
+    //noinspection JSCheckFunctionSignatures
 
 
 // Perform other work here ...
