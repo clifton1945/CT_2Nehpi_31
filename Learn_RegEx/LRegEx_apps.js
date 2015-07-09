@@ -6,7 +6,7 @@
 // using jQuery see groups of text with css mods
 $(document).ready(function() {
     var nameHtml = '../2Nep31_1.html',
-        globalDat;
+        globalDat, msg ;
 
     var jqxhr = $.get(nameHtml, '', function (data, status, xhr) {
     })
@@ -19,26 +19,39 @@ $(document).ready(function() {
         });
 
     jqxhr.done( function() {
-        regexMatch(/bapti/ig, globalDat);
         regexMatch(/water/ig, globalDat);
+        regexMatch(/bapti/ig, globalDat);
+        regexMatch(/repent/ig, globalDat);
+        regexMatch(/ghost/ig, globalDat);
+        regexMatch(/fire/ig, globalDat);
+        regexMatch(/endure/ig, globalDat);
+        regexMatch(/doctrine/ig, globalDat);
+        //regexMatch(/and/ig, globalDat);
     });
 
     // use regex
     function regexMatch(re, text) {
-        var reObj, hits, msg, delta;
+        var reObj, msg, hits, last, lng, delta, del, ndx, delDiv, ndxDiv;
         reObj = new RegExp(re);
 
-        msg = 'Found ' + re +  '@ \n';
         delta = 0;
+        last = 0;
+        lng = text.length;
+        msg = 'Found ' + re +  '@ \n';
+        delDiv = msg;
+        ndxDiv = msg;
         while ((hits = reObj.exec(text)) !== null) {
-            delta = hits.index - delta;
-            msg += '<br>[' + hits.index + ', ' + delta + ']';
-            //msg += '<br>Next match[' + reObj.lastIndex + ']';
-            console.log(msg);
-        }
+            delta = hits.index - last;
+            last = hits.index;
+            ndx = Number((hits.index / lng).toFixed(3));
+            del = Number((delta / lng).toFixed(3));
 
-        //msg += "<br>\nin regexMatch() >> \n   there are (" + matched.length + ")" + reObj;
+            msg += hits.index + ', ' + delta + ', ' + ndx + ', ' + del + '\n';
+            ndxDiv += '<br>' + ndx;
+            delDiv += '<br>' + del;
+        }
+        $('#deltaDiv').html(delDiv);
+        $('#ndxDiv').html(ndxDiv);
         console.log(msg);
-        $("#hiddiv").html(msg);
     }
 });
