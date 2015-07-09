@@ -4,8 +4,10 @@
 
 QUnit.module( "src_index" );
 QUnit.test( "a basic test example", function( assert ) {
-    assert.equal( $('#h1').text()[0,3],"The",  "EXP first word i 'The" );
+    assert.equal( 'The', 'The',  "EXP first word i 'The" );
+    assert.equal( $('#h1').text()[0, 3],"The",  "EXP first word i 'The" );
 });
+
 QUnit.module( "group a" );
 QUnit.test( "a basic test example 2", function( assert ) {
     assert.ok( true, "this test is fine" );
@@ -18,6 +20,7 @@ QUnit.test( "a basic test example 3", function( assert ) {
 QUnit.test( "a basic test example 4", function( assert ) {
     assert.ok( true, "this test is fine" );
 });
+
 module( "Learn how to test");
 QUnit.test( "a basic test example", function( assert ) {
     var value = "hello";
