@@ -43,9 +43,9 @@ TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
  2015-06-08 18:34:08
  in Learn_jQuery_2Nep31
     This was a long day. I finally discovered, answered, learned  the questions:
- DONE Now split js code into app.js
- >>> How shift <script> .... </script>  to separate app.js file. Though I knew it just needed a
-    <script src="app.js"></script> right before  the  </body> tag in the html file,
+ DONE Now split js code into src_app.js
+ >>> How shift <script> .... </script>  to separate src_app.js file. Though I knew it just needed a
+    <script src="src_app.js"></script> right before  the  </body> tag in the html file,
     it REQUIRED $(document).ready(function() {...  in place to allow the js code to be loaded!.
     That was frustrating to learn, I took hours proving alll the code was correct, passing inspection, but never working!
  DONE a working header and verses 2Nep31 loads.
@@ -58,7 +58,7 @@ TODO can use below BUT watch out for baptism a NOT A '-'yea following character!
  DONE:  LEARN USING JSON data
     PUT json converted txt of sentlst_toklst somewhere by python.
     GET that txt and convert it back?? as a dict of lists of lists??
-    MANIPULATE that object in app.js ??
+    MANIPULATE that object in src_app.js ??
     step thru a few sentences at a time by loop thru JSON data??
 
 2015-06-09 08:23:50

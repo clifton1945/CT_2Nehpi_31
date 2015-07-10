@@ -1,9 +1,10 @@
 
 QUnit.module("qT_index.html");
-QUnit.test( "title.slice(0,5)", function( assert ) {
+    QUnit.test( "title.slice(0,5)", function( assert ) {
     var cut = $("title").text();
     assert.equal( cut.slice(0, 5), "QUnit", " Expect first 5 characters" );
 });
+
 QUnit.module("hello");
     function saysHi(name) {
         return "Hi, " + name;
