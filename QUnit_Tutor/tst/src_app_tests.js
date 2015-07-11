@@ -1,8 +1,18 @@
 QUnit.module("Scrolling", {
+    //beforeEach ONLY WOKS until next module.
     beforeEach: function() {
     this.fixture = $("#qunit-fixture");
+    //this.outer = $("#outer");
     }
 });
+
+QUnit.test("Scroll", function ( assert ) {
+    $("#outer", this.fixture).scrollTop(200);
+    //$("#outer", this.fixture).trigger("scroll");
+    // PROBLEM since I can't see the html I don't know it it scrolled.
+    assert.equal($("#outer", this.fixture).scrollTop(), 200, "exp it at 200");
+});
+
 QUnit.test( "setup:", function( assert) {
     assert.equal(this.fixture.height(), 1000, "height set in qunit.css");
     assert.equal($("#outer", this.fixture).height(), 200, "exp height 200 set in style");

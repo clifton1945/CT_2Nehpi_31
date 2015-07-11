@@ -18,9 +18,13 @@
 <div id="qunit-fixture">
     <style type="text/css" scoped>
         #outer {height:200px}
+        #outer {overflow: scroll}
         #inner {height: 400px}
+        #inner {overflow: scroll}
     </style>
     <div id="outer">
+        scrolling is now set in css with overFlow.
+        Once I set outer and inner style overflow=scroll the Scrolling test worked.
         <div id = 'inner'>
         ertyuiop[]\
         </div>
