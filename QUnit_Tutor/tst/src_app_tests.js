@@ -11,6 +11,8 @@ QUnit.test("Scroll", function ( assert ) {
     //$("#outer", this.fixture).trigger("scroll");
     // PROBLEM since I can't see the html I don't know it it scrolled.
     assert.equal($("#outer", this.fixture).scrollTop(), 200, "exp it at 200");
+    $("#outer", this.fixture).scrollTop(2200);
+    assert.ok($("#outer", this.fixture).scrollTop() >= 249.333, "exp beyond 200 but don't know why it's 249+");
 });
 
 QUnit.test( "setup:", function( assert) {
