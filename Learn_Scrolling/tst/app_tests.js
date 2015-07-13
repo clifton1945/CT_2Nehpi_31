@@ -10,8 +10,17 @@ QUnit.module("scrolling", {
         $("#qunit-fixture").height(this.defaultHeight)
     }
 });
-QUnit.test( "default:", function( assert) {
-    assert.equal(this.fixture.height(), 1000, "height set in qunit.css");
+QUnit.test( "append div inner:", function( assert) {
+    jQuery('<div>', {
+        id: 'inner',
+        title: "pseudoText",
+        height: 900,
+        overflow: "scroll",
+        text: "DEFAULT TEXT"
+    }).appendTo("#qunit-fixture");
+
+    assert.equal($('#inner').height(), 900, "height set in qunit.css");
+    assert.equal($('#inner').text(), "DEFAULT TEXT", "default text");
 });
 
 
