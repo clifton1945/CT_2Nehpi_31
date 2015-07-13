@@ -103,3 +103,8 @@ GOAL:
 PLAN as of above date.
  +CSS Opacity and maybe element: hover look good. Low opacity above and below AOI:'AreaOfInterest'
  +Couple sentences to text Area and scrolled Area. This allows me to modify AreaBefore, AOI, AreaAfter as a function of Scroll: specifically probably to scrolled area. Something like scrolledArea
+
+ MAYBE USE
+ -jquery's $().
+    e.g.   $( "<p id='test'>My <em>new</em> text</p>" ).appendTo( "body" );
+ -jquery.fracs()  git addon
