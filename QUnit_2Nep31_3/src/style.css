@@ -1,0 +1,15 @@
+.JC {color:  orange }
+
+.HG {
+    color: greenyellow;
+}
+.bap {
+    color: green;
+    font-weight: bold;
+}
+.expand {
+    font-size:smaller;
+    font-weight: bolder;
+    color: blue;
+    background-color: cornsilk;
+}
