@@ -1,7 +1,7 @@
 /**
  * Created by CLIF on 7/13/2015.
  */
-QUnit.module("scrolling", {
+QUnit.module("setup", {
     //beforeEach ONLY WOKS until next module.
     beforeEach: function() {
         this.fixture = $("#qunit-fixture");
@@ -13,5 +13,10 @@ QUnit.module("scrolling", {
 QUnit.test( "default:", function( assert) {
     assert.equal(this.fixture.height(), 1000, "height set in qunit.css");
 });
-
-
+QUnit.test( "reset fixture height", function( assert ){
+    this.fixture.height(251);
+    assert.equal(this.fixture.height(), 251, "height set here");
+});
+QUnit.test( "confirm no side effect.", function( assert) {
+    assert.equal(this.fixture.height(), 1000, "height set in qunit.css");
+});
