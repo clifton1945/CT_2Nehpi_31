@@ -21,18 +21,15 @@ function countThisWord (targetArr) {
     var result = text.replaceAll(/(bapt[^\s,-]+)/ig, "<span id='bap'>$&</span>");
 }
 
-
 function click_a_verse () {
     $('p').click(function () {
         $(this).toggle(1000, function () {
-            //$(this).load('test_page_1.html');
-            //alert(" toggled() a verse. BUT seeable after this alert.");
             $(this).addClass('expand');
             $(this).toggle(1000);
         })
     });
     $('button').click( function() {
-        $('#1').load('test_page_1.html');
+        $('#1').load('test_header.html');
     })
 }
 
@@ -42,4 +39,4 @@ var main = function () {
     //countThisWord(['bapti', 'brother', "Jacob", "Holy Ghost"]);
 };
 
-//$(document).ready(main);
+$(document).ready(main);
