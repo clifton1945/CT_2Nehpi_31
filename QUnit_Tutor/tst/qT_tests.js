@@ -13,7 +13,3 @@ QUnit.module("hello");
     QUnit.test('saysHi()', function( assert ) {
         assert.equal(saysHi("Jack"), "Hi, Jack", "function outputs string correctly")
     });
-
-QUnit.test( "hello test", function( assert ) {
-    assert.ok( 1 == "1", "Expected 1 == '1'" );
-});

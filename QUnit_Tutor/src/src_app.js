@@ -29,11 +29,12 @@ function click_a_verse () {
         })
     });
     $('button').click( function() {
-        $('#1').load('test_header.html');
+        $('#1').load('header.html');
     })
 }
 
 var main = function () {
+    $(".verses").load('verses.html')
     click_a_verse();
     //findText();
     //countThisWord(['bapti', 'brother', "Jacob", "Holy Ghost"]);
