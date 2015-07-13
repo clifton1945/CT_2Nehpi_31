@@ -34,7 +34,7 @@ function click_a_verse () {
 }
 
 var main = function () {
-    $(".verses").load('verses.html')
+    $(".verses").load('verses.html');
     click_a_verse();
     //findText();
     //countThisWord(['bapti', 'brother', "Jacob", "Holy Ghost"]);
