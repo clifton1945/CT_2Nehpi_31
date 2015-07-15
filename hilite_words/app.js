@@ -42,4 +42,4 @@ var main = function () {
     //countThisWord(['bapti', 'brother', "Jacob", "Holy Ghost"]);
 };
 
-//$(document).ready(main);
+$(document).ready(main);
