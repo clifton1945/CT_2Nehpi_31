@@ -28,7 +28,6 @@ QUnit.test( "append div inner:", function( assert) {
     assert.equal(nr.scrollTop(), 0, "no scroll yet");
 });
 
-
 QUnit.test( "scroll div inner:", function( assert) {
     jQuery('<div/>', {
         id: 'inner',
@@ -42,7 +41,6 @@ QUnit.test( "scroll div inner:", function( assert) {
     var nr = $('#inner');
     assert.equal(nr.scrollTop(), 400, "after scroll")
 });
-
 //This is an example of Testing User Actions
 function KeyLogger( target ) {
     this.target = target;

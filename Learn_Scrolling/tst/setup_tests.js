@@ -18,5 +18,8 @@ QUnit.test( "reset fixture height", function( assert ){
     assert.equal(this.fixture.height(), 251, "height set here");
 });
 QUnit.test( "confirm no side effect.", function( assert) {
-    assert.equal(this.fixture.height(), 1000, "height set in qunit.css");
+    assert.equal(this.fixture.height(), 1000, "DEFAULT height reset from unit.css");
+});
+QUnit.test( "see inner div ", function( assert) {
+   assert.equal($('#inner').height(), 555, "");
 });

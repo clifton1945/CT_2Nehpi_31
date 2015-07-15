@@ -1,0 +1,16 @@
+
+#old {opacity:0.4;
+    font-size:small;
+}
+#now {
+    opacity: 1;
+    font-size:large;
+    /*font-weight: bold;*/
+}
+#new {opacity:0.3;
+    font-size:small;
+}
+.bap {
+    color: lawngreen;
+    font-weight: bold;
+}
