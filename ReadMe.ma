@@ -108,3 +108,6 @@ PLAN as of above date.
  -jquery's $().
     e.g.   $( "<p id='test'>My <em>new</em> text</p>" ).appendTo( "body" );
  -jquery.fracs()  git addon
+
+ NOTE: a js noop is jQuery.noop()
+ NOTE: jQuery and regex: selector.match(/regex str/ig)
