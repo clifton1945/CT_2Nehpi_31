@@ -34,12 +34,24 @@
     }
 
     function forEachElement( collection, ndxBeg, ndxEnd ) {
-        $.each(collection, function (i, x) {
-            if (i >= ndxBeg && i <= ndxEnd) {
-                console.log("x[" + i + "]:" + x);
-            }
-        });
+    $.each(collection, function (i, x) {
+        var s = x.outerText.slice(0, 5)
+        if (isBetween( i )) {
+            console.log("between: x[" + i + "]:" + s);
+        }
+        if (isOutside( i )) {
+            console.log("outside: x[" + i + "]:" + s);
+        }
+    });
+    function isBetween( i ) {
+        return i >= ndxBeg && i <= ndxEnd
     }
+    function isOutside( i ) {
+        return i < ndxBeg || i > ndxEnd
+    }
+
+}
+
 
     function click_a_verse () {
         $('p').click(function () {
