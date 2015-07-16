@@ -17,8 +17,8 @@
         //  which proceeds the beginning of <div id='cur'
         //
         var txt = '';
-        var doc = document.body.innerHTML;  // one way.
-        // Other: $("html").html();
+        var doc = document.body.innerHTML; // one way.
+        // Other ways: $("html").html();
         // document.documentElement.outerHTML;
         // $('html')[0].outerHTML;
         var y = $("#cur");  // y: Array[1]
@@ -31,6 +31,14 @@
         }
         console.log(txt);
         $.noop();
+    }
+
+    function forEachElement( collection, ndxBeg, ndxEnd ) {
+        $.each(collection, function (i, x) {
+            if (i >= ndxBeg && i <= ndxEnd) {
+                console.log("x[" + i + "]:" + x);
+            }
+        });
     }
 
     function click_a_verse () {
@@ -62,11 +70,10 @@
         })
     }
 
-
-
 var main;
 main = function () {
-    removeBegCurrent();
+    forEachElement($('p'), 6, 8);
+    //removeBegCurrent();
     //seeKey();
     //click_a_verse();
 };
