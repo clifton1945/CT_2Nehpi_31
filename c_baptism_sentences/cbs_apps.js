@@ -35,12 +35,14 @@
 
     function forEachElement( collection, ndxBeg, ndxEnd ) {
     $.each(collection, function (i, x) {
-        var s = x.outerText.slice(0, 5)
+        var s = x.outerText.slice(0, 8)
         if (isBetween( i )) {
-            console.log("between: x[" + i + "]:" + s);
+            console.log("between: x[" + i + "]:" + s
+            + ", " + $(this).css('height'));
         }
         if (isOutside( i )) {
-            console.log("outside: x[" + i + "]:" + s);
+            console.log("outside: x[" + i + "]:" + s
+                + ", " + $(this).css('id'));
         }
     });
     function isBetween( i ) {
