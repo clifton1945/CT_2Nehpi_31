@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-.old {opacity:0.4;
+.old {opacity:0.2;
     font-size:small;
 }
 .now {
@@ -11,7 +11,7 @@
     font-size:large;
     /*font-weight: bold;*/
 }
-.new {opacity:0.3;
+.new {opacity:0.4;
     font-size:small;
 }
 .bap {

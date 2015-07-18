@@ -35,23 +35,35 @@
 
     function forEachElement( collection, ndxBeg, ndxEnd ) {
     $.each(collection, function (i, x) {
-        var s = this.outerText.slice(0, 8);
+        var z,
+            s = this.outerText.slice(0, 8);
         var y = $(this);
         if (isBetween( i )) {
-            y.attr('class','now');
+            $(this).attr('class', 'now');
             z = $(this).attr('class');
             console.log("between[" + i + "]  z:" + z
                 + ", sT:" + roundIt(y.position().top)
                 + ", o:" + roundIt(y.offset().top));
         }
         if (isOutside(i)) {
-            y.attr('class','old');
+
+            $(this).attr('class', 'old');
             z = $(this).attr('class');
             console.log("outside[" + i + "]  " + z
                 + ", sT:" + roundIt(y.position().top)
                 + ", o:" + roundIt(y.offset().top));
         }
     });
+    function alterOld( that ) {
+       that.attr('class', 'old');
+    }
+    function alterNow( that ) {
+        that.attr('class', 'now');
+    }
+    function alterNew( that ) {
+        that.attr('class', 'new');
+    }
+
     function isBetween( i ) {
         return i >= ndxBeg && i <= ndxEnd
     }
@@ -104,7 +116,7 @@
 
 var main;
 main = function () {
-    forEachElement($('p'), 15, 25);
+    forEachElement($('p'), 5, 8);
     //removeBegCurrent();
     //seeKey();
     //click_a_verse();
