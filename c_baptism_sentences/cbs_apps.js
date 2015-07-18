@@ -29,20 +29,27 @@
         } else {
             txt = '// Match attempt failed';
         }
-        console.log(txt);
+        logIt(txt);
         $.noop();
     }
 
     function forEachElement( collection, ndxBeg, ndxEnd ) {
     $.each(collection, function (i, x) {
-        var s = x.outerText.slice(0, 8)
+        var s = this.outerText.slice(0, 8);
+        var y = $(this);
         if (isBetween( i )) {
-            console.log("between: x[" + i + "]:" + s
-            + ", " + $(this).css('height'));
+            y.attr('class','now');
+            z = $(this).attr('class');
+            console.log("between[" + i + "]  z:" + z
+                + ", sT:" + roundIt(y.position().top)
+                + ", o:" + roundIt(y.offset().top));
         }
-        if (isOutside( i )) {
-            console.log("outside: x[" + i + "]:" + s
-                + ", " + $(this).css('id'));
+        if (isOutside(i)) {
+            y.attr('class','old');
+            z = $(this).attr('class');
+            console.log("outside[" + i + "]  " + z
+                + ", sT:" + roundIt(y.position().top)
+                + ", o:" + roundIt(y.offset().top));
         }
     });
     function isBetween( i ) {
@@ -51,9 +58,7 @@
     function isOutside( i ) {
         return i < ndxBeg || i > ndxEnd
     }
-
 }
-
 
     function click_a_verse () {
         $('p').click(function () {
@@ -84,9 +89,22 @@
         })
     }
 
+    function logIt( text ) {
+    $(".console").html(text)
+}
+
+    function roundIt(num, dPt){
+        if(dPt === undefined) {
+            dPt = 1;
+        }
+        var f = Math.pow(10, dPt);
+        return parseFloat(Math.round(num * f ) / f )
+    }
+
+
 var main;
 main = function () {
-    forEachElement($('p'), 6, 8);
+    forEachElement($('p'), 15, 25);
     //removeBegCurrent();
     //seeKey();
     //click_a_verse();
