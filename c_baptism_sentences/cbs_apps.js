@@ -12,32 +12,40 @@
 // SET end 'cur' end;
 //      insert | append "</div><div id='new'>"
 
-    function removeBegCurrent () {
-        // this requires finding the end of the <div id='beg'
-        //  which proceeds the beginning of <div id='cur'
-        //
-        var txt = '';
-        var doc = document.body.innerHTML; // one way.
-        // Other ways: $("html").html();
-        // document.documentElement.outerHTML;
-        // $('html')[0].outerHTML;
-        var y = $("#cur");  // y: Array[1]
-        var x = y[0];  // x: div#cur
-        var z = (/<div\sid="cur">/.test(doc));
-        if (/<div\sid="cur">/.test(doc)) {
-            txt = '// Successful match';
-        } else {
-            txt = '// Match attempt failed';
-        }
-        logIt(txt);
-        $.noop();
+    function setNow () {
+        var ndx, ndxBeg;
+        var $p = $('p');
+        $p.click(function () {
+            ndx = $p.index();
+            logIt("ndx(" + ndx + ") "+ $p.html().slice(0, 10));
+            var delta = 3;
+            forEachElement($p, ndx, ndx + delta);
+            $.noop();
+        })
+    }
+
+    function getVerse() {
+        $('p').click(function () {
+            var ret;
+            ret = $(this).index();
+            logIt("ndx:" + ret);
+            return ret
+        })
     }
 
     function forEachElement( collection, ndxBeg, ndxEnd ) {
-    $.each(collection, function (i, x) {
-        var z,
-            s = this.outerText.slice(0, 8);
+    $.each(collection, function (ndx, x) {
+        var i = ndx;
+        var z;
+        //var s = this.outerText.slice(0, 8);
         var y = $(this);
+        if (isBefore( i )) {
+            $(this).attr('class', 'old');
+            z = $(this).attr('class');
+            console.log("before[" + i + "]  z:" + z
+                + ", sT:" + roundIt(y.position().top)
+                + ", o:" + roundIt(y.offset().top));
+        }
         if (isBetween( i )) {
             $(this).attr('class', 'now');
             z = $(this).attr('class');
@@ -45,11 +53,11 @@
                 + ", sT:" + roundIt(y.position().top)
                 + ", o:" + roundIt(y.offset().top));
         }
-        if (isOutside(i)) {
+        if (isAfter(i)) {
 
-            $(this).attr('class', 'old');
+            $(this).attr('class', 'new');
             z = $(this).attr('class');
-            console.log("outside[" + i + "]  " + z
+            console.log("after[" + i + "]  " + z
                 + ", sT:" + roundIt(y.position().top)
                 + ", o:" + roundIt(y.offset().top));
         }
@@ -64,6 +72,12 @@
         that.attr('class', 'new');
     }
 
+    function isBefore( i ) {
+        return i < ndxBeg
+    }
+    function isAfter( i ) {
+        return i > ndxEnd
+    }
     function isBetween( i ) {
         return i >= ndxBeg && i <= ndxEnd
     }
@@ -116,7 +130,9 @@
 
 var main;
 main = function () {
-    forEachElement($('p'), 5, 8);
+    setNow();
+    //getVerse();
+    //forEachElement($('p'), 5, 8);
     //removeBegCurrent();
     //seeKey();
     //click_a_verse();
