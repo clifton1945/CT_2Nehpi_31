@@ -20,11 +20,11 @@
             index  = self.index(),
             text   = self.text();
 
-            ndx = $(this).index();  // this report the n element in the document
+            //ndx = $(this).index();  // this report the n element in the document
             //logIt("ndx(" +  ndx + ") "+ $(this).text().slice(0, 10));
             logIt("ndx(" +  index + ") "+ text.slice(0, 10));
             var delta = 3;
-            forEachElement(self, index, ndx + delta);
+            forEachElement(ap, index, index + delta);
             $.noop();
         })
     }
