@@ -13,97 +13,62 @@
 //      insert | append "</div><div id='new'>"
 
     function setNow () {
-        var ndx, ndxBeg, ap;
+        var nxtBeg, ndxBeg, ap, txt;
         ap = $('body p');
         ap.click(function () {
-            var self   = $(this),
-            index  = self.index(),
-            text   = self.text();
+            var self = $(this);
+            nxtBeg  = self.index();
+            txt   = self.text();
 
-            //ndx = $(this).index();  // this report the n element in the document
-            //logIt("ndx(" +  ndx + ") "+ $(this).text().slice(0, 10));
-            logIt("ndx(" +  index + ") "+ text.slice(0, 10));
+            //nxtBeg = $(this).index();  // this report the n element in the document
+            //logIt("nxtBeg(" +  nxtBeg + ") "+ $(this).text().slice(0, 10));
+            logIt("nxtBeg(" +  nxtBeg + ") "+ txt.slice(0, 10));
             var delta = 3;
-            forEachElement(ap, index, index + delta);
+            forEachElement(ap, nxtBeg, nxtBeg + delta);
             $.noop();
         })
     }
 
-    function getVerse() {
-        $('p').click(function () {
-            var ret;
-            ret = $(this).index();
-            logIt("ndx:" + ret);
-            return ret
-        })
-    }
-
-    function forEachElement( collection, ndxBeg, ndxEnd ) {
-    $.each(collection, function (ndx, x) {
-        var i = ndx;
-        var z;
-        var txt = ';';
-        //var s = this.outerText.slice(0, 8);
-        var y = $(this);
-        if (isBefore( i )) {
+function forEachElement( collection, ndxBeg, ndxEnd ) {
+    $.each(collection, function (ndx) {
+        var z,
+            txt = '',
+            y = $(this);
+        if (isBefore()) {
             $(this).attr('class', 'old');
             z = $(this).attr('class');
             txt += "before";
         }
-        if (isBetween( i )) {
+        if (isBetween()) {
             $(this).attr('class', 'now');
             z = $(this).attr('class');
             txt += "between";
         }
-        if (isAfter(i)) {
-
+        if (isAfter()) {
             $(this).attr('class', 'new');
             z = $(this).attr('class');
             txt += "after";
         }
-        txt += " [" + i + "]  z:" + z
+        txt += " [" + ndx+ "]  z:" + z
         + ", sT:" + roundIt(y.position().top)
         + ", o:" + roundIt(y.offset().top);
         console.log(txt );
+
+        function isBefore() {
+            return ndx < ndxBeg
+        }
+        function isAfter() {
+            return ndx > ndxEnd
+        }
+        function isBetween() {
+            return ndx >= ndxBeg && ndx <= ndxEnd
+        }
+        function isOutside() {
+            return ndx < ndxBeg ||ndx
+                > ndxEnd
+        }
     });
-    function alterOld( that ) {
-       that.attr('class', 'old');
-    }
-    function alterNow( that ) {
-        that.attr('class', 'now');
-    }
-    function alterNew( that ) {
-        that.attr('class', 'new');
-    }
-
-    function isBefore( i ) {
-        return i < ndxBeg
-    }
-    function isAfter( i ) {
-        return i > ndxEnd
-    }
-    function isBetween( i ) {
-        return i >= ndxBeg && i <= ndxEnd
-    }
-    function isOutside( i ) {
-        return i < ndxBeg || i > ndxEnd
-    }
 }
-
-    function click_a_verse () {
-        $('p').click(function () {
-            $(this).toggle(1000, function () {
-                //$(this).load('test_page_1.html');
-                //alert(" toggled() a verse. BUT seeable after this alert.");
-                $(this).addClass('expand');
-                $(this).toggle(1000);
-            })
-        });
-        $('button').click( function() {
-            $('#1').load('test_page_1.html');
-        })
-    }
-
     function KeyLogger( target ) {
     this.target = target;
     this.log = [];
