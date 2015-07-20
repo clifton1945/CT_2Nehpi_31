@@ -1,10 +1,4 @@
-QUnit.module("Scrolling", {
-    //beforeEach ONLY WOKS until next module.
-    beforeEach: function() {
-    this.fixture = $("#qunit-fixture");
-    //this.outer = $("#outer");
-    }
-});
+QUnit.module("Scrolling");
 
 QUnit.test("Scroll", function ( assert ) {
     $("#outer", this.fixture).scrollTop(200);
@@ -23,7 +17,13 @@ QUnit.test( "setup:", function( assert) {
 
 });
 
-QUnit.module("Fixture with extra append");
+QUnit.module("Fixture with extra append", {
+    //beforeEach ONLY WOKS until next module.
+    beforeEach: function() {
+        this.str = $("#qunit-fixture");
+        //this.outer = $("#outer");
+    }
+});
 QUnit.test( "append ", function( assert ) {
     var fixture = $( "#qunit-fixture" );
     fixture.append( "<div>hello!</div>" );

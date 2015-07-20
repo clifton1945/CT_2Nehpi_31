@@ -12,8 +12,9 @@
 // SET end 'cur' end;
 //      insert | append "</div><div id='new'>"
 
-    function setNow () {
-        var nxtBeg, ndxBeg, ap, txt;
+function setNow () {
+        var nxtBeg, ndxBeg, ap,
+            txt;
         ap = $('body p');
         ap.click(function () {
             var self = $(this);
@@ -69,7 +70,8 @@ function forEachElement( collection, ndxBeg, ndxEnd ) {
         }
     });
 }
-    function KeyLogger( target ) {
+
+function KeyLogger( target ) {
     this.target = target;
     this.log = [];
     var that = this;
@@ -78,17 +80,17 @@ function forEachElement( collection, ndxBeg, ndxEnd ) {
     });
 }
 
-    function seeKey() {
+function seeKey() {
         $(document).on("keydown", function ( event ) {
             console.log("keydown[" + event.keyCode + "]");
         })
     }
 
-    function logIt( text ) {
+function logIt( text ) {
     $(".console").html(text)
 }
 
-    function roundIt(num, dPt){
+function roundIt(num, dPt){
         if(dPt === undefined) {
             dPt = 1;
         }
@@ -96,6 +98,13 @@ function forEachElement( collection, ndxBeg, ndxEnd ) {
         return parseFloat(Math.round(num * f ) / f )
     }
 
+function p2Span() {
+
+}
+
+function span2P() {
+
+}
 
 var main;
 main = function () {

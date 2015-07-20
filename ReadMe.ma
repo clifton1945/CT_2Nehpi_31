@@ -111,3 +111,7 @@ PLAN as of above date.
 
  NOTE: a js noop is jQuery.noop()
  NOTE: jQuery and regex: selector.match(/regex str/ig)
+
+ 2015-07-20  I have css controling three classes: old, now, new text. BUT NEXT
+  change NOW locatons with keyPress
+  REMOVE/REPLACE <p> with either nothing or <span>
