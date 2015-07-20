@@ -35,18 +35,18 @@ function forEachElement( collection, ndxBeg, ndxEnd ) {
             txt = '',
             y = $(this);
         if (isBefore()) {
-            $(this).attr('class', 'old');
-            z = $(this).attr('class');
+            y.attr('class', 'old');
+            z = y.attr('class');
             txt += "before";
         }
         if (isBetween()) {
-            $(this).attr('class', 'now');
-            z = $(this).attr('class');
+            y.attr('class', 'now');
+            z = y.attr('class');
             txt += "between";
         }
         if (isAfter()) {
-            $(this).attr('class', 'new');
-            z = $(this).attr('class');
+            y.attr('class', 'new');
+            z = y.attr('class');
             txt += "after";
         }
         txt += " [" + ndx+ "]  z:" + z
