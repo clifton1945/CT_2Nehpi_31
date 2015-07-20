@@ -13,13 +13,18 @@
 //      insert | append "</div><div id='new'>"
 
     function setNow () {
-        var ndx, ndxBeg;
-        var $p = $('p');
-        $p.click(function () {
-            ndx = $p.index();
-            logIt("ndx(" + ndx + ") "+ $p.html().slice(0, 10));
+        var ndx, ndxBeg, ap;
+        ap = $('body p');
+        ap.click(function () {
+            var self   = $(this),
+            index  = self.index(),
+            text   = self.text();
+
+            ndx = $(this).index();  // this report the n element in the document
+            //logIt("ndx(" +  ndx + ") "+ $(this).text().slice(0, 10));
+            logIt("ndx(" +  index + ") "+ text.slice(0, 10));
             var delta = 3;
-            forEachElement($p, ndx, ndx + delta);
+            forEachElement(self, index, ndx + delta);
             $.noop();
         })
     }
@@ -37,30 +42,29 @@
     $.each(collection, function (ndx, x) {
         var i = ndx;
         var z;
+        var txt = ';';
         //var s = this.outerText.slice(0, 8);
         var y = $(this);
         if (isBefore( i )) {
             $(this).attr('class', 'old');
             z = $(this).attr('class');
-            console.log("before[" + i + "]  z:" + z
-                + ", sT:" + roundIt(y.position().top)
-                + ", o:" + roundIt(y.offset().top));
+            txt += "before";
         }
         if (isBetween( i )) {
             $(this).attr('class', 'now');
             z = $(this).attr('class');
-            console.log("between[" + i + "]  z:" + z
-                + ", sT:" + roundIt(y.position().top)
-                + ", o:" + roundIt(y.offset().top));
+            txt += "between";
         }
         if (isAfter(i)) {
 
             $(this).attr('class', 'new');
             z = $(this).attr('class');
-            console.log("after[" + i + "]  " + z
-                + ", sT:" + roundIt(y.position().top)
-                + ", o:" + roundIt(y.offset().top));
+            txt += "after";
         }
+        txt += " [" + i + "]  z:" + z
+        + ", sT:" + roundIt(y.position().top)
+        + ", o:" + roundIt(y.offset().top);
+        console.log(txt );
     });
     function alterOld( that ) {
        that.attr('class', 'old');
