@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-.old {opacity:0.2;
+.old {opacity:0.4;
     font-size:small;
 }
 .now {
@@ -11,11 +11,11 @@
     font-size:large;
     /*font-weight: bold;*/
 }
-.new {opacity:0.5;
+.new {opacity:0.3;
     font-size:small;
 }
 .bap {
-    color: lawngreen;
+    color: #9ffc9c;
     font-weight: bold;
 }
 .console {

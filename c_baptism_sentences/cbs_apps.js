@@ -12,24 +12,45 @@
 // SET end 'cur' end;
 //      insert | append "</div><div id='new'>"
 
-function setNow () {
-        var nxtBeg, ndxBeg, ap,
-            txt;
-        ap = $('body p');
-        ap.click(function () {
-            var self = $(this);
-            nxtBeg  = self.index();
-            txt   = self.text();
-
-            //nxtBeg = $(this).index();  // this report the n element in the document
-            //logIt("nxtBeg(" +  nxtBeg + ") "+ $(this).text().slice(0, 10));
-            logIt("nxtBeg(" +  nxtBeg + ") "+ txt.slice(0, 10));
-            var delta = 3;
-            forEachElement(ap, nxtBeg, nxtBeg + delta);
-            $.noop();
+function KeyLogger( target ) {
+    this.target = target;
+    this.log = [];
+    var that = this;
+    this.target.off( "keydown" ).on( "keydown", function( event ) {
+        that.log.push( event.keyCode );
+    });
+}
+function seeKey() {
+        $(document).on("keydown", function ( event ) {
+            console.log("keydown[" + event.keyCode + "]");
         })
     }
 
+function logIt( text ) {
+    $(".console").html(text)
+}
+function roundIt(num, dPt){
+        if(dPt === undefined) {
+            dPt = 1;
+        }
+        var f = Math.pow(10, dPt);
+        return parseFloat(Math.round(num * f ) / f )
+    }
+
+function p2Span() {
+
+}
+
+function span2P() {
+
+}
+
+/**
+ *
+ * @param collection
+ * @param ndxBeg
+ * @param ndxEnd
+ */
 function forEachElement( collection, ndxBeg, ndxEnd ) {
     $.each(collection, function (ndx) {
         var z,
@@ -51,8 +72,8 @@ function forEachElement( collection, ndxBeg, ndxEnd ) {
             txt += "after";
         }
         txt += " [" + ndx+ "]  z:" + z
-        + ", sT:" + roundIt(y.position().top)
-        + ", o:" + roundIt(y.offset().top);
+            + ", sT:" + roundIt(y.position().top)
+            + ", o:" + roundIt(y.offset().top);
         console.log(txt );
 
         function isBefore() {
@@ -71,44 +92,28 @@ function forEachElement( collection, ndxBeg, ndxEnd ) {
     });
 }
 
-function KeyLogger( target ) {
-    this.target = target;
-    this.log = [];
-    var that = this;
-    this.target.off( "keydown" ).on( "keydown", function( event ) {
-        that.log.push( event.keyCode );
-    });
-}
+/**
+ * CHANGES style, and soon Position, etc for Verse tags.
+ */
+function setVerses () {
+    var nxtBeg, ndxBeg, ap,
+        txt;
+    ap = $('.verses p');
+    ap.click(function () {
+        var self = $(this);
+        nxtBeg  = self.index();
+        txt   = self.text();
 
-function seeKey() {
-        $(document).on("keydown", function ( event ) {
-            console.log("keydown[" + event.keyCode + "]");
-        })
-    }
-
-function logIt( text ) {
-    $(".console").html(text)
-}
-
-function roundIt(num, dPt){
-        if(dPt === undefined) {
-            dPt = 1;
-        }
-        var f = Math.pow(10, dPt);
-        return parseFloat(Math.round(num * f ) / f )
-    }
-
-function p2Span() {
-
-}
-
-function span2P() {
-
+        logIt("nxtBeg(" +  nxtBeg + ") "+ txt.slice(0, 10));
+        var delta = 3;
+        forEachElement(ap, nxtBeg, nxtBeg + delta);
+        $.noop();
+    })
 }
 
 var main;
 main = function () {
-    setNow();
+    setVerses();
     //getVerse();
     //forEachElement($('p'), 5, 8);
     //removeBegCurrent();
