@@ -12,6 +12,10 @@ QUnit.test('round 3.3 rounded up', function( assert ){
     assert.equal(ret, 321.236, "exp 3 places.")
 });
 
+
+/**
+ * SWITCHES tags: <p> tag to|from <span>
+ */
 QUnit.module("p2span_span2p", {
     beforeEach: function() {
         this.str1 = "one <p> fghjkl; </p> wertyuiop";
@@ -40,10 +44,10 @@ QUnit.test("/p2/span_js", function ( assert ) {
     assert.equal(ret.slice(16,23), "</span>", "EXP: js replace is simpler")
 });
 
-QUnit.test("<span>2<p>", function ( assert ) {
-    var re = /span/ig// NOTE use of regex verses a straight sting [ which works in this case.
-        , ret = this.str2.replace(re, "<p>");
-    assert.equal(ret.slice(4, 7), "<p>", "EXP: <p> => <span>")
+QUnit.test("span2p", function ( assert ) {
+    var cut = span2p(this.str2);
+    assert.equal(cut.substr(4, 3), "<p>", "EXP: ALL spans:  <span> now <p>")
+    assert.equal(cut.substr(18, 4), "</p>", "EXP: ALL spans: </span> now </p>")
 });
 
 //

@@ -40,13 +40,18 @@ function roundIt(num, dPt){
 function p2Span() {
 
 }
-
-function span2P() {
-
+/**
+ * ALL 'span' > 'p'
+ * @param str
+ * @return a new string}
+ */
+function span2p(str) {
+    return str.replace(/span/ig, "p");
 }
 
 /**
- *
+ * MODIFIES each verse style, tags, etc as a function of
+ * 'old' read, 'now' reading, ''new' to read.
  * @param collection
  * @param ndxBeg
  * @param ndxEnd
@@ -105,7 +110,7 @@ function setVerses () {
         txt   = self.text();
 
         logIt("nxtBeg(" +  nxtBeg + ") "+ txt.slice(0, 10));
-        var delta = 3;
+        var delta = 2;
         forEachElement(ap, nxtBeg, nxtBeg + delta);
         $.noop();
     })
