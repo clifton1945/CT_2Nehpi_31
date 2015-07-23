@@ -64,37 +64,43 @@ function span2p( str ) {
  */
 function forEachElement( collection, ndxBeg, ndxEnd ) {
     $.each(collection, function (ndx) {
-        var z,
-            txt = '',
-            y = $(this);
+        var classType
+            , verse = $(this)
+            , txt = ''
+            ;
+
         if (isBefore()) {
-            y.attr('class', 'old');
-            z = y.attr('class');
+            verse.attr('class', 'old');
+            classType = verse.attr('class');
             txt += "before";
         }
         if (isBetween()) {
-            y.attr('class', 'now');
-            z = y.attr('class');
+            verse.attr('class', 'now');
+            classType = verse.attr('class');
             txt += "between";
         }
         if (isAfter()) {
-            y.attr('class', 'new');
-            z = y.attr('class');
+            verse.attr('class', 'new');
+            classType = verse.attr('class');
             txt += "after";
         }
-        txt += " [" + ndx+ "]  z:" + z
-            + ", sT:" + roundIt(y.position().top)
-            + ", o:" + roundIt(y.offset().top);
+        txt += " [" + ndx+ "]  classType:" + classType
+            + ", sT:" + roundIt(verse.position().top)
+            + ", o:" + roundIt(verse.offset().top);
         console.log(txt );
 
+        /**
+         *
+         * @returns {boolean}
+         */
         function isBefore() {
             return ndx < ndxBeg
         }
-        function isAfter() {
-            return ndx > ndxEnd
-        }
         function isBetween() {
-            return ndx >= ndxBeg && ndx <= ndxEnd
+            return ndx >= ndxBeg && ndx < ndxEnd
+        }
+        function isAfter() {
+            return ndx >= ndxEnd
         }
     });
 }

@@ -12,7 +12,6 @@ QUnit.test('round 3.3 rounded up', function( assert ){
     assert.equal(ret, 321.236, "exp 3 places.")
 });
 
-
 QUnit.module("p2span and span2p", {
     beforeEach: function() {
         this.str1 = "<p> </p> ppp p <span>";
