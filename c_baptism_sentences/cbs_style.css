@@ -6,7 +6,7 @@
 .old {opacity:0.4;
     font-size:small;
 }
-.now {
+.cur {
     opacity: 1;
     font-size:large;
     /*font-weight: bold;*/

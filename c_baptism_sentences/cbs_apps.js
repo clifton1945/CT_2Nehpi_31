@@ -57,13 +57,14 @@ function span2p( str ) {
 
 /**
  * MODIFIES each verse style, tags, etc as a function of
- * 'old' read, 'now' reading, ''new' to read.
+ * a selected set of verses being 'old'==read, 'now'==CURrently reading, ''new'==NOT read.
  * @param collection
  * @param ndxBeg
- * @param ndxEnd
+ * @param ndxAft
  */
-function forEachElement( collection, ndxBeg, ndxEnd ) {
+function forEachElement( collection, ndxBeg, ndxAft ) {
     $.each(collection, function (ndx) {
+
         var classType
             , verse = $(this)
             , txt = ''
@@ -75,19 +76,20 @@ function forEachElement( collection, ndxBeg, ndxEnd ) {
             txt += "before";
         }
         if (isBetween()) {
-            verse.attr('class', 'now');
+            verse.attr('class', 'cur');
             classType = verse.attr('class');
-            txt += "between";
+            txt += "current";
         }
         if (isAfter()) {
             verse.attr('class', 'new');
             classType = verse.attr('class');
             txt += "after";
         }
+        // these properties are just for debugging
         txt += " [" + ndx+ "]  classType:" + classType
             + ", sT:" + roundIt(verse.position().top)
             + ", o:" + roundIt(verse.offset().top);
-        console.log(txt );
+        console.debug(txt );
 
         /**
          *
@@ -97,10 +99,10 @@ function forEachElement( collection, ndxBeg, ndxEnd ) {
             return ndx < ndxBeg
         }
         function isBetween() {
-            return ndx >= ndxBeg && ndx < ndxEnd
+            return ndx >= ndxBeg && ndx < ndxAft
         }
         function isAfter() {
-            return ndx >= ndxEnd
+            return ndx >= ndxAft
         }
     });
 }
@@ -109,17 +111,17 @@ function forEachElement( collection, ndxBeg, ndxEnd ) {
  * CHANGES style, and soon Position, etc for Verse tags.
  */
 function setVerses () {
-    var nxtBeg, ap,
-        txt;
+    var ndxBeg, ap, txt
+        ;
     ap = $('.verses p');
     ap.click(function () {
-        var self = $(this);
-        nxtBeg  = self.index();
-        txt   = self.text();
-
-        logIt("nxtBeg(" +  nxtBeg + ") "+ txt.slice(0, 10));
-        var delta = 2;
-        forEachElement(ap, nxtBeg, nxtBeg + delta);
+        var self = $(this)
+            ,ndxBeg  = self.index()
+            ,txt   = self.text()
+            ,delta = 2
+            ;
+        logIt("ndxBeg(" +  ndxBeg + ") "+ txt.slice(0, 10));
+        forEachElement(ap, ndxBeg, ndxBeg + delta);
         $.noop();
     })
 }
