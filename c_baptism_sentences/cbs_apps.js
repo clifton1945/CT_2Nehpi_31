@@ -33,18 +33,6 @@ function seeKey() {
             console.log("keydown[" + event.keyCode + "]");
         })
     }
-
-function logIt( txt ) {
-    $(".console").text(txt)
-}
-function roundIt(num, dPt){
-        if(dPt === undefined) {
-            dPt = 1;
-        }
-        var f = Math.pow(10, dPt);
-        return parseFloat(Math.round(num * f ) / f )
-    }
-
 /**
  * @deprecated - leave <p>, mitigate it with css, too much trouble.
  * all p to span
@@ -65,22 +53,34 @@ function span2p( str ) {
     return str.replace(/span/ig, "p");
 }
 
-function aVerse(verseThis, ndxThis, ndxBeg, ndxAft ) {
+//UTILITIES
+function logIt( txt ) {
+    $(".console").text(txt)
+}
+function roundIt(num, dPt){
+    if(dPt === undefined) {
+        dPt = 1;
+    }
+    var f = Math.pow(10, dPt);
+    return parseFloat(Math.round(num * f ) / f )
+}
+// CThought functions
+function aVerse(verseThis, ndxThis, ndxCur, ndxNew ) {
     var classType
         , txt = ''
         ;
 
-    if (isBefore()) {
+    if (isOld()) {
         verseThis.attr('class', 'old');
         classType = verseThis.attr('class');
         txt += "before";
     }
-    if (isBetween()) {
+    if (isCurrent()) {
         verseThis.attr('class', 'cur');
         classType = verseThis.attr('class');
         txt += "current";
     }
-    if (isAfter()) {
+    if (isNew()) {
         verseThis.attr('class', 'new');
         classType = verseThis.attr('class');
         txt += "after";
@@ -95,54 +95,52 @@ function aVerse(verseThis, ndxThis, ndxBeg, ndxAft ) {
      *
      * @returns {boolean}
      */
-    function isBefore() {
-        return ndxThis < ndxBeg
+    function isOld() {
+        return ndxThis < ndxCur
     }
 
-    function isBetween() {
-        return ndxThis >= ndxBeg && ndxThis < ndxAft
+    function isCurrent() {
+        return ndxThis >= ndxCur && ndxThis < ndxNew
     }
 
-    function isAfter() {
-        return ndxThis >= ndxAft
+    function isNew() {
+        return ndxThis >= ndxNew
     }
 }
-
 /**
- * MODIFIES each verse style, tags, etc as a function of
- * a selected set of verses being 'old'==read, 'now'==CURrently reading, ''new'==NOT read.
- * @param collection
- * @param ndxBeg
- * @param ndxAft
+ * MODIFIES a verse's style, tags, etc f(index
+ * CLASSIFIES a verse as being 'old'==read, 'cur'==CURrently reading, 'new'==NOT read.
+ * @param collection of verses.
+ * @param ndxCur: first verse to magnify.
+ * @param ndxNew: first verse to STOP magnifying.
  */
-function forEachElement(collection, ndxBeg, ndxAft) {
+function forEachElement(collection, ndxCur, ndxNew) {
     $.each(collection, function (ndx) {
-        aVerse($(this), ndx, ndxBeg, ndxAft);
+        aVerse($(this), ndx, ndxCur, ndxNew);
     });
 }
-
 /**
- * CHANGES style, and soon Position, etc for Verse tags.
+ * MODIFIES All Verse's style, Position, etc as f(position index, tags).
  */
-function setVerses () {
-    var ndxBeg, ap, txt
+function setAllVerses () {
+    var ndxBeg, verses, txt
         ;
-    ap = $('.verses p, br');
-    ap.click(function () {
+    verses = $('.verses p');  // expect all verses are <p>.
+    verses.click(function () {
         var self = $(this)
             ,txt   = self.text()
-            ,ndxBeg  = self.index()
+            ,ndxCur  = self.index()
             ,ndxDelta = 2
             ;
-        logIt("ndxBeg(" +  ndxBeg + ") "+ txt.slice(0, 10));
-        forEachElement(ap, ndxBeg, ndxBeg + ndxDelta);
+        logIt("ndxCur(" +  ndxCur + ") "+ txt.slice(0, 10));
+        forEachElement(verses, ndxCur, ndxCur + ndxDelta);
         $.noop();
     })
 }
 
 var main;
 main = function () {
-    setVerses();
+    setAllVerses();
     //getVerse();
     //forEachElement($('p'), 5, 8);
     //removeBegCurrent();
