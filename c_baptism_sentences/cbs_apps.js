@@ -12,6 +12,11 @@
 // SET end 'cur' end;
 //      insert | append "</div><div id='new'>"
 
+/**
+ * @deprecated - reatining for when I add key press stuff.
+ * @param target
+ * @constructor
+ */
 function KeyLogger( target ) {
     this.target = target;
     this.log = [];
@@ -20,6 +25,9 @@ function KeyLogger( target ) {
         that.log.push( event.keyCode );
     });
 }
+/**
+ * @deprecated - useful when using keyPress
+ */
 function seeKey() {
         $(document).on("keydown", function ( event ) {
             console.log("keydown[" + event.keyCode + "]");
@@ -38,6 +46,7 @@ function roundIt(num, dPt){
     }
 
 /**
+ * @deprecated - leave <p>, mitigate it with css, too much trouble.
  * all p to span
  * @returns {XML|void|string}
  * @param str
@@ -47,6 +56,7 @@ function p2span( str ) {
     return str.replace(/<(\/?)p>/img, "<$1span>");
 }
 /**
+ * @deprecated - leave <p>, mitigate it with css, too much trouble.
  * ALL 'span' to 'p'
  * @param str
  * @param str
