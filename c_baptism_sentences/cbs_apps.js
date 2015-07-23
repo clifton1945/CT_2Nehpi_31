@@ -13,7 +13,7 @@
 //      insert | append "</div><div id='new'>"
 
 /**
- * @deprecated - reatining for when I add key press stuff.
+ * @deprecated - retaining for when I add key press stuff and us QUnit.
  * @param target
  * @constructor
  */
@@ -108,6 +108,17 @@ function aVerse(verseThis, ndxThis, ndxCur, ndxNew ) {
         return ndxThis >= ndxNew
     }
 }
+
+// expect I'm in setAllVerse():
+// AND verses, ndxCur, ndxDelta in scope
+// AND all the p #class are in scope
+// USE someKey  TO increment ndxCur
+// THEN
+//  call logIt, forEachElement
+function forKeyPress() {
+
+}
+
 /**
  * MODIFIES a verse's style, tags, etc f(index
  * CLASSIFIES a verse as being 'old'==read, 'cur'==CURrently reading, 'new'==NOT read.
@@ -124,7 +135,7 @@ function forEachElement(collection, ndxCur, ndxNew) {
  * MODIFIES All Verse's style, Position, etc as f(position index, tags).
  */
 function setAllVerses () {
-    var ndxBeg, verses, txt
+    var verses
         ;
     verses = $('.verses p');  // expect all verses are <p>.
     verses.click(function () {
@@ -133,9 +144,16 @@ function setAllVerses () {
             ,ndxCur  = self.index()
             ,ndxDelta = 2
             ;
+        // probably make these a function
         logIt("ndxCur(" +  ndxCur + ") "+ txt.slice(0, 10));
         forEachElement(verses, ndxCur, ndxCur + ndxDelta);
-        $.noop();
+
+        // probably add a keypress call here and call
+        $(document).keypress( function( event ) {
+            logIt( "you pressed:" + event.keyCode
+                + "ndxCur:" + ndxCur);2
+        });
+
     })
 }
 

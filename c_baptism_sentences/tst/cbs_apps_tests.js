@@ -1,16 +1,3 @@
-QUnit.module("cbs_apps roundIt");
-QUnit.test('round 1.3 places', function( assert ){
-    var ret = roundIt(1.234444, 2);
-    assert.equal(ret, 1.23, "exp 3 places.")
-});
-QUnit.test('round 3.3 places', function( assert ){
-    var ret = roundIt(321.234444, 3);
-    assert.equal(ret, 321.234, "exp 3 places.")
-});
-QUnit.test('round 3.3 rounded up', function( assert ){
-    var ret = roundIt(321.2355, 3);
-    assert.equal(ret, 321.236, "exp 3 places.")
-});
 
 /**
  * @deprecated: not changing <p> anymore.
@@ -36,3 +23,31 @@ QUnit.test("p2span", function ( assert ) {
     assert.equal(cut.substr(0, 6), "<span>", "EXP: <p> becomes <span>");
     assert.equal(cut.substr(7, 7), "</span>", "EXP: </p> becomes </span>");
 });
+
+QUnit.module("cbs_apps roundIt");
+QUnit.test('round 1.3 places', function( assert ){
+    var ret = roundIt(1.234444, 2);
+    assert.equal(ret, 1.23, "exp 3 places.")
+});
+QUnit.test('round 3.3 places', function( assert ){
+    var ret = roundIt(321.234444, 3);
+    assert.equal(ret, 321.234, "exp 3 places.")
+});
+QUnit.test('round 3.3 rounded up', function( assert ){
+    var ret = roundIt(321.2355, 3);
+    assert.equal(ret, 321.236, "exp 3 places.")
+});
+
+QUnit.module("keypress testing");
+// first the qunit.cookbook example
+QUnit.test( "keylogger api behavior", function( assert ) {
+    var doc = $( document ),
+        keys = new KeyLogger( doc );
+
+    // Trigger the key event
+    doc.trigger( $.Event( "keydown", { keyCode: 9 } ) );
+
+    // Verify expected behavior
+    assert.deepEqual( keys.log, [ 9 ], "correct key was logged" );
+});
+
