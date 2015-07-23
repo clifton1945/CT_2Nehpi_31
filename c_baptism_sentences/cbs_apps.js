@@ -26,8 +26,8 @@ function seeKey() {
         })
     }
 
-function logIt( text ) {
-    $(".console").html(text)
+function logIt( txt ) {
+    $(".console").text(txt)
 }
 function roundIt(num, dPt){
         if(dPt === undefined) {
@@ -37,15 +37,21 @@ function roundIt(num, dPt){
         return parseFloat(Math.round(num * f ) / f )
     }
 
-function p2Span() {
-
+/**
+ * all p to span
+ * @returns {XML|void|string}
+ * @param str
+ */
+function p2span( str ) {
+    // how handle /p
+    return str.replace(/<(\/?)p>/img, "<$1span>");
 }
 /**
- * ALL 'span' > 'p'
+ * ALL 'span' to 'p'
  * @param str
- * @return a new string}
+ * @param str
  */
-function span2p(str) {
+function span2p( str ) {
     return str.replace(/span/ig, "p");
 }
 
@@ -90,10 +96,6 @@ function forEachElement( collection, ndxBeg, ndxEnd ) {
         function isBetween() {
             return ndx >= ndxBeg && ndx <= ndxEnd
         }
-        function isOutside() {
-            return ndx < ndxBeg ||ndx
-                > ndxEnd
-        }
     });
 }
 
@@ -101,7 +103,7 @@ function forEachElement( collection, ndxBeg, ndxEnd ) {
  * CHANGES style, and soon Position, etc for Verse tags.
  */
 function setVerses () {
-    var nxtBeg, ndxBeg, ap,
+    var nxtBeg, ap,
         txt;
     ap = $('.verses p');
     ap.click(function () {

@@ -13,41 +13,26 @@ QUnit.test('round 3.3 rounded up', function( assert ){
 });
 
 
-/**
- * SWITCHES tags: <p> tag to|from <span>
- */
-QUnit.module("p2span_span2p", {
+QUnit.module("p2span and span2p", {
     beforeEach: function() {
-        this.str1 = "one <p> fghjkl; </p> wertyuiop";
-        this.str2 = "two <span> wertyuiop </span> fghjkl";
+        this.str1 = "<p> </p> ppp p <span>";
+        this.str2 = "<span> </span> span </p";
     }
 });
-QUnit.test("p2span_regex", function ( assert ) {
-    var ret,
-        myregexp = /<p>/img,
-        nustr;
-    nustr = this.str1.replace(myregexp, function(match) {
-        return "<span>";
-    });
-    assert.equal(nustr.slice(4,10), "<span>", "EXP: regex obj to work.")
-
-});
-QUnit.test("p2span_js", function ( assert ) {
-    var ret
-        ;
-    ret = this.str1.replace("<p>", "<span>");
-    assert.equal(ret.slice(4,10), "<span>", "EXP: js replace is simpler")
-
-});
-QUnit.test("/p2/span_js", function ( assert ) {
-    var ret = this.str1.replace("</p>", "</span>");
-    assert.equal(ret.slice(16,23), "</span>", "EXP: js replace is simpler")
-});
-
 QUnit.test("span2p", function ( assert ) {
-    var cut = span2p(this.str2);
-    assert.equal(cut.substr(4, 3), "<p>", "EXP: ALL spans:  <span> now <p>")
-    assert.equal(cut.substr(18, 4), "</p>", "EXP: ALL spans: </span> now </p>")
+    var str = this.str2
+        , cut = span2p(str);
+    logIt(str + ' now:' + cut);
+    assert.equal(cut.substr(0,3), "<p>", "EXP: ALL spans:  <span> now <p>");
+    assert.equal(cut.substr(4, 4), "</p>", "EXP: ALL spans: </span> now </p>")
+});
+QUnit.test("p2span", function ( assert ) {
+    var str = "<p> </p> ppp p <span>"
+        , cut = p2span(str)
+        ;
+    logIt(str + ' now:' + cut);
+    assert.equal(cut.substr(0, 6), "<span>", "EXP: <p> becomes <span>");
+    assert.equal(cut.substr(7, 7), "</span>", "EXP: </p> becomes </span>");
 });
 
 //
