@@ -64,6 +64,7 @@ function roundIt(num, dPt){
     var f = Math.pow(10, dPt);
     return parseFloat(Math.round(num * f ) / f )
 }
+
 // CThought functions
 function aVerse(verseThis, ndxThis, ndxCur, ndxNew ) {
     var classType

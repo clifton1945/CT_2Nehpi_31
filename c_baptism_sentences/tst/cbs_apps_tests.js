@@ -12,6 +12,9 @@ QUnit.test('round 3.3 rounded up', function( assert ){
     assert.equal(ret, 321.236, "exp 3 places.")
 });
 
+/**
+ * @deprecated: not changing <p> anymore.
+ */
 QUnit.module("p2span and span2p", {
     beforeEach: function() {
         this.str1 = "<p> </p> ppp p <span>";
@@ -33,12 +36,3 @@ QUnit.test("p2span", function ( assert ) {
     assert.equal(cut.substr(0, 6), "<span>", "EXP: <p> becomes <span>");
     assert.equal(cut.substr(7, 7), "</span>", "EXP: </p> becomes </span>");
 });
-
-//
-//QUnit.module("hello");
-//    function saysHi(name) {
-//        return "Hi, " + name;
-//    }
-//    QUnit.test('saysHi()', function( assert ) {
-//        assert.equal(saysHi("Jack"), "Hi, Jack", "function outputs string correctly")
-//    });
