@@ -55,46 +55,46 @@ function span2p( str ) {
     return str.replace(/span/ig, "p");
 }
 
-function aVerse(verse, ndx, ndxBeg, ndxAft ) {
+function aVerse(verseThis, ndxThis, ndxBeg, ndxAft ) {
     var classType
         , txt = ''
         ;
 
     if (isBefore()) {
-        verse.attr('class', 'old');
-        classType = verse.attr('class');
+        verseThis.attr('class', 'old');
+        classType = verseThis.attr('class');
         txt += "before";
     }
     if (isBetween()) {
-        verse.attr('class', 'cur');
-        classType = verse.attr('class');
+        verseThis.attr('class', 'cur');
+        classType = verseThis.attr('class');
         txt += "current";
     }
     if (isAfter()) {
-        verse.attr('class', 'new');
-        classType = verse.attr('class');
+        verseThis.attr('class', 'new');
+        classType = verseThis.attr('class');
         txt += "after";
     }
     // these properties are just for debugging
-    txt += " [" + ndx + "]  classType:" + classType
-        + ", sT:" + roundIt(verse.position().top)
-        + ", o:" + roundIt(verse.offset().top);
-    console.debug(txt);
+    txt += " [" + ndxThis + "]  classType:" + classType
+        + ", sT:" + roundIt(verseThis.position().top)
+        + ", o:" + roundIt(verseThis.offset().top);
+    console.log(txt);
 
     /**
      *
      * @returns {boolean}
      */
     function isBefore() {
-        return ndx < ndxBeg
+        return ndxThis < ndxBeg
     }
 
     function isBetween() {
-        return ndx >= ndxBeg && ndx < ndxAft
+        return ndxThis >= ndxBeg && ndxThis < ndxAft
     }
 
     function isAfter() {
-        return ndx >= ndxAft
+        return ndxThis >= ndxAft
     }
 }
 
@@ -105,7 +105,7 @@ function aVerse(verse, ndx, ndxBeg, ndxAft ) {
  * @param ndxBeg
  * @param ndxAft
  */
-function forEachElement( collection, ndxBeg, ndxAft ) {
+function forEachElement(collection, ndxBeg, ndxAft) {
     $.each(collection, function (ndx) {
         aVerse($(this), ndx, ndxBeg, ndxAft);
     });
@@ -117,15 +117,15 @@ function forEachElement( collection, ndxBeg, ndxAft ) {
 function setVerses () {
     var ndxBeg, ap, txt
         ;
-    ap = $('.verses p');
+    ap = $('.verses p, br');
     ap.click(function () {
         var self = $(this)
-            ,ndxBeg  = self.index()
             ,txt   = self.text()
-            ,delta = 2
+            ,ndxBeg  = self.index()
+            ,ndxDelta = 2
             ;
         logIt("ndxBeg(" +  ndxBeg + ") "+ txt.slice(0, 10));
-        forEachElement(ap, ndxBeg, ndxBeg + delta);
+        forEachElement(ap, ndxBeg, ndxBeg + ndxDelta);
         $.noop();
     })
 }

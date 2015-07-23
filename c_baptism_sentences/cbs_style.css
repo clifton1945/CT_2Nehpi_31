@@ -5,14 +5,16 @@
 
 .old {opacity:0.4;
     font-size:small;
+    line-height: 75%;
 }
 .cur {
     opacity: 1;
     font-size:large;
-    /*font-weight: bold;*/
+    font-weight: bold;
 }
-.new {opacity:0.3;
+.new {opacity:0.2;
     font-size:small;
+    line-height: 60%;
 }
 .bap {
     color: #9ffc9c;
