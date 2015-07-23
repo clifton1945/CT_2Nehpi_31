@@ -55,6 +55,49 @@ function span2p( str ) {
     return str.replace(/span/ig, "p");
 }
 
+function aVerse(verse, ndx, ndxBeg, ndxAft ) {
+    var classType
+        , txt = ''
+        ;
+
+    if (isBefore()) {
+        verse.attr('class', 'old');
+        classType = verse.attr('class');
+        txt += "before";
+    }
+    if (isBetween()) {
+        verse.attr('class', 'cur');
+        classType = verse.attr('class');
+        txt += "current";
+    }
+    if (isAfter()) {
+        verse.attr('class', 'new');
+        classType = verse.attr('class');
+        txt += "after";
+    }
+    // these properties are just for debugging
+    txt += " [" + ndx + "]  classType:" + classType
+        + ", sT:" + roundIt(verse.position().top)
+        + ", o:" + roundIt(verse.offset().top);
+    console.debug(txt);
+
+    /**
+     *
+     * @returns {boolean}
+     */
+    function isBefore() {
+        return ndx < ndxBeg
+    }
+
+    function isBetween() {
+        return ndx >= ndxBeg && ndx < ndxAft
+    }
+
+    function isAfter() {
+        return ndx >= ndxAft
+    }
+}
+
 /**
  * MODIFIES each verse style, tags, etc as a function of
  * a selected set of verses being 'old'==read, 'now'==CURrently reading, ''new'==NOT read.
@@ -64,46 +107,7 @@ function span2p( str ) {
  */
 function forEachElement( collection, ndxBeg, ndxAft ) {
     $.each(collection, function (ndx) {
-
-        var classType
-            , verse = $(this)
-            , txt = ''
-            ;
-
-        if (isBefore()) {
-            verse.attr('class', 'old');
-            classType = verse.attr('class');
-            txt += "before";
-        }
-        if (isBetween()) {
-            verse.attr('class', 'cur');
-            classType = verse.attr('class');
-            txt += "current";
-        }
-        if (isAfter()) {
-            verse.attr('class', 'new');
-            classType = verse.attr('class');
-            txt += "after";
-        }
-        // these properties are just for debugging
-        txt += " [" + ndx+ "]  classType:" + classType
-            + ", sT:" + roundIt(verse.position().top)
-            + ", o:" + roundIt(verse.offset().top);
-        console.debug(txt );
-
-        /**
-         *
-         * @returns {boolean}
-         */
-        function isBefore() {
-            return ndx < ndxBeg
-        }
-        function isBetween() {
-            return ndx >= ndxBeg && ndx < ndxAft
-        }
-        function isAfter() {
-            return ndx >= ndxAft
-        }
+        aVerse($(this), ndx, ndxBeg, ndxAft);
     });
 }
 
