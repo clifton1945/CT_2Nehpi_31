@@ -53,6 +53,12 @@ function span2p( str ) {
     return str.replace(/span/ig, "p");
 }
 
+// GLOBALS
+var NDXDELTA = 3
+    , ndxDELTA = NDXDELTA
+    , ndxCUR = 0
+    ;
+
 //UTILITIES
 function logIt( txt ) {
     $(".console").text(txt)
@@ -110,7 +116,7 @@ function aVerse(verseThis, ndxThis, ndxCur, ndxNew ) {
 }
 
 // expect I'm in setAllVerse():
-// AND verses, ndxCur, ndxDelta in scope
+// AND verses, ndxCur, ndxDELTA in scope
 // AND all the p #class are in scope
 // USE someKey  TO increment ndxCur
 // THEN
@@ -123,14 +129,15 @@ function forKeyPress() {
  * MODIFIES a verse's style, tags, etc f(index
  * CLASSIFIES a verse as being 'old'==read, 'cur'==CURrently reading, 'new'==NOT read.
  * @param collection of verses.
- * @param ndxCur: first verse to magnify.
- * @param ndxDelta
+ * @param ndx_current
+ * @param delta
  */
-function forEachElement(collection, ndxCur, ndxDelta) {
-    ndxDelta = (ndxDelta  ? ndxDelta : 2 );  // default
-    var ndxNew = ndxCur + ndxDelta;
+function forEachElement(collection, ndx_current, delta) {
+    ndxCUR = (ndx_current ? ndx_current : ndxCUR);
+    ndxDELTA = (delta  ? delta : ndxDELTA );  // default
+    var ndxNew = ndxCUR + ndxDELTA;
     $.each(collection, function (ndx) {
-        aVerse($(this), ndx, ndxCur, ndxNew);
+        aVerse($(this), ndx, ndxCUR, ndxNew);
     });
 }
 /**
@@ -143,26 +150,30 @@ function setAllVerses () {
     verses.click(function () {
         var self = $(this)
             ,txt   = self.text()
-            ,ndxCur  = self.index()
-            ,ndxDelta = 2
             ;
+            ndxCUR  = self.index();
+            ndxDELTA = NDXDELTA;
+
         // probably make these a function
-        logIt("ndxCur(" +  ndxCur + ") "+ txt.slice(0, 10));
-        forEachElement(verses, ndxCur, ndxDelta);
+        logIt("ndxCUR(" +  ndxCUR + ") "+ txt.slice(0, 10));
+        forEachElement(verses, ndxCUR);
 
         // now use keys to continue reading
-        //TODO 1. limit ndxCur within length
+        // var y = (x == 2 ? "yes" : "no");
         $(document).keypress( function( event ) {
-            var ky = event.keyCode;
-            logIt("you pressed:" + event.keyCode
-                + "  now ndxCur:" + ndxCur);
-            if (ky == 122) { // 'Q'
-                ndxCur += 2;
-                forEachElement(verses, ndxCur);
-            } else if (ky == 113) { // 'Z'
-                ndxCur -= 2;
-                forEachElement(verses, ndxCur);
+            var ky = event.keyCode
+                , max = verses.length - ndxDELTA - 1
+                ;
+            if (ky == 113) { // 'Q' UP, lower ndx
+                ndxCUR = (ndxCUR > 0 ? ndxCUR - 1 : ndxCUR);
+                forEachElement(verses, ndxCUR);
+            } else if (ky == 122) { // 'Z' DOWN higher ndx
+                ndxCUR = (ndxCUR < max ? ndxCUR + 1 : ndxCUR);
+                forEachElement(verses, ndxCUR);
             }
+            logIt("you pressed:" + event.keyCode
+                + "  now ndxCUR:" + ndxCUR + " max:" + max);
+
         })
     })
 }
