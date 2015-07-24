@@ -124,9 +124,11 @@ function forKeyPress() {
  * CLASSIFIES a verse as being 'old'==read, 'cur'==CURrently reading, 'new'==NOT read.
  * @param collection of verses.
  * @param ndxCur: first verse to magnify.
- * @param ndxNew: first verse to STOP magnifying.
+ * @param ndxDelta
  */
-function forEachElement(collection, ndxCur, ndxNew) {
+function forEachElement(collection, ndxCur, ndxDelta) {
+    ndxDelta = (ndxDelta  ? ndxDelta : 2 );  // default
+    var ndxNew = ndxCur + ndxDelta;
     $.each(collection, function (ndx) {
         aVerse($(this), ndx, ndxCur, ndxNew);
     });
@@ -146,14 +148,22 @@ function setAllVerses () {
             ;
         // probably make these a function
         logIt("ndxCur(" +  ndxCur + ") "+ txt.slice(0, 10));
-        forEachElement(verses, ndxCur, ndxCur + ndxDelta);
+        forEachElement(verses, ndxCur, ndxDelta);
 
-        // probably add a keypress call here and call
+        // now use keys to continue reading
+        //TODO 1. limit ndxCur within length
         $(document).keypress( function( event ) {
-            logIt( "you pressed:" + event.keyCode
-                + "ndxCur:" + ndxCur);2
-        });
-
+            var ky = event.keyCode;
+            logIt("you pressed:" + event.keyCode
+                + "  now ndxCur:" + ndxCur);
+            if (ky == 122) { // 'Q'
+                ndxCur += 2;
+                forEachElement(verses, ndxCur);
+            } else if (ky == 113) { // 'Z'
+                ndxCur -= 2;
+                forEachElement(verses, ndxCur);
+            }
+        })
     })
 }
 
