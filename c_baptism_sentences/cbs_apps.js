@@ -100,16 +100,6 @@ function setReadingClass(verseThis, ndxThis, ndxCur, ndxNew ) {
     }
 }
 
-// expect I'm in setAllVerse():
-// AND verses, ndxCur, ndxDelta in scope
-// AND all the p #class are in scope
-// USE someKey  TO increment ndxCur
-// THEN
-//  call logIt, forEachElement
-function forKeyPress() {
-
-}
-
 /**
  * MODIFIES a verse's style, tags, etc f(index
  * CLASSIFIES a verse as being 'old'==read, 'cur'==CURrently reading, 'new'==NOT read.
@@ -138,8 +128,6 @@ function setAllVerses () {
             ;
         // these are GLOBALS: notice the caps.
         ndxCur  = self.index();
-        //ndxDelta = NDXDELTA;  // always reset to DEFAULT do I want this??
-        //
         logIt("ndxCur(" +  ndxCur + ") "+ txt.slice(0, 10));
         // codeOfInterest
         forEachElement(verses, ndxCur, NDXDELTA);
@@ -170,11 +158,6 @@ function setAllVerses () {
 var main;
 main = function () {
     setAllVerses();
-    //getVerse();
-    //forEachElement($('p'), 5, 8);
-    //removeBegCurrent();
-    //seeKey();
-    //click_a_verse();
 };
 
 $(document).ready(main);
