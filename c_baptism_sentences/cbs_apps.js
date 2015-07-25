@@ -1,16 +1,3 @@
-// a <div> way to move 'old', 'cur', 'new' focus area.
-//
-//      note: for this begin 'old' is fixed at beginning.
-//      note: for this end 'new' is fixed at ending.
-// REMOVE old focus area:
-//      remove "</div><div id='cur'>"
-//      remove "</div><div id='new'>"
-// somehow determine a new focus area:
-//      set new location
-// SET new 'cur' begin:
-//      insert | append "</div><div id='cur'>"
-// SET end 'cur' end;
-//      insert | append "</div><div id='new'>"
 
 /**
  * @deprecated - retaining for when I add key press stuff and us QUnit.
@@ -60,9 +47,6 @@ var NDXDELTA = 3
     ;
 
 //UTILITIES
-function logIt( txt ) {
-    $(".console").text(txt)
-}
 function roundIt(num, dPt){
     if(dPt === undefined) {
         dPt = 1;
@@ -70,46 +54,50 @@ function roundIt(num, dPt){
     var f = Math.pow(10, dPt);
     return parseFloat(Math.round(num * f ) / f )
 }
+function logIt( txt ) {
+    $(".console").text(txt)
+}
+function logVerseAttributes (verseThis, ndxThis) {
+    var txt
+        ;
+    if (verseThis.attr('class') == 'cur') {
+        //$(window).scrollTop(250);  //this worlks
+        txt = " [" + ndxThis + "]  class:" + verseThis.attr('class')
+            + ", posTop:" + roundIt(verseThis.position().top)
+            + ", offtop:" + roundIt(verseThis.offset().top)
+            + ", scrollTop:" + roundIt($(window).scrollTop());
+        console.log(txt);
+    }
+}
 
 // CThought functions
 function aVerse(verseThis, ndxThis, ndxCur, ndxNew ) {
-    var classType
-        , txt = ''
+    var txt = ''
         ;
-
     if (isOld()) {
         verseThis.attr('class', 'old');
-        classType = verseThis.attr('class');
-        txt += "before";
+        //classType = verseThis.attr('class');
+        //txt += "before";
     }
     if (isCurrent()) {
         verseThis.attr('class', 'cur');
-        classType = verseThis.attr('class');
-        txt += "current";
+        //classType = verseThis.attr('class');
+        //txt += "current";
     }
     if (isNew()) {
         verseThis.attr('class', 'new');
-        classType = verseThis.attr('class');
-        txt += "after";
+        //classType = verseThis.attr('class');
+        //txt += "after";
     }
     // these properties are just for debugging
-    txt += " [" + ndxThis + "]  classType:" + classType
-        + ", sT:" + roundIt(verseThis.position().top)
-        + ", o:" + roundIt(verseThis.offset().top);
-    console.log(txt);
+    logVerseAttributes(verseThis, ndxThis);
 
-    /**
-     *
-     * @returns {boolean}
-     */
     function isOld() {
         return ndxThis < ndxCur
     }
-
     function isCurrent() {
         return ndxThis >= ndxCur && ndxThis < ndxNew
     }
-
     function isNew() {
         return ndxThis >= ndxNew
     }
@@ -144,17 +132,15 @@ function forEachElement(collection, ndx_current, delta) {
  * MODIFIES All Verse's style, Position, etc as f(position index, tags).
  */
 function setAllVerses () {
-    var verses
-        ;
-    verses = $('.verses p');  // expect all verses are <p>.
+    var verses = $('.verses p')
+        ;  // expect all verses are <p>.
     verses.click(function () {
         var self = $(this)
             ,txt   = self.text()
             ;
-            ndxCUR  = self.index();
-            ndxDELTA = NDXDELTA;
+        ndxCUR  = self.index();
+        ndxDELTA = NDXDELTA;
 
-        // probably make these a function
         logIt("ndxCUR(" +  ndxCUR + ") "+ txt.slice(0, 10));
         forEachElement(verses, ndxCUR);
 
@@ -164,15 +150,15 @@ function setAllVerses () {
             var ky = event.keyCode
                 , max = verses.length - ndxDELTA - 1
                 ;
-            if (ky == 113) { // 'Q' UP, lower ndx
+            if (ky == 113 || ky == 56)  { // 113 & 91 'Q' UP, lower ndx
                 ndxCUR = (ndxCUR > 0 ? ndxCUR - 1 : ndxCUR);
                 forEachElement(verses, ndxCUR);
-            } else if (ky == 122) { // 'Z' DOWN higher ndx
+            } else if (ky == 122 || ky == 50) { //  122 & 90  'Z' DOWN higher ndx
                 ndxCUR = (ndxCUR < max ? ndxCUR + 1 : ndxCUR);
                 forEachElement(verses, ndxCUR);
             }
-            logIt("you pressed:" + event.keyCode
-                + "  now ndxCUR:" + ndxCUR + " max:" + max);
+            logIt("KEYPRESS: " + event.keyCode
+                + "  ndxCUR:" + ndxCUR + "/max:" + max);
 
         })
     })
