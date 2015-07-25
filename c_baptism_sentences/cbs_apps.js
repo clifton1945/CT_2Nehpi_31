@@ -144,14 +144,19 @@ function setAllVerses () {
         // these are GLOBALS: notice the caps.
         ndxCur  = self.index();
         ndxDELTA = NDXDELTA;  // always reset to DEFAULT do I want this??
-
+        //
         logIt("ndxCur(" +  ndxCur + ") "+ txt.slice(0, 10));
         // codeOfInterest
         forEachElement(verses, ndxCur);
 
         // now use keys to continue reading
         // var y = (x == 2 ? "yes" : "no");
-        $(document).keypress( function( event ) {
+        /**
+         * reading verses by keyPress.
+         *   this controls over and under incrementing the verses.
+         *     NOTE: this is an inner function so ndxCur works.
+         */
+        $(document).keypress(  function readingKeyPress( event ) {
             var ky = event.keyCode
                 , max = verses.length - ndxDELTA - 1
                 ;
@@ -162,6 +167,7 @@ function setAllVerses () {
                 ndxCUR = (ndxCUR < max ? ndxCUR + 1 : ndxCUR);
                 forEachElement(verses, ndxCUR);
             }
+            // coding helper
             logIt("KEYPRESS: " + event.keyCode
                 + "  ndxCUR:" + ndxCUR + "/max:" + max);
         })
