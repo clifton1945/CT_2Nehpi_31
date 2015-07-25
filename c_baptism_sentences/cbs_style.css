@@ -24,9 +24,9 @@ h3 {
     color: #9ffc9c;
     font-weight: bold;
 }
-.new .bap {
+.old .bap, .new .bap {
     color: fuchsia;
-    font-size: larger;
+    font-size: medium;
 }
 .console {
     position: fixed;
