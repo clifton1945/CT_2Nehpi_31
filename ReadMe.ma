@@ -113,5 +113,10 @@ PLAN as of above date.
  NOTE: jQuery and regex: selector.match(/regex str/ig)
 
  2015-07-20  I have css controling three classes: old, now, new text. BUT NEXT
-  change NOW locatons with keyPress
+  change NOW locations with keyPress
   REMOVE/REPLACE <p> with either nothing or <span>
+
+ 2015-07-25 OK have keyPress movement working. Now would like to adjust scroll to keep view in window center.
+   But I'm begining to USE what I have.
+   (1) to highlight words that appear in the 'View' - I'll use that name meaning the current selection.
+   (2) work on WHO's voice[s\ the verse contains.
