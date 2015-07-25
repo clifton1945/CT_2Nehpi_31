@@ -164,7 +164,6 @@ function setAllVerses () {
             }
             logIt("KEYPRESS: " + event.keyCode
                 + "  ndxCUR:" + ndxCUR + "/max:" + max);
-
         })
     })
 }
