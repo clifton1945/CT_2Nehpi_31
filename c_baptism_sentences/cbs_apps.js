@@ -138,6 +138,7 @@ function setAllVerses () {
         var self = $(this)
             ,txt   = self.text()
             ;
+        // these are GLOBALS: notice the caps.
         ndxCUR  = self.index();
         ndxDELTA = NDXDELTA;
 
