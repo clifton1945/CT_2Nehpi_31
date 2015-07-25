@@ -43,7 +43,6 @@ function span2p( str ) {
 // GLOBALS
 var NDXDELTA = 2
     ;
-
 //UTILITIES
 function roundIt(num, dPt){
     if(dPt === undefined) {
@@ -128,7 +127,7 @@ function setAllVerses () {
             ;
         // these are GLOBALS: notice the caps.
         ndxCur  = self.index();
-        logIt("ndxCur(" +  ndxCur + ") "+ txt.slice(0, 10));
+        logIt("ndxCur[" +  ndxCur + "] "+ txt.slice(0, 10));
         // codeOfInterest
         forEachElement(verses, ndxCur, NDXDELTA);
 
