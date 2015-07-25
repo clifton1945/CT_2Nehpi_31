@@ -42,8 +42,6 @@ function span2p( str ) {
 
 // GLOBALS
 var NDXDELTA = 2
-    , ndxDELTA = NDXDELTA
-    , ndxCUR = 0
     ;
 
 //UTILITIES
@@ -103,7 +101,7 @@ function setReadingClass(verseThis, ndxThis, ndxCur, ndxNew ) {
 }
 
 // expect I'm in setAllVerse():
-// AND verses, ndxCur, ndxDELTA in scope
+// AND verses, ndxCur, ndxDelta in scope
 // AND all the p #class are in scope
 // USE someKey  TO increment ndxCur
 // THEN
@@ -117,18 +115,14 @@ function forKeyPress() {
  * CLASSIFIES a verse as being 'old'==read, 'cur'==CURrently reading, 'new'==NOT read.
  * @param collection of verses.
  * @param ndx_current: if passed parameter, global ndxCUR is updated; if not global is used.
- * @param delta: if passed parameter global ndxDELTA is updated; if not global is used.
+ * @param delta: if passed parameter global ndxDelta is updated; if not global is used.
  */
 function forEachElement(collection, ndx_current, delta) {
-    // Globals
-    ndxCUR = (ndx_current ? ndx_current : ndxCUR);  //if passed parameter global is updated.
-    ndxDELTA = (delta  ? delta : ndxDELTA );  //if passed parameter global is updated.
-    // vars
-    var ndxNew = ndxCUR + ndxDELTA
+    var ndxNew = ndx_current + delta
         ;
     // CodeOI
     $.each(collection, function (ndx) {
-        setReadingClass($(this), ndx, ndxCUR, ndxNew);
+        setReadingClass($(this), ndx, ndx_current, ndxNew);
     });
 }
 /**
@@ -136,6 +130,7 @@ function forEachElement(collection, ndx_current, delta) {
  */
 function setAllVerses () {
     var verses = $('.verses p')
+        , ndxCur, ndxDelta
         ;  // expect all verses are <p>.
     verses.click(function () {
         var self = $(this)
@@ -143,14 +138,12 @@ function setAllVerses () {
             ;
         // these are GLOBALS: notice the caps.
         ndxCur  = self.index();
-        ndxDELTA = NDXDELTA;  // always reset to DEFAULT do I want this??
+        //ndxDelta = NDXDELTA;  // always reset to DEFAULT do I want this??
         //
         logIt("ndxCur(" +  ndxCur + ") "+ txt.slice(0, 10));
         // codeOfInterest
-        forEachElement(verses, ndxCur);
+        forEachElement(verses, ndxCur, NDXDELTA);
 
-        // now use keys to continue reading
-        // var y = (x == 2 ? "yes" : "no");
         /**
          * reading verses by keyPress.
          *   this controls over and under incrementing the verses.
@@ -158,18 +151,18 @@ function setAllVerses () {
          */
         $(document).keypress(  function readingKeyPress( event ) {
             var ky = event.keyCode
-                , max = verses.length - ndxDELTA - 1
+                , max = verses.length - ndxDelta - 1
                 ;
             if (ky == 113 || ky == 56)  { // 113 & 91 'Q' UP, lower ndx
-                ndxCUR = (ndxCUR > 0 ? ndxCUR - 1 : ndxCUR);
-                forEachElement(verses, ndxCUR);
+                ndxCur = (ndxCur > 0 ? ndxCur - 1 : ndxCur);  // set low limit.
+                forEachElement(verses, ndxCur, NDXDELTA);
             } else if (ky == 122 || ky == 50) { //  122 & 90  'Z' DOWN higher ndx
-                ndxCUR = (ndxCUR < max ? ndxCUR + 1 : ndxCUR);
-                forEachElement(verses, ndxCUR);
+                ndxCur = (ndxCur < max ? ndxCur + 1 : ndxCur);  // set hi limit.
+                forEachElement(verses, ndxCur, NDXDELTA);
             }
             // coding helper
             logIt("KEYPRESS: " + event.keyCode
-                + "  ndxCUR:" + ndxCUR + "/max:" + max);
+                + "  ndxCur:" + ndxCur + "/max:" + max);
         })
     })
 }
