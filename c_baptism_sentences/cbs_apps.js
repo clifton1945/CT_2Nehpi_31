@@ -41,7 +41,7 @@ function span2p( str ) {
 }
 
 // GLOBALS
-var NDXDELTA = 3
+var NDXDELTA = 2
     , ndxDELTA = NDXDELTA
     , ndxCUR = 0
     ;
@@ -132,7 +132,7 @@ function forEachElement(collection, ndx_current, delta) {
     });
 }
 /**
- * MODIFIES All Verse's style, Position, etc as f(position index, tags).
+ * MODIFIES All Verse's Reading style, Position, etc as f(position index, tags).
  */
 function setAllVerses () {
     var verses = $('.verses p')
@@ -142,11 +142,12 @@ function setAllVerses () {
             ,txt   = self.text()
             ;
         // these are GLOBALS: notice the caps.
-        ndxCUR  = self.index();
-        ndxDELTA = NDXDELTA;
+        ndxCur  = self.index();
+        ndxDELTA = NDXDELTA;  // always reset to DEFAULT do I want this??
 
-        logIt("ndxCUR(" +  ndxCUR + ") "+ txt.slice(0, 10));
-        forEachElement(verses, ndxCUR);
+        logIt("ndxCur(" +  ndxCur + ") "+ txt.slice(0, 10));
+        // codeOfInterest
+        forEachElement(verses, ndxCur);
 
         // now use keys to continue reading
         // var y = (x == 2 ? "yes" : "no");
