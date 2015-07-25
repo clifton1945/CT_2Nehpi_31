@@ -78,7 +78,7 @@ function logVerseReadingClassAttribute (verseThis, ndxThis) {
  * @param ndxCur
  * @param ndxNew
  */
-function setVerseClass(verseThis, ndxThis, ndxCur, ndxNew ) {
+function setReadingClass(verseThis, ndxThis, ndxCur, ndxNew ) {
     if (isOld()) {
         verseThis.attr('class', 'old');
     }
@@ -116,15 +116,19 @@ function forKeyPress() {
  * MODIFIES a verse's style, tags, etc f(index
  * CLASSIFIES a verse as being 'old'==read, 'cur'==CURrently reading, 'new'==NOT read.
  * @param collection of verses.
- * @param ndx_current: if passed parameter global ndxCUR is updated
- * @param delta: if passed parameter global ndxDELTA is updated.
+ * @param ndx_current: if passed parameter, global ndxCUR is updated; if not global is used.
+ * @param delta: if passed parameter global ndxDELTA is updated; if not global is used.
  */
 function forEachElement(collection, ndx_current, delta) {
+    // Globals
     ndxCUR = (ndx_current ? ndx_current : ndxCUR);  //if passed parameter global is updated.
     ndxDELTA = (delta  ? delta : ndxDELTA );  //if passed parameter global is updated.
-    var ndxNew = ndxCUR + ndxDELTA;
+    // vars
+    var ndxNew = ndxCUR + ndxDELTA
+        ;
+    // CodeOI
     $.each(collection, function (ndx) {
-        setVerseClass($(this), ndx, ndxCUR, ndxNew);
+        setReadingClass($(this), ndx, ndxCUR, ndxNew);
     });
 }
 /**
