@@ -68,6 +68,17 @@ function logVerseReadingClassAttribute (verseThis, ndxThis) {
 }
 
 // CThought functions
+
+function setWordOfInterestId(collection, re) {
+    var
+        arr
+        ;
+    // form: str.match(regex) returns an array.
+    re = /woi/gi;
+    arr = collection.replace(re, "<span id='woi'>woi</span>");
+    logIt(arr);
+
+}
 /**
  * sets a verse's read class to old:have read, current: am reading or new: have not read.
  * @param verseThis
@@ -119,7 +130,7 @@ function forEachElement(collection, ndx_current, delta) {
  */
 function setAllVerses () {
     var verses = $('.verses p')
-        , ndxCur, ndxDelta
+        , ndxCur, ndxDelta = NDXDELTA
         ;  // expect all verses are <p>.
     verses.click(function () {
         var self = $(this)

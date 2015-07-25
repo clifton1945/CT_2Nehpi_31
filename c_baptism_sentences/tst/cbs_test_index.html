@@ -11,12 +11,15 @@
 
     <script src="cbs_apps_tests.js"></script>
     <script src="../cbs_apps.js"></script>
+    <link rel="stylesheet" href="cbs_apps_tests.css">
 
 </head>
 <body>
 
 <div id="qunit"></div>
-<div id="qunit-fixture"></div>
+<div id="qunit-fixture">
+    <p> some words, then <span id="woi" style="font-size: larger"> that should follow the css.</span></p><p> but this will not.</p>
+</div>
 <div class="console">logIt() output</div>
 </body>
 </html>
