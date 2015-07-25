@@ -57,7 +57,7 @@ function roundIt(num, dPt){
 function logIt( txt ) {
     $(".console").text(txt)
 }
-function logVerseAttributes (verseThis, ndxThis) {
+function logVerseReadingClassAttribute (verseThis, ndxThis) {
     var txt
         ;
     if (verseThis.attr('class') == 'cur') {
@@ -71,26 +71,25 @@ function logVerseAttributes (verseThis, ndxThis) {
 }
 
 // CThought functions
-function aVerse(verseThis, ndxThis, ndxCur, ndxNew ) {
-    var txt = ''
-        ;
+/**
+ * sets a verse's read class to old:have read, current: am reading or new: have not read.
+ * @param verseThis
+ * @param ndxThis
+ * @param ndxCur
+ * @param ndxNew
+ */
+function setVerseClass(verseThis, ndxThis, ndxCur, ndxNew ) {
     if (isOld()) {
         verseThis.attr('class', 'old');
-        //classType = verseThis.attr('class');
-        //txt += "before";
     }
     if (isCurrent()) {
         verseThis.attr('class', 'cur');
-        //classType = verseThis.attr('class');
-        //txt += "current";
     }
     if (isNew()) {
         verseThis.attr('class', 'new');
-        //classType = verseThis.attr('class');
-        //txt += "after";
     }
     // these properties are just for debugging
-    logVerseAttributes(verseThis, ndxThis);
+    logVerseReadingClassAttribute(verseThis, ndxThis);
 
     function isOld() {
         return ndxThis < ndxCur
@@ -117,15 +116,15 @@ function forKeyPress() {
  * MODIFIES a verse's style, tags, etc f(index
  * CLASSIFIES a verse as being 'old'==read, 'cur'==CURrently reading, 'new'==NOT read.
  * @param collection of verses.
- * @param ndx_current
- * @param delta
+ * @param ndx_current: if passed parameter global ndxCUR is updated
+ * @param delta: if passed parameter global ndxDELTA is updated.
  */
 function forEachElement(collection, ndx_current, delta) {
-    ndxCUR = (ndx_current ? ndx_current : ndxCUR);
-    ndxDELTA = (delta  ? delta : ndxDELTA );  // default
+    ndxCUR = (ndx_current ? ndx_current : ndxCUR);  //if passed parameter global is updated.
+    ndxDELTA = (delta  ? delta : ndxDELTA );  //if passed parameter global is updated.
     var ndxNew = ndxCUR + ndxDELTA;
     $.each(collection, function (ndx) {
-        aVerse($(this), ndx, ndxCUR, ndxNew);
+        setVerseClass($(this), ndx, ndxCUR, ndxNew);
     });
 }
 /**
