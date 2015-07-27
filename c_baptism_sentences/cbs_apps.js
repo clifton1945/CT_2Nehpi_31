@@ -30,52 +30,6 @@ function roundIt(num, dPt){
 function logIt( txt ) {
     $(".console").text(txt)
 }
-// CThought functions
-//
-
-/**
- * Binds events AND sets some
- * @constructor
- */
-function bindHandlers() {
-    var verses = $('.verses p')
-        , ndxCur = 0
-        , ndxDelta = 2
-        ;
-
-    verses.on({
-        click: function () {
-            var  txt   = $(this).text()
-                ;
-            ndxCur = $(this).index();
-            logIt(".verses.on click: ndxCur[" +  ndxCur + "] "+ txt.slice(0, 10));
-            forEachElement(verses, ndxCur, ndxDelta);
-        }
-    });
-    $(document).on({
-        keypress: function (e) {
-            ndxCur = keypressSetNdxCur(e, verses, ndxCur, ndxDelta);
-            forEachElement(verses, ndxCur, ndxDelta);
-    }
-});
-}
-
-function keypressSetNdxCur( event, verses, ndxCur, ndxDelta ) {
-    var ky = event.keyCode
-        , max = verses.length - ndxDelta - 1
-        ;
-    if (ky == 113 || ky == 56) { // 113 & 91 'Q' UP, lower ndx
-        ndxCur = (ndxCur > 0 ? ndxCur - 1 : ndxCur);  // set low limit.
-        forEachElement(verses, ndxCur, ndxDelta);
-    } else if (ky == 122 || ky == 50) { //  122 & 90  'Z' DOWN higher ndx
-        ndxCur = (ndxCur < max ? ndxCur + 1 : ndxCur);  // set hi limit.
-        forEachElement(verses, ndxCur, ndxDelta);
-    }
-    // coding helper
-    logIt("keypressSetNdxCur(): " + ky
-        + "  ndxCur:" + ndxCur + "/max:" + max);
-    return ndxCur
-}
 
 function setWordOfInterestId(collection, re) {
     var
@@ -86,6 +40,52 @@ function setWordOfInterestId(collection, re) {
     arr = collection.replace(re, "<span id='woi'>woi</span>");
     logIt(arr);
 
+}
+// CThought functions
+//
+
+/**
+ * Binds events AND sets some
+ * @constructor
+ */
+function BindHandlers() {
+    var ptags = $('.verses p')
+        , ndxCur = 0
+        , ndxDelta = NDXDELTA
+        ;
+
+    ptags.on({
+        click: function () {
+            var  txt   = $(this).text()
+                ;
+            ndxCur = $(this).index();
+            logIt(".ptags.on click: ndxCur[" +  ndxCur + "] "+ txt.slice(0, 10));
+            read(ptags, ndxCur, ndxDelta);
+        }
+    });
+    $(document).on({
+        keypress: function (e) {
+            ndxCur = keypressSetNdxCur(e, ptags, ndxCur, ndxDelta);
+            read(ptags, ndxCur, ndxDelta);
+    }
+});
+}
+
+function keypressSetNdxCur( event, ptags, ndxCur, ndxDelta ) {
+    var ky = event.keyCode
+        , max = ptags.length - ndxDelta - 1
+        ;
+    if (ky == 113 || ky == 56) { // 113 & 91 'Q' UP, lower ndx
+        ndxCur = (ndxCur > 0 ? ndxCur - 1 : ndxCur);  // set low limit.
+        forEachElement(ptags, ndxCur, ndxDelta);
+    } else if (ky == 122 || ky == 50) { //  122 & 90  'Z' DOWN higher ndx
+        ndxCur = (ndxCur < max ? ndxCur + 1 : ndxCur);  // set hi limit.
+        forEachElement(ptags, ndxCur, ndxDelta);
+    }
+    // coding helper
+    logIt("keypressSetNdxCur(): " + ky
+        + "  ndxCur:" + ndxCur + "/max:" + max);
+    return ndxCur
 }
 
 /**
@@ -123,7 +123,7 @@ function setReadingClass(verseThis, ndxThis, ndxCur, ndxDelta ) {
 /**
  * MODIFIES a verse's style, tags, etc f(index
  * CLASSIFIES a verse as being 'old'==read, 'cur'==CURrently reading, 'new'==NOT read.
- * @param collection of verses.
+ * @param collection of ptags.
  * @param ndxCur: if passed parameter, global ndxCUR is updated; if not global is used.
  * @param ndxDelta: if passed parameter global ndxDelta is updated; if not global is used.
  */
@@ -134,21 +134,20 @@ function forEachElement(collection, ndxCur, ndxDelta) {
         setReadingClass($this, ndx, ndxCur, ndxDelta);
     });
 }
+
 /**
  * MODIFIES All Verse's Reading style, Position, etc as f(position index, tags).
+ * @param collection: of paragraphs.
+ * @param ndxCur: the beginning of current verses of interest.
+ * @param ndxDelta: how many verses of interesst.
  */
-function setAllVerses () {
-
+function read (collection, ndxCur, ndxDelta) {
+    forEachElement(collection, ndxCur, ndxDelta);
 }
 
 var main;
 main = function () {
-    var verses = []
-        , ndxCur = 0
-        , ndxDelta = 2
-    ;  // these are effectively gloabal.
-    bindHandlers();
-    //setAllVerses();
+    new BindHandlers();
 };
 
 $(document).ready(main);
