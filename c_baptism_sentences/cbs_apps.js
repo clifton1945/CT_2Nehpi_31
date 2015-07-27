@@ -68,8 +68,23 @@ function logVerseReadingClassAttribute (verseThis, ndxThis) {
 }
 
 // CThought functions
+function readingKeyPress( event, verses, ndxCur, ndxDelta ) {
+    var ky = event.keyCode
+        , max = verses.length - ndxDelta - 1
+        ;
+    if (ky == 113 || ky == 56) { // 113 & 91 'Q' UP, lower ndx
+        ndxCur = (ndxCur > 0 ? ndxCur - 1 : ndxCur);  // set low limit.
+        forEachElement(verses, ndxCur, NDXDELTA);
+    } else if (ky == 122 || ky == 50) { //  122 & 90  'Z' DOWN higher ndx
+        ndxCur = (ndxCur < max ? ndxCur + 1 : ndxCur);  // set hi limit.
+        forEachElement(verses, ndxCur, NDXDELTA);
+    }
+    // coding helper
+    logIt("KEYPRESS: " + event.keyCode
+        + "  ndxCur:" + ndxCur + "/max:" + max);
+}
 
-function setWordOfInterestId(collection, re) {
+    function setWordOfInterestId(collection, re) {
     var
         arr
         ;
@@ -140,28 +155,14 @@ function setAllVerses () {
         ndxCur  = self.index();
         logIt("ndxCur[" +  ndxCur + "] "+ txt.slice(0, 10));
         // codeOfInterest
-        forEachElement(verses, ndxCur, NDXDELTA);
+        forEachElement(verses, ndxCur, ndxDelta);
 
         /**
          * reading verses by keyPress.
          *   this controls over and under incrementing the verses.
          *     NOTE: this is an inner function so ndxCur works.
          */
-        $(document).keypress(  function readingKeyPress( event ) {
-            var ky = event.keyCode
-                , max = verses.length - ndxDelta - 1
-                ;
-            if (ky == 113 || ky == 56)  { // 113 & 91 'Q' UP, lower ndx
-                ndxCur = (ndxCur > 0 ? ndxCur - 1 : ndxCur);  // set low limit.
-                forEachElement(verses, ndxCur, NDXDELTA);
-            } else if (ky == 122 || ky == 50) { //  122 & 90  'Z' DOWN higher ndx
-                ndxCur = (ndxCur < max ? ndxCur + 1 : ndxCur);  // set hi limit.
-                forEachElement(verses, ndxCur, NDXDELTA);
-            }
-            // coding helper
-            logIt("KEYPRESS: " + event.keyCode
-                + "  ndxCur:" + ndxCur + "/max:" + max);
-        })
+        $(document).keypress( readingKeyPress( event, verses, ndxCur, ndxDelta ));
     })
 }
 
