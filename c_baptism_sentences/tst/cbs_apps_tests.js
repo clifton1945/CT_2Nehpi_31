@@ -78,7 +78,7 @@ QUnit.test("replace all of wordsOI", function( assert ){
     //logIt(arr);
     assert.ok( arr.match(/span/gi).length == 6, "EXP see six spans surrounding woi.")
 });
-QUnit.test("DOEs not WORK; see if css works on hard coded stuff in qunit-fixture works", function( assert ){
+QUnit.test("DOES not WORK; see if css works on hard coded stuff in qunit-fixture works", function( assert ){
     expect(0);
     logIt("fix: " + $("#qunit-fixture").html());
 });
