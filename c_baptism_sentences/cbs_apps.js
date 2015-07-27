@@ -15,30 +15,6 @@ function KeyLogger( target ) {
 /**
  * @deprecated - useful when using keyPress
  */
-function seeKey() {
-        $(document).on("keydown", function ( event ) {
-            console.log("keydown[" + event.keyCode + "]");
-        })
-    }
-/**
- * @deprecated - leave <p>, mitigate it with css, too much trouble.
- * all p to span
- * @returns {XML|void|string}
- * @param str
- */
-function p2span( str ) {
-    // how handle /p
-    return str.replace(/<(\/?)p>/img, "<$1span>");
-}
-/**
- * @deprecated - leave <p>, mitigate it with css, too much trouble.
- * ALL 'span' to 'p'
- * @param str
- * @param str
- */
-function span2p( str ) {
-    return str.replace(/span/ig, "p");
-}
 
 // GLOBALS
 var NDXDELTA = 2
@@ -54,37 +30,54 @@ function roundIt(num, dPt){
 function logIt( txt ) {
     $(".console").text(txt)
 }
-function logVerseReadingClassAttribute (verseThis, ndxThis) {
-    var txt
+// CThought functions
+//
+
+/**
+ * Binds events AND sets some
+ * @constructor
+ */
+function BindHandlers() {
+    var verses = $('.verses p')
+        , ndxCur = 0
+        , ndxDelta = 2
         ;
-    if (verseThis.attr('class') == 'cur') {
-        //$(window).scrollTop(250);  //this worlks
-        txt = " [" + ndxThis + "]  class:" + verseThis.attr('class')
-            + ", posTop:" + roundIt(verseThis.position().top)
-            + ", offtop:" + roundIt(verseThis.offset().top)
-            + ", scrollTop:" + roundIt($(window).scrollTop());
-        console.log(txt);
+
+    verses.on({
+        click: function () {
+            var  txt   = $(this).text()
+                ;
+            ndxCur = $(this).index();
+            logIt(".verses.on click: ndxCur[" +  ndxCur + "] "+ txt.slice(0, 10));
+            forEachElement(verses, ndxCur, ndxDelta);
+        }
+    });
+    $(document).on({
+        keypress: function (e) {
+            ndxCur = keypressSetNdxCur(e, verses, ndxCur, ndxDelta);
+            forEachElement(verses, ndxCur, ndxDelta);
     }
+});
 }
 
-// CThought functions
-function readingKeyPress( event, verses, ndxCur, ndxDelta ) {
+function keypressSetNdxCur( event, verses, ndxCur, ndxDelta ) {
     var ky = event.keyCode
         , max = verses.length - ndxDelta - 1
         ;
     if (ky == 113 || ky == 56) { // 113 & 91 'Q' UP, lower ndx
         ndxCur = (ndxCur > 0 ? ndxCur - 1 : ndxCur);  // set low limit.
-        forEachElement(verses, ndxCur, NDXDELTA);
+        forEachElement(verses, ndxCur, ndxDelta);
     } else if (ky == 122 || ky == 50) { //  122 & 90  'Z' DOWN higher ndx
         ndxCur = (ndxCur < max ? ndxCur + 1 : ndxCur);  // set hi limit.
-        forEachElement(verses, ndxCur, NDXDELTA);
+        forEachElement(verses, ndxCur, ndxDelta);
     }
     // coding helper
-    logIt("KEYPRESS: " + event.keyCode
+    logIt("keypressSetNdxCur(): " + ky
         + "  ndxCur:" + ndxCur + "/max:" + max);
+    return ndxCur
 }
 
-    function setWordOfInterestId(collection, re) {
+function setWordOfInterestId(collection, re) {
     var
         arr
         ;
@@ -94,14 +87,16 @@ function readingKeyPress( event, verses, ndxCur, ndxDelta ) {
     logIt(arr);
 
 }
+
 /**
  * sets a verse's read class to old:have read, current: am reading or new: have not read.
  * @param verseThis
  * @param ndxThis
  * @param ndxCur
- * @param ndxNew
+ * @param ndxDelta
  */
-function setReadingClass(verseThis, ndxThis, ndxCur, ndxNew ) {
+function setReadingClass(verseThis, ndxThis, ndxCur, ndxDelta ) {
+    var ndxNew = ndxCur + ndxDelta;
     if (isOld()) {
         verseThis.attr('class', 'old');
     }
@@ -112,7 +107,7 @@ function setReadingClass(verseThis, ndxThis, ndxCur, ndxNew ) {
         verseThis.attr('class', 'new');
     }
     // these properties are just for debugging
-    logVerseReadingClassAttribute(verseThis, ndxThis);
+    //logVerseReadingClassAttribute(verseThis, ndxThis);
 
     function isOld() {
         return ndxThis < ndxCur
@@ -129,15 +124,14 @@ function setReadingClass(verseThis, ndxThis, ndxCur, ndxNew ) {
  * MODIFIES a verse's style, tags, etc f(index
  * CLASSIFIES a verse as being 'old'==read, 'cur'==CURrently reading, 'new'==NOT read.
  * @param collection of verses.
- * @param ndx_current: if passed parameter, global ndxCUR is updated; if not global is used.
- * @param delta: if passed parameter global ndxDelta is updated; if not global is used.
+ * @param ndxCur: if passed parameter, global ndxCUR is updated; if not global is used.
+ * @param ndxDelta: if passed parameter global ndxDelta is updated; if not global is used.
  */
-function forEachElement(collection, ndx_current, delta) {
-    var ndxNew = ndx_current + delta
-        ;
+function forEachElement(collection, ndxCur, ndxDelta) {
     // CodeOI
     $.each(collection, function (ndx) {
-        setReadingClass($(this), ndx, ndx_current, ndxNew);
+        var $this = $(this);
+        setReadingClass($this, ndx, ndxCur, ndxDelta);
     });
 }
 /**
@@ -156,21 +150,26 @@ function setAllVerses () {
         ndxCur  = self.index();
         logIt("ndxCur[" +  ndxCur + "] "+ txt.slice(0, 10));
         // codeOfInterest
-        forEachElement(verses, ndxCur, ndxDelta);
+        //forEachElement(verses, ndxCur, ndxDelta);
     });
-    /**
-     * reading verses by keyPress.
-     *   this controls over and under incrementing the verses.
-     *     NOTE: this is an inner function so ndxCur works.
-     */
-    $(document).keypress( function( event) {
-        readingKeyPress( event, verses, ndxCur, 1 )
-    });
+    ///**
+    // * reading verses by keyPress.
+    // *   this controls over and under incrementing the verses.
+    // *     NOTE: this is an inner function so ndxCur works.
+    // */
+    //$(document).keypress( function( event) {
+    //    keypressSetNdxCur( event, verses, ndxCur, 1 )
+    //});
 }
 
 var main;
 main = function () {
-    setAllVerses();
+    var verses = []
+        , ndxCur = 0
+        , ndxDelta = 2
+    ;
+    new BindHandlers();
+    //setAllVerses();
 };
 
 $(document).ready(main);
