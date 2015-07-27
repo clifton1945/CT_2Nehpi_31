@@ -37,7 +37,7 @@ function logIt( txt ) {
  * Binds events AND sets some
  * @constructor
  */
-function BindHandlers() {
+function bindHandlers() {
     var verses = $('.verses p')
         , ndxCur = 0
         , ndxDelta = 2
@@ -138,28 +138,7 @@ function forEachElement(collection, ndxCur, ndxDelta) {
  * MODIFIES All Verse's Reading style, Position, etc as f(position index, tags).
  */
 function setAllVerses () {
-    var verses = $('.verses p')
-        , ndxCur = 0
-        , ndxDelta = NDXDELTA
-        ;  // expect all verses are <p>.
-    verses.click(function () {
-        var self = $(this)
-            ,txt   = self.text()
-            ;
-        // these are GLOBALS: notice the caps.
-        ndxCur  = self.index();
-        logIt("ndxCur[" +  ndxCur + "] "+ txt.slice(0, 10));
-        // codeOfInterest
-        //forEachElement(verses, ndxCur, ndxDelta);
-    });
-    ///**
-    // * reading verses by keyPress.
-    // *   this controls over and under incrementing the verses.
-    // *     NOTE: this is an inner function so ndxCur works.
-    // */
-    //$(document).keypress( function( event) {
-    //    keypressSetNdxCur( event, verses, ndxCur, 1 )
-    //});
+
 }
 
 var main;
@@ -167,8 +146,8 @@ main = function () {
     var verses = []
         , ndxCur = 0
         , ndxDelta = 2
-    ;
-    new BindHandlers();
+    ;  // these are effectively gloabal.
+    bindHandlers();
     //setAllVerses();
 };
 
