@@ -119,4 +119,13 @@ PLAN as of above date.
  2015-07-25 OK have keyPress movement working. Now would like to adjust scroll to keep view in window center.
    But I'm begining to USE what I have.
    (1) to highlight words that appear in the 'View' - I'll use that name meaning the current selection.
-   (2) work on WHO's voice[s\ the verse contains.
+   (2) work on WHO's voice[s\ WhoIsSpeaking the verse contains.
+
+2015-07-29
+Switched to standalone EventBinding.
+Three Areas of Focus ahead
+    (1) View or Read impovement:  progressive past/read and future/unread.
+    (2) a WordOfInterst feature: again, progressive opacity as f(relative position to total count)
+    (3) a NarratorOfInterest / WhoIsSpeaking feature:  this seems hard as I've begun looking at it.
+        I can find the beginning of a change in narrator - e.g. and my father said: ...
+        But it is not trivial to decide when the narrator shifts back: to Nephi or to Mormon.
