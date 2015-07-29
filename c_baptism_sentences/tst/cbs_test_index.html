@@ -7,17 +7,22 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
     </script>
     <link rel="stylesheet" href="../../qunitSrc/qunit-1.18.0.css">
+    <link rel="stylesheet" href="../cbs_style.css">
     <script src="../../qunitSrc/qunit-1.18.0.js"></script>
 
     <script src="cbs_apps_tests.js"></script>
     <script src="../cbs_apps.js"></script>
 </head>
 <body>
+<p> some words, then <span id="woi"> these words should follow the css for an id: woi.</span>
+</p>
+<p> but these will not.</p>
 
 <div id="qunit"></div>
 <div id="qunit-fixture">
-    <p> some words, then <span id="woi" style="font-size: larger"> that should follow the css.</span></p><p> but this will not.</p>
+    CAN YOU SEE ME
 </div>
+
 <div class="console">logIt() output</div>
 </body>
 </html>

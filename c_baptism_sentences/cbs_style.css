@@ -20,6 +20,10 @@ h3 {
     font-size:small;
     line-height: 60%;
 }
+#woi {
+    color: #4c45fc;
+    font-weight: bold;
+}
 .bap {
     color: #9ffc9c;
     font-weight: bold;

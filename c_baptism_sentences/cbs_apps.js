@@ -69,7 +69,7 @@ function BindHandlers() {
             read(ptags, ndxCur, ndxDelta);
     }
 });
-}
+}8222
 
 function keypressSetNdxCur( event, ptags, ndxCur, ndxDelta ) {
     var ky = event.keyCode
