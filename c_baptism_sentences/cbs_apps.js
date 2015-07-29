@@ -14,10 +14,11 @@ function KeyLogger( target ) {
 }
 /**
  * @deprecated - useful when using keyPress
+ * @type {number}
  */
 
 // GLOBALS
-var NDXDELTA = 2
+var INDX_DELTA = 2
     ;
 //UTILITIES
 function roundIt(num, dPt){
@@ -31,6 +32,17 @@ function logIt( txt ) {
     $(".console").text(txt)
 }
 
+// CThought functions
+//
+function setProgressiveOpacity(ndx, ndxCur, ndxDelta, collection) {
+    var maxLng = collection.length
+        , opMin = 20
+        , opMax = 75
+        , r = 0
+        ;
+    r = ndx / maxLng;
+    return roundIt(r)
+}
 function setWordOfInterestId(collection, re) {
     var
         arr
@@ -41,17 +53,16 @@ function setWordOfInterestId(collection, re) {
     logIt(arr);
 
 }
-// CThought functions
-//
 
 /**
  * Binds events AND sets some
  * @constructor
  */
 function BindHandlers() {
+    //noinspection JSDeprecatedSymbols,JSDeprecatedSymbols,JSDeprecatedSymbols,JSDeprecatedSymbols,JSDeprecatedSymbols
     var ptags = $('p')
         , ndxCur = 0
-        , ndxDelta = NDXDELTA
+        , ndxDelta = INDX_DELTA
         ;
 
     ptags.on({

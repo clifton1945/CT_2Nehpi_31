@@ -55,7 +55,13 @@ QUnit.test("replace all of wordsOI", function( assert ){
     //logIt(arr);
     assert.ok( arr.match(/span/gi).length == 6, "EXP see six spans surrounding woi.")
 });
-QUnit.test("DOES not WORK; see if css works on hard coded stuff in qunit-fixture works", function( assert ){
-    expect(0);
-    logIt("qunit-fixture: " + $("#qunit-fixture").html());
+QUnit.test("DOES not WORK; see if css works on hard coded stuff in qunit-fixture works"
+    , function( assert ){
+        expect(0);
+        logIt("qunit-fixture: "  +  $("#qunit-fixture").text());
+});
+
+QUnit.module("setProgressiveOpacity");
+QUnit.test("ret calc", function( assert ) {
+    assert.ok( false)
 });
