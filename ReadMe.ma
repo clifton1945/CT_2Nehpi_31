@@ -123,6 +123,7 @@ PLAN as of above date.
 
 2015-07-29
 Switched to standalone EventBinding.
+...
 Three Areas of Focus ahead
     (1) View or Read impovement:  progressive past/read and future/unread.
     (2) a WordOfInterst feature: again, progressive opacity as f(relative position to total count)
