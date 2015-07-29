@@ -49,7 +49,7 @@ function setWordOfInterestId(collection, re) {
  * @constructor
  */
 function BindHandlers() {
-    var ptags = $('.verses p')
+    var ptags = $('p')
         , ndxCur = 0
         , ndxDelta = NDXDELTA
         ;
@@ -63,13 +63,13 @@ function BindHandlers() {
             read(ptags, ndxCur, ndxDelta);
         }
     });
-    $(document).on({
+    $('body').on({
         keypress: function (e) {
             ndxCur = keypressSetNdxCur(e, ptags, ndxCur, ndxDelta);
             read(ptags, ndxCur, ndxDelta);
     }
 });
-}8222
+}
 
 function keypressSetNdxCur( event, ptags, ndxCur, ndxDelta ) {
     var ky = event.keyCode
