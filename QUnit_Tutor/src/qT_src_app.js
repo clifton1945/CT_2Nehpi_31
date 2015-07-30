@@ -26,34 +26,26 @@ function countThisWord (targetArr) {
      * @type {*|jQuery}
      */
     // make Array of Words in this Chapter of Text.
-
     var text = $('div').text();
     var result = text.replaceAll(/(bapt[^\s,-]+)/ig, "<span id='bap'>$&</span>");
 }
-function click_a_verse () {
+function bindEvents() {
     $('.verses p').click(function () {
-        var $this = $(this);
-        logIt("in click_a_verse $(this)" + $this.length + ", " + $this.text().slice(0, 50));
-        $(this).toggle(1000, function () {
-            $(this).addClass('expand');
-            $(this).toggle(1000);
-        })
+        toggleVerse( $(this));
     });
     $('button').click( function() {
         $('#1').load('header.html');
     })
 }
-function toggleVerse( that ) {
-    that.toggle(1000, function () {
-        that.addClass('expand');
-        that.toggle(1000);
+function toggleVerse( aVerse ) {
+    aVerse.toggle(1000, function () {
+        aVerse.addClass('expand');
+        aVerse.toggle(1000);
+    logIt("in toggleVerse Index[" + aVerse.index() + "], " + aVerse.text().slice(0, 50));
     });
 }
 var main = function () {
-    $(".verses").load('verses.html');
-    click_a_verse();
-    //findText();
-    //countThisWord(['bapti', 'brother', "Jacob", "Holy Ghost"]);
+    bindEvents();
 };
 
 $(document).ready(main);
