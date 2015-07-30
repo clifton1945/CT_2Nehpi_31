@@ -10,6 +10,7 @@ QUnit.test("Scroll", function ( assert ) {
 });
 
 QUnit.test( "setup:", function( assert) {
+    assert.expect(4);
     assert.equal(this.fixture.height(), 1000, "height set in qunit.css");
     assert.equal($("#outer", this.fixture).height(), 200, "exp height 200 set in style");
     assert.equal($("#inner", this.fixture).height(), 400, "exp height 400 set in style");
