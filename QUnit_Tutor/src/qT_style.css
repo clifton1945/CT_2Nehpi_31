@@ -13,3 +13,19 @@
     color: blue;
     background-color: cornsilk;
 }
+div.verses {
+    opacity: 100;
+}
+.console {
+    position: fixed;
+    bottom: 0;
+    background: #333;
+    left: 0;
+    right: 0;
+    padding: 5px;
+    color: #FFF
+}
+.console b {
+    font-weight: bold
+}
+
