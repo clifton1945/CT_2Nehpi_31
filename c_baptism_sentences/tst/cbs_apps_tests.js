@@ -63,5 +63,9 @@ QUnit.test("DOES not WORK; see if css works on hard coded stuff in qunit-fixture
 
 QUnit.module("setProgressiveOpacity");
 QUnit.test("ret calc", function( assert ) {
+    //**
+    // want some function that returns an opacity value
+    // between loOpacity: see thru  and hiOpacity: can't see through
+    // as a function( distance ndxTop:0 and ndxBot:length
     assert.ok( false)
 });

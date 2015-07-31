@@ -87,10 +87,10 @@ function keypressSetNdxCur( event, ptags, ndxCur, ndxDelta ) {
         , max = ptags.length - ndxDelta - 1
         ;
     if (ky == 113 || ky == 56) { // 113 & 91 'Q' UP, lower ndx
-        ndxCur = (ndxCur > 0 ? ndxCur - 1 : ndxCur);  // set low limit.
+        ndxCur = (ndxCur > 0 ? ndxCur - 1 : ndxCur);  // set top limit.
         forEachElement(ptags, ndxCur, ndxDelta);
     } else if (ky == 122 || ky == 50) { //  122 & 90  'Z' DOWN higher ndx
-        ndxCur = (ndxCur < max ? ndxCur + 1 : ndxCur);  // set hi limit.
+        ndxCur = (ndxCur < max ? ndxCur + 1 : ndxCur);  // set bottom limit.
         forEachElement(ptags, ndxCur, ndxDelta);
     }
     // coding helper
