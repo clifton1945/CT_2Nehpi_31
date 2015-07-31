@@ -58,7 +58,7 @@ function setWordOfInterestId(collection, re) {
  * Binds events AND sets some
  * @constructor
  */
-function BindHandlers() {
+function bindHandlers() {
     //noinspection JSDeprecatedSymbols,JSDeprecatedSymbols,JSDeprecatedSymbols,JSDeprecatedSymbols,JSDeprecatedSymbols
     var ptags = $('p')
         , ndxCur = 0
@@ -119,7 +119,6 @@ function setReadingClass(verseThis, ndxThis, ndxCur, ndxDelta ) {
     }
     // these properties are just for debugging
     //logVerseReadingClassAttribute(verseThis, ndxThis);
-
     function isOld() {
         return ndxThis < ndxCur
     }
@@ -141,8 +140,7 @@ function setReadingClass(verseThis, ndxThis, ndxCur, ndxDelta ) {
 function forEachElement(collection, ndxCur, ndxDelta) {
     // CodeOI
     $.each(collection, function (ndx) {
-        var $this = $(this);
-        setReadingClass($this, ndx, ndxCur, ndxDelta);
+        setReadingClass($(this), ndx, ndxCur, ndxDelta);
     });
 }
 
@@ -158,7 +156,7 @@ function read (collection, ndxCur, ndxDelta) {
 
 var main;
 main = function () {
-    new BindHandlers();
+    bindHandlers();
 };
 
 $(document).ready(main);

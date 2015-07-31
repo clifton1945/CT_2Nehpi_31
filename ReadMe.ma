@@ -130,3 +130,69 @@ Three Areas of Focus ahead
     (3) a NarratorOfInterest / WhoIsSpeaking feature:  this seems hard as I've begun looking at it.
         I can find the beginning of a change in narrator - e.g. and my father said: ...
         But it is not trivial to decide when the narrator shifts back: to Nephi or to Mormon.
+
+************************************************
+REFERENCE:JavaScript distinguishes EXPRESSIONS and STATEMENTS.
+DECLARATIONS hoisted with function code
+EXPRESSION results in something directly x+2:  sort of a NounPhrase
+STATEMENT results in something AND HAS A SIDE EFFECT: x = 5; x changed, sort of a Sentence: NP + VP
+
+DECLARATIONS, EXPRESSIONS, STATEMNTS
+An EXPRESSION produces a value and can be written wherever a value is expected, for example as an argument in a function call. Each of the following lines contains an EXPRESSION:
+              myvar
+              3 + x
+              myfunc("a", "b")
+EXPRESSIONS don't have side effects.
+The left hand side (var bar = function () {}  is a Variable Declaration. Variable Declarations get hoisted but their Assignment EXPRESSIONS DON’T
+
+Roughly, a STATEMENT performs an action. Loops and if statements, even x = 5 are examples of statements.
+STATMENTS produce side effects.
+************************
+Function DECLARATION
+
+function x() {
+    console.log('x');
+}
+A function DECLARATION is a declaration; it's not a STATEMENT or EXPRESSION. As such, you don't follow it with a ; (although doing so is harmless).
+
+A function declaration is processed when execution enters the context in which it appears, before any step-by-step code is executed. The function it creates is given a proper name (x in the example above), and that name is put in the scope in which the declaration appears.
+
+Because it's processed before any step-by-step code in the same context, you can do things like this:
+
+x(); // Works even though it's above the declaration
+function x() {
+    console.log('x');
+}
+Also because it's not part of the step-by-step execution of the code, you can't put it inside a control structure like try, if, switch, while, etc.
+
+if (someCondition) {
+    function foo() {    // <===== INVALID AND WILL FAIL ON
+    }                   //        MANY ENGINES
+}
+Some engines will handle the above even though it's invalid, by rewriting it as a function expression on-the-fly. There's talk of adding a function statement to the next spec (ECMAScript6) to codify that. But with current engines, it will not work reliably; don't do it.
+
+Anonymous" function Expression
+
+The second common form is called an anonymous function expression:
+
+var y = function () {
+    console.log('y');
+};
+Like all expressions, it's evaluated when it's reached in the step-by-step execution of the code.
+
+In ES5, the function this creates has no name (it's anonymous). In ES6, the function is assigned a name if possible by inferring it from context. In the example above, the name would be y. Something similar is done when the function is the value of a property initializer. (For details on when this happens and the rules, search for SetFunctionName in the ES6 draft specification — it appears all over the place.)
+
+Named function Expression
+
+The third form is a named function expression ("NFE"):
+
+var z = function w() {
+    console.log('zw')
+};
+The function this creates has a proper name (w in this case). Like all expressions, this is evaluated when it's reached in the step-by-step execution of the code. The name of the function is not added to the scope in which the expression appears; the name is in scope within the function itself:
+
+var z = function w() {
+    console.log(typeof w); // "function"
+};
+console.log(typeof w);     // "undefined"
+Note that NFEs have frequently been a source of bugs for JavaScript implementations. IE8 and earlier, for instance, handle NFEs completely incorrectly, creating two different functions at two different times. Early versions of Safari had issues as well. The good news is that current versions of browsers (IE9 and up, current Safari) don't have those issues any more. (But as of this writing, sadly, IE8 remains in widespread use, and so using NFEs with code for the web in general is still problematic.)

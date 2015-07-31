@@ -44,6 +44,9 @@ function toggleVerse( aVerse ) {
     logIt("in toggleVerse Index[" + aVerse.index() + "], " + aVerse.text().slice(0, 50));
     });
 }
+function setOpacity( ) {}
+
+
 var main = function () {
     bindEvents();
 };
