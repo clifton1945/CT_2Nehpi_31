@@ -92,18 +92,6 @@ QUnit.module("objLiteral Structure", {
                 CUR_DLTA: 2,
                 MIN_NDX: 0
             },
-            ndx: {
-                min: undefined,
-                old: undefined,
-                cur: undefined,
-                new: undefined,
-                max: undefined
-            },
-            dlta: {
-                old: undefined,
-                cur: undefined,
-                new: undefined
-            },
             min: {}
             ,
             old: {}
@@ -115,7 +103,6 @@ QUnit.module("objLiteral Structure", {
             max: {}
             ,
             config: function () {
-                this.cur.ndx = 0;  // default
                 this.validOldNdx = function() {
                     return this.min.ndx;  // always
                 };
