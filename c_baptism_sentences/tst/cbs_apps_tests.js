@@ -85,6 +85,9 @@ QUnit.module("objLiteral Structure", {
             },
             // sub objects
             min: {}, old: {}, cur: {}, new: {}, max: {},
+            //validMinNdx: function validMinNdx() {
+            //    return this.const.MIN_NDX;
+            //},
             config: function () {
                 this.validMinNdx = function() {
                     return this.const.MIN_NDX;
