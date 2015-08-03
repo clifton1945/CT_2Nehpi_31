@@ -155,8 +155,6 @@ QUnit.test("init curNdx:0", function( assert ){  // might try a curNdx = -5
     assert.equal(mv.cur.ndx, 0, "EXP after .init curNdx again this is a repeat test" );
     assert.equal(mv.new.ndx, 2, "EXP after init see .new.ndx");
     assert.equal(mv.max.ndx, 5, "EXP: after .init see .max.ndx");
-
-
 });
 QUnit.test("init curNdx:1", function( assert ){
     var mv = this.mv;
@@ -228,5 +226,15 @@ QUnit.test("init curNdx:6", function( assert ){
     assert.equal(mv.max.ndx, 5, "EXP: after .init see .max.ndx");
 
 
+});
+
+QUnit.module("class OneVerse tests");
+QUnit.test(" use OneVerse() class", function( assert ) {
+    var mv = new OneVerse(0, [0, 1, 2, 3, 4, 5, 6]);
+    assert.equal(mv.min.ndx, 0, "EXP: after .init see .min.ndx");
+    assert.equal(mv.old.ndx, 0, "EXP: after .init see .old.ndx");
+    assert.equal(mv.cur.ndx, 0, "EXP after .init curNdx again this is a repeat test" );
+    assert.equal(mv.new.ndx, 2, "EXP after init see .new.ndx");
+    assert.equal(mv.max.ndx, 5, "EXP: after .init see .max.ndx");
 });
 
