@@ -104,13 +104,20 @@ QUnit.module("objLiteral Structure", {
                 cur: undefined,
                 new: undefined
             },
-            // local globals
-            //curNdx: 0,
-            //verses: [],
+            min: {}
+            ,
+            old: {}
+            ,
+            cur: {}
+            ,
+            new: {}
+            ,
+            max: {}
+            ,
             config: function () {
-                this.ndx.cur = 0;  // default
+                this.cur.ndx = 0;  // default
                 this.validOldNdx = function() {
-                    return this.ndx.min;  // always
+                    return this.min.ndx;  // always
                 };
                 this.validCurNdx = function(curNdx, maxNdx) {
                     curNdx = (curNdx >= 0 ) ? curNdx : 0;
@@ -133,10 +140,10 @@ QUnit.module("objLiteral Structure", {
                 };
                 // deltas
                 this.calcOldDlta = function () {
-                    return this.curNdx - 1 - this.ndx.min
+                    return this.curNdx - 1 - this.min.ndx
                 };
                 this.calcNewDlta = function () {
-                    return this.ndx.max - (this.curNdx + 1)
+                    return this.max.ndx - (this.curNdx + 1)
                 };
             },
             /**
@@ -148,17 +155,17 @@ QUnit.module("objLiteral Structure", {
                 // local globals EARLY. They are used in .config
                 this.verses = collection;
                 this.curNdx = currentNdx;
-                this.dlta.cur = this.const.CUR_DLTA;
+                this.cur.dlta = this.const.CUR_DLTA;
                 // config some definitions needed before following calcs.
-                this.ndx.min = this.const.MIN_NDX;
-                this.ndx.max = this.validMaxNdx(collection.length, this.dlta.cur);
+                this.min.ndx = this.const.MIN_NDX;
+                this.max.ndx = this.validMaxNdx(collection.length, this.cur.dlta);
                 // now the rest
-                this.ndx.old = this.validOldNdx();
-                this.ndx.cur = this.validCurNdx(currentNdx, this.ndx.max);  // already assigned
-                this.ndx.new = this.validNewNdx(currentNdx, this.dlta.cur, this.ndx.max);
+                this.old.ndx = this.validOldNdx();
+                this.cur.ndx = this.validCurNdx(currentNdx, this.max.ndx);  // already assigned
+                this.new.ndx = this.validNewNdx(currentNdx, this.cur.dlta, this.max.ndx);
 
-                this.dlta.old = this.calcOldDlta();
-                this.dlta.new = this.calcNewDlta();
+                this.old.dlta = this.calcOldDlta();
+                this.new.dlta = this.calcNewDlta();
             }
         }
     }
@@ -167,11 +174,11 @@ QUnit.test("init curNdx:0", function( assert ){  // might try a curNdx = -5
     var mv = this.mv;
     mv.config();
     mv.init(0, [0,1,2,3,4,5,6]);
-    assert.equal(mv.ndx.min, 0, "EXP: after .init see .ndx.min");
-    assert.equal(mv.ndx.old, 0, "EXP: after .init see .ndx.old");
-    assert.equal(mv.ndx.cur, 0, "EXP after .init curNdx again this is a repeat test" );
-    assert.equal(mv.ndx.new, 2, "EXP after init see .ndx.new");
-    assert.equal(mv.ndx.max, 5, "EXP: after .init see .ndx.max");
+    assert.equal(mv.min.ndx, 0, "EXP: after .init see .min.ndx");
+    assert.equal(mv.old.ndx, 0, "EXP: after .init see .old.ndx");
+    assert.equal(mv.cur.ndx, 0, "EXP after .init curNdx again this is a repeat test" );
+    assert.equal(mv.new.ndx, 2, "EXP after init see .new.ndx");
+    assert.equal(mv.max.ndx, 5, "EXP: after .init see .max.ndx");
 
 
 });
@@ -179,46 +186,46 @@ QUnit.test("init curNdx:1", function( assert ){
     var mv = this.mv;
     mv.config();
     mv.init(1, [0,1,2,3,4,5,6]);
-    assert.equal(mv.ndx.min, 0, "EXP: after .init see .ndx.min");
-    assert.equal(mv.ndx.old, 0, "EXP: after .init see .ndx.old");
-    assert.equal(mv.ndx.cur, 1, "EXP after .init curNdx has a new value" );
-    assert.equal(mv.ndx.new, 3, "EXP after init see .ndx.new");
-    assert.equal(mv.ndx.max, 5, "EXP: after .init see .ndx.max");
+    assert.equal(mv.min.ndx, 0, "EXP: after .init see .min.ndx");
+    assert.equal(mv.old.ndx, 0, "EXP: after .init see .old.ndx");
+    assert.equal(mv.cur.ndx, 1, "EXP after .init curNdx has a new value" );
+    assert.equal(mv.new.ndx, 3, "EXP after init see .new.ndx");
+    assert.equal(mv.max.ndx, 5, "EXP: after .init see .max.ndx");
 
 
 });
 QUnit.test("init curNdx:2", function( assert ){
     var mv = this.mv;
     assert.ok(mv.const.CUR_DLTA === 2);
-    assert.equal(mv.ndx.cur, undefined, "EXP no ncdCur BEFORE config ");
+    assert.equal(mv.cur.ndx, undefined, "EXP no ncdCur BEFORE config ");
     mv.config();
     mv.init(2, [0,1,2,3,4,5,6]);
-    assert.equal(mv.ndx.cur, 2, "EXP after .init curNdx has a new value" );
-    assert.equal(mv.ndx.min, 0, "EXP: after .init see .ndx.min");
-    assert.equal(mv.ndx.old, 0, "EXP: after .init see .ndx.old");
-    assert.equal(mv.ndx.cur, 2, "EXP after .init curNdx again this is a repeat test" );
-    assert.equal(mv.ndx.new, 4, "EXP after init see .ndx.new");
-    assert.equal(mv.ndx.max, 5, "EXP: after .init see .ndx.max");
+    assert.equal(mv.cur.ndx, 2, "EXP after .init curNdx has a new value" );
+    assert.equal(mv.min.ndx, 0, "EXP: after .init see .min.ndx");
+    assert.equal(mv.old.ndx, 0, "EXP: after .init see .old.ndx");
+    assert.equal(mv.cur.ndx, 2, "EXP after .init curNdx again this is a repeat test" );
+    assert.equal(mv.new.ndx, 4, "EXP after init see .new.ndx");
+    assert.equal(mv.max.ndx, 5, "EXP: after .init see .max.ndx");
 });
 QUnit.test("init curNdx:3", function( assert ){
     var mv = this.mv;
     mv.config();
     mv.init(3, [0,1,2,3,4,5,6]);
-    assert.equal(mv.ndx.min, 0, "EXP: after .init see .ndx.min");
-    assert.equal(mv.ndx.old, 0, "EXP: after .init see .ndx.old");
-    assert.equal(mv.ndx.cur, 3, "EXP after .init curNdx again this is a repeat test" );
-    assert.equal(mv.ndx.new, 5, "EXP after init see .ndx.new");
-    assert.equal(mv.ndx.max, 5, "EXP: after .init see .ndx.max");
+    assert.equal(mv.min.ndx, 0, "EXP: after .init see .min.ndx");
+    assert.equal(mv.old.ndx, 0, "EXP: after .init see .old.ndx");
+    assert.equal(mv.cur.ndx, 3, "EXP after .init curNdx again this is a repeat test" );
+    assert.equal(mv.new.ndx, 5, "EXP after init see .new.ndx");
+    assert.equal(mv.max.ndx, 5, "EXP: after .init see .max.ndx");
 });
 QUnit.test("init curNdx:4", function( assert ){
     var mv = this.mv;
     mv.config();
     mv.init(4, [0,1,2,3,4,5,6]);
-    assert.equal(mv.ndx.min, 0, "EXP: after .init see .ndx.min");
-    assert.equal(mv.ndx.old, 0, "EXP: after .init see .ndx.old");
-    assert.equal(mv.ndx.cur, 4, "EXP after .init curNdx again this is a repeat test" );
-    assert.equal(mv.ndx.new, 5, "EXP after init see .ndx.new");
-    assert.equal(mv.ndx.max, 5, "EXP: after .init see .ndx.max");
+    assert.equal(mv.min.ndx, 0, "EXP: after .init see .min.ndx");
+    assert.equal(mv.old.ndx, 0, "EXP: after .init see .old.ndx");
+    assert.equal(mv.cur.ndx, 4, "EXP after .init curNdx again this is a repeat test" );
+    assert.equal(mv.new.ndx, 5, "EXP after init see .new.ndx");
+    assert.equal(mv.max.ndx, 5, "EXP: after .init see .max.ndx");
 
 
 });
@@ -226,11 +233,11 @@ QUnit.test("init curNdx:5", function( assert ){
     var mv = this.mv;
     mv.config();
     mv.init(5, [0,1,2,3,4,5,6]);
-    assert.equal(mv.ndx.min, 0, "EXP: after .init see .ndx.min");
-    assert.equal(mv.ndx.old, 0, "EXP: after .init see .ndx.old");
-    assert.equal(mv.ndx.cur, 5, "EXP after .init curNdx has a new value" );
-    assert.equal(mv.ndx.new, 5, "EXP after init see .ndx.new");
-    assert.equal(mv.ndx.max, 5, "EXP: after .init see .ndx.max");
+    assert.equal(mv.min.ndx, 0, "EXP: after .init see .min.ndx");
+    assert.equal(mv.old.ndx, 0, "EXP: after .init see .old.ndx");
+    assert.equal(mv.cur.ndx, 5, "EXP after .init curNdx has a new value" );
+    assert.equal(mv.new.ndx, 5, "EXP after init see .new.ndx");
+    assert.equal(mv.max.ndx, 5, "EXP: after .init see .max.ndx");
 
 
 });
@@ -238,11 +245,11 @@ QUnit.test("init curNdx:6", function( assert ){
     var mv = this.mv;
     mv.config();
     mv.init(6, [0,1,2,3,4,5,6]);
-    assert.equal(mv.ndx.min, 0, "EXP: after .init see .ndx.min");
-    assert.equal(mv.ndx.old, 0, "EXP: after .init see .ndx.old");
-    assert.equal(mv.ndx.cur, 5, "EXP after .init curNdx has a new value" );
-    assert.equal(mv.ndx.new, 5, "EXP after init see .ndx.new");
-    assert.equal(mv.ndx.max, 5, "EXP: after .init see .ndx.max");
+    assert.equal(mv.min.ndx, 0, "EXP: after .init see .min.ndx");
+    assert.equal(mv.old.ndx, 0, "EXP: after .init see .old.ndx");
+    assert.equal(mv.cur.ndx, 5, "EXP after .init curNdx has a new value" );
+    assert.equal(mv.new.ndx, 5, "EXP after init see .new.ndx");
+    assert.equal(mv.max.ndx, 5, "EXP: after .init see .max.ndx");
 
 
 });
