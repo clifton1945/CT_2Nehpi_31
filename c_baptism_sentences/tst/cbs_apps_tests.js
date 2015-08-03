@@ -229,7 +229,7 @@ QUnit.test("init curNdx:6", function( assert ){
 });
 
 QUnit.module("class OneVerse tests");
-QUnit.test(" use OneVerse(0, testArray) class", function( assert ) {
+QUnit.test(" use equal() OneVerse(0, testArray) class", function( assert ) {
     var mv = new OneVerse(0, [0, 1, 2, 3, 4, 5, 6]);
     assert.equal(mv.min.ndx, 0, "EXP: after .init see .min.ndx");
     assert.equal(mv.old.ndx, 0, "EXP: after .init see .old.ndx");
@@ -237,15 +237,14 @@ QUnit.test(" use OneVerse(0, testArray) class", function( assert ) {
     assert.equal(mv.new.ndx, 2, "EXP after init see .new.ndx");
     assert.equal(mv.max.ndx, 5, "EXP: after .init see .max.ndx");
 });
-QUnit.test("use OneVerse(2, testArray)", function( assert ){
+QUnit.test("use deepEqual(): OneVerse(2, testArray)", function( assert ){
     var mv = new OneVerse(2, [0, 1, 2, 3, 4, 5, 6]);
-    assert.ok(mv.const.CUR_DLTA === 2);
-    assert.equal(mv.cur.ndx, 2, "EXP after .init curNdx has a new value" );
-    assert.equal(mv.min.ndx, 0, "EXP: after .init see .min.ndx");
-    assert.equal(mv.old.ndx, 0, "EXP: after .init see .old.ndx");
-    assert.equal(mv.cur.ndx, 2, "EXP after .init curNdx again this is a repeat test" );
-    assert.equal(mv.new.ndx, 4, "EXP after init see .new.ndx");
-    assert.equal(mv.max.ndx, 5, "EXP: after .init see .max.ndx");
+    var ret = [mv.const.CUR_DLTA, mv.cur.ndx,
+            mv.min.ndx, mv.old.ndx, mv.cur.ndx, mv.new.ndx, mv.max.ndx];
+    var exp = [2,2,0,0,2,4,5];
+    logIt('ret: ' + ret + ' exp: ' + exp);
+    assert.deepEqual(ret, exp);
+
 });
 
 
