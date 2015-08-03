@@ -109,21 +109,21 @@ QUnit.module("objLiteral Structure", {
             //verses: [],
             config: function () {
                 this.ndx.cur = 0;  // default
-                this.validNdxOld = function() {
+                this.validOldNdx = function() {
                     return this.ndx.min;  // always
                 };
-                this.validcurNdx = function(curNdx, maxNdx) {
+                this.validCurNdx = function(curNdx, maxNdx) {
                     curNdx = (curNdx >= 0 ) ? curNdx : 0;
                     curNdx = (curNdx <= maxNdx ) ? curNdx : maxNdx;
                     return curNdx
                 };
-                this.validNdxNew = function (curNdx, curDlta, maxNdx) {
+                this.validNewNdx = function (curNdx, curDlta, maxNdx) {
                     var ndxNew = curNdx + curDlta
                     // NOTE: e.g. 3 + dlta==2 will have cur:3,4; new:5
                         ;
                     return ( ndxNew < maxNdx) ? ndxNew : maxNdx
                 };
-                this.validmaxNdx = function( arrLength, curDlta){
+                this.validMaxNdx = function( arrLength, curDlta){
                     // NOTE: an array.length is 1 more than actual length: 6.
                     // NOTE: BUT ndx + dltaCur:2 points one beyond ndx
                     // SO says pt to 6 - 1 as the last useable index
@@ -132,10 +132,10 @@ QUnit.module("objLiteral Structure", {
                     return arrLength - curDlta
                 };
                 // deltas
-                this.calcDltaOld = function () {
+                this.calcOldDlta = function () {
                     return this.curNdx - 1 - this.ndx.min
                 };
-                this.calcDltaNew = function () {
+                this.calcNewDlta = function () {
                     return this.ndx.max - (this.curNdx + 1)
                 };
             },
@@ -151,14 +151,14 @@ QUnit.module("objLiteral Structure", {
                 this.dlta.cur = this.const.CUR_DLTA;
                 // config some definitions needed before following calcs.
                 this.ndx.min = this.const.MIN_NDX;
-                this.ndx.max = this.validmaxNdx(collection.length, this.dlta.cur);
+                this.ndx.max = this.validMaxNdx(collection.length, this.dlta.cur);
                 // now the rest
-                this.ndx.old = this.validNdxOld();
-                this.ndx.cur = this.validcurNdx(currentNdx, this.ndx.max);  // already assigned
-                this.ndx.new = this.validNdxNew(currentNdx, this.dlta.cur, this.ndx.max);
+                this.ndx.old = this.validOldNdx();
+                this.ndx.cur = this.validCurNdx(currentNdx, this.ndx.max);  // already assigned
+                this.ndx.new = this.validNewNdx(currentNdx, this.dlta.cur, this.ndx.max);
 
-                this.dlta.old = this.calcDltaOld();
-                this.dlta.new = this.calcDltaNew();
+                this.dlta.old = this.calcOldDlta();
+                this.dlta.new = this.calcNewDlta();
             }
         }
     }
