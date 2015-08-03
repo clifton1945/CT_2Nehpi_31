@@ -67,15 +67,7 @@ QUnit.test(" calc opacity/transparency", function (assert) {
     // Where verses near curNdx have hiOp; near ndxFar have loOp.
     // ndxFar >= 0 if in class:old - already read.
     // ndxFar <= maxNdx if in class:new - haven't read it yet
-    var cut = function setOpacity(curNdx, maxNdx, ndxFar, hiOp, loOp) {
-        // a small ndxDelta means current near top|bottom: i.e, near the extreme.
-        var ndxDelta = curNdx - ndxFar
-            , isCloser2Top = ndxDelta >= 0
-            , opDelta = hiOp - loOp
-            ;
-        return opDelta * ndxDelta / maxNdx
-    };
-    assert.expect(0);
+     assert.expect(0);
     //var ret = cut(10, 10, 10, .8, .2);
     //assert.equal(ret, .2, "EXP at bottom extreme: lowest opacity ");
     //ret = cut(0, 10, 0, .8, .2);
@@ -98,7 +90,7 @@ QUnit.module("objLiteral Structure", {
                     return this.const.MIN_NDX;
                 };
                 this.validOldNdx = function() {
-                    return this.const.MIN_NDX;  // always
+                    return this.const.MIN_NDX;
                 };
                 this.validCurNdx = function(curNdx, maxNdx) {
                     curNdx = (curNdx >= 0 ) ? curNdx : 0;
