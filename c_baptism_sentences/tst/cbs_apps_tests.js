@@ -163,7 +163,7 @@ QUnit.module("objLiteral Structure", {
         }
     }
 });
-QUnit.test("init ndxCur:0", function( assert ){
+QUnit.test("init ndxCur:0", function( assert ){  // might try a ndxCur = -5
     var mv = this.mv;
     mv.config();
     mv.init(0, [0,1,2,3,4,5,6]);
