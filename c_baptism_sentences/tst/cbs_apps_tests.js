@@ -72,9 +72,8 @@ QUnit.test(" calc opacity/transparency", function (assert) {
         var ndxDelta = curNdx - ndxFar
             , isCloser2Top = ndxDelta >= 0
             , opDelta = hiOp - loOp
-            , x = opDelta * ndxDelta / maxNdx
             ;
-        return x
+        return opDelta * ndxDelta / maxNdx
     };
     assert.expect(0);
     //var ret = cut(10, 10, 10, .8, .2);
@@ -92,19 +91,14 @@ QUnit.module("objLiteral Structure", {
                 CUR_DLTA: 2,
                 MIN_NDX: 0
             },
-            min: {}
-            ,
-            old: {}
-            ,
-            cur: {}
-            ,
-            new: {}
-            ,
-            max: {}
-            ,
+            // sub objects
+            min: {}, old: {}, cur: {}, new: {}, max: {},
             config: function () {
+                this.validMinNdx = function() {
+                    return this.const.MIN_NDX;
+                };
                 this.validOldNdx = function() {
-                    return this.min.ndx;  // always
+                    return this.const.MIN_NDX;  // always
                 };
                 this.validCurNdx = function(curNdx, maxNdx) {
                     curNdx = (curNdx >= 0 ) ? curNdx : 0;
@@ -144,7 +138,7 @@ QUnit.module("objLiteral Structure", {
                 this.curNdx = currentNdx;
                 this.cur.dlta = this.const.CUR_DLTA;
                 // config some definitions needed before following calcs.
-                this.min.ndx = this.const.MIN_NDX;
+                this.min.ndx = this.validMinNdx();
                 this.max.ndx = this.validMaxNdx(collection.length, this.cur.dlta);
                 // now the rest
                 this.old.ndx = this.validOldNdx();
