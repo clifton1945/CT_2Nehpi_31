@@ -120,7 +120,6 @@ function OneVerse(currentNdx, collection) {
         // 6 - 1 - dltaCur + 1 === len - dlta
         return collection.length - this.curDlta
     };
-
     this.maxNdx = this.validMaxNdx();  // set here for local use
     // sub objects defined
     this.min = {};
@@ -140,8 +139,8 @@ function OneVerse(currentNdx, collection) {
         currentNdx = (currentNdx <= this.maxNdx ) ? currentNdx : this.maxNdx;
         return currentNdx
     };
-    this.validNewNdx = function (curDlta) {
-        var ndxNew = currentNdx + curDlta
+    this.validNewNdx = function () {
+        var ndxNew = currentNdx + this.curDlta
         // NOTE: e.g. 3 + dlta==2 will have cur:3,4; new:5
             ;
         return ( ndxNew < this.maxNdx) ? ndxNew : this.maxNdx

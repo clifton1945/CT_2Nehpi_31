@@ -231,10 +231,10 @@ QUnit.test("init curNdx:6", function( assert ){
 QUnit.module("class OneVerse tests");
 QUnit.test(" use equal() OneVerse(0, testArray) class", function( assert ) {
     var mv = new OneVerse(0, [0, 1, 2, 3, 4, 5, 6]);
-    assert.equal(mv.min.ndx, 0, "EXP: after .init see .min.ndx");
+    assert.equal(mv.min.ndx, 0, "EXP:  see .min.ndx");
     assert.equal(mv.old.ndx, 0, "EXP: after .init see .old.ndx");
     assert.equal(mv.cur.ndx, 0, "EXP after .init curNdx again this is a repeat test" );
-    assert.equal(mv.new.ndx, 2, "EXP after init see .new.ndx");
+    assert.equal(mv.new.ndx, 2, "EXP .new.ndx");
     assert.equal(mv.max.ndx, 5, "EXP: after .init see .max.ndx");
 });
 QUnit.test("use deepEqual(): OneVerse(2, testArray)", function( assert ){
