@@ -115,10 +115,10 @@ QUnit.module("objLiteral Structure", {
                     return arrLength - curDlta
                 };
                 // deltas
-                this.calcOldDlta = function () {
+                this.validOldDlta = function () {
                     return this.curNdx - 1 - this.min.ndx
                 };
-                this.calcNewDlta = function () {
+                this.validNewDlta = function () {
                     return this.max.ndx - (this.curNdx + 1)
                 };
             },
@@ -140,8 +140,8 @@ QUnit.module("objLiteral Structure", {
                 this.cur.ndx = this.validCurNdx(currentNdx, this.max.ndx);  // already assigned
                 this.new.ndx = this.validNewNdx(currentNdx, this.cur.dlta, this.max.ndx);
 
-                this.old.dlta = this.calcOldDlta();
-                this.new.dlta = this.calcNewDlta();
+                this.old.dlta = this.validOldDlta();
+                this.new.dlta = this.validNewDlta();
             }
         }
     }
@@ -244,7 +244,31 @@ QUnit.test("use deepEqual(): OneVerse(2, testArray)", function( assert ){
     var exp = [2,2,0,0,2,4,5];
     logIt('ret: ' + ret + ' exp: ' + exp);
     assert.deepEqual(ret, exp);
-
 });
+
+QUnit.module("ADD ..Delta to class OneVerse");
+QUnit.test(" use equal() OneVerse(0, testArray) class", function( assert ) {
+    var mv = new OneVerse(0, [0, 1, 2, 3, 4, 5, 6]);
+    var ret = [mv.old.dlta];
+    var exp = [0];
+    logIt('ret: ' + ret + ' exp: ' + exp);
+    assert.deepEqual(ret, exp);
+});
+QUnit.test(" use equal() OneVerse(2, testArray) class", function( assert ) {
+    var mv = new OneVerse(2, [0, 1, 2, 3, 4, 5, 6]);
+    var ret = [mv.old.dlta];
+    var exp = [1];
+    logIt('ret: ' + ret + ' exp: ' + exp);
+    assert.deepEqual(ret, exp);
+});
+QUnit.test(" use equal() OneVerse(5, testArray) class", function( assert ) {
+    var mv = new OneVerse(5, [0, 1, 2, 3, 4, 5, 6]);
+    var ret = [mv.old.dlta];
+    var exp = [4];
+    logIt('ret: ' + ret + ' exp: ' + exp);
+    assert.deepEqual(ret, exp);
+});
+
+
 
 

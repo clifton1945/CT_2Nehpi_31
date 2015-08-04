@@ -38,7 +38,7 @@ function setProgressiveOpacity(ndx, ndxCur, ndxDelta, collection) {
     var maxLng = collection.length
         , opMin = 20
         , opMax = 75
-        , r = 0
+        , r
         ;
     r = ndx / maxLng;
     return roundIt(r)
@@ -99,7 +99,13 @@ function keypressSetNdxCur( event, ptags, ndxCur, ndxDelta ) {
     return ndxCur
 }
 
-function OneVerse(currentNdx, collection) {
+/**
+ * class:
+ * @param currrentNdx: the current index of a collection. e.g. a verse.
+ * @param collection: typically a jQuery selection of <p> verses.
+ * @constructor
+ */
+function OneVerse(currrentNdx, collection) {
     this.const = {
         CUR_DLTA: 2,
         MIN_NDX: 0
@@ -109,7 +115,7 @@ function OneVerse(currentNdx, collection) {
     this.old = {};
     this.cur = {};
     this.new = {};
-    //TODO  HEY can't usE 'new'
+    //TODO  HEY DO NOT usE 'new'
     this.max = {};
     //validMinNdx: function validMinNdx() {
     //    return this.const.MIN_NDX;
@@ -140,31 +146,35 @@ function OneVerse(currentNdx, collection) {
         return arrLength - curDlta
     };
     // deltas
-    this.calcOldDlta = function () {
-        return this.curNdx - 1 - this.min.ndx
+    this.validOldDlta = function () {
+        var r = currrentNdx - 1 - this.min.ndx;
+        return (r > 0 ? r : 0)
     };
-    this.calcNewDlta = function () {return this.max.ndx - (this.curNdx + 1)};
+    this.validNewDlta = function () {
+        var max = this.max.ndx;
+        var ret = max - currrentNdx + 1;
+        return (ret > max) ? ret : max
+    };
     /**
      *  except for the two params, all other indexs ans deltas are communicated.
-     * @param currentNdx: the index of the current verse.
+     * @param currrentNdx: the index of the current verse.
      * @param collection: the verses [<p> tags] of the chapter being read.
      */
         // local globals EARLY. They are used in .config
     this.verses = collection;
-    this.curNdx = currentNdx;
+    this.curNdx = currrentNdx;
     this.cur.dlta = this.const.CUR_DLTA;
     // config some definitions needed before following calcs.
     this.min.ndx = this.validMinNdx();
     this.max.ndx = this.validMaxNdx(collection.length, this.cur.dlta);
     // now the rest
     this.old.ndx = this.validOldNdx();
-    this.cur.ndx = this.validCurNdx(currentNdx, this.max.ndx);  // already assigned
-    this.new.ndx = this.validNewNdx(currentNdx, this.cur.dlta, this.max.ndx);
+    this.cur.ndx = this.validCurNdx(currrentNdx, this.max.ndx);  // already assigned
+    this.new.ndx = this.validNewNdx(currrentNdx, this.cur.dlta, this.max.ndx);
 
-    this.old.dlta = this.calcOldDlta();
-    this.new.dlta = this.calcNewDlta();
+    this.old.dlta = this.validOldDlta();
+    this.new.dlta = this.validNewDlta();
 }
-
 
 /**
  * sets a verse's read class to old:have read, current: am reading or new: have not read.
@@ -223,7 +233,7 @@ function read (collection, ndxCur, ndxDelta) {
 
 var main;
 main = function () {
-    bindHandlers();
+    new bindHandlers();
 };
 
 $(document).ready(main);
