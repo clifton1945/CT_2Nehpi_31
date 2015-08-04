@@ -110,37 +110,41 @@ function OneVerse(currentNdx, collection) {
         CUR_DLTA: 2,
         MIN_NDX: 0
     };
-    // sub objects
+    // local GLOLBALS
+    this.curDlta = this.const.CUR_DLTA;
+    this.validMaxNdx = function () {
+        // NOTE: an array.length is 1 more than actual length: 6.
+        // NOTE: BUT ndx + dltaCur:2 points one beyond ndx
+        // SO says pt to 6 - 1 as the last useable index
+        // THEN subtract just 1 more place to accomodate the dltaCur
+        // 6 - 1 - dltaCur + 1 === len - dlta
+        return collection.length - this.curDlta
+    };
+
+    this.maxNdx = this.validMaxNdx();  // set here for local use
+    // sub objects defined
     this.min = {};
     this.old = {};
     this.cur = {};
-    this.new = {};
-    //TODO  HEY DO NOT usE 'new'
+    this.new = {};  //TODO  HEY DO NOT usE 'new'
     this.max = {};
+    // methods
     this.validMinNdx = function () {
         return this.const.MIN_NDX;
     };
     this.validOldNdx = function () {
         return this.const.MIN_NDX;
     };
-    this.validCurNdx = function (maxNdx) {
+    this.validCurNdx = function () {
         currentNdx = (currentNdx >= 0 ) ? currentNdx : 0;
-        currentNdx = (currentNdx <= maxNdx ) ? currentNdx : maxNdx;
+        currentNdx = (currentNdx <= this.maxNdx ) ? currentNdx : this.maxNdx;
         return currentNdx
     };
-    this.validNewNdx = function (curDlta, maxNdx) {
+    this.validNewNdx = function (curDlta) {
         var ndxNew = currentNdx + curDlta
         // NOTE: e.g. 3 + dlta==2 will have cur:3,4; new:5
             ;
-        return ( ndxNew < maxNdx) ? ndxNew : maxNdx
-    };
-    this.validMaxNdx = function (arrLength, curDlta) {
-        // NOTE: an array.length is 1 more than actual length: 6.
-        // NOTE: BUT ndx + dltaCur:2 points one beyond ndx
-        // SO says pt to 6 - 1 as the last useable index
-        // THEN subtract just 1 more place to accomodate the dltaCur
-        // 6 - 1 - dltaCur + 1 === len - dlta
-        return arrLength - curDlta
+        return ( ndxNew < this.maxNdx) ? ndxNew : this.maxNdx
     };
     // delta: count of index's BETWEEN  currentNdx and endpoints.
     this.validOldDlta = function () {
@@ -148,22 +152,13 @@ function OneVerse(currentNdx, collection) {
         return (r > 0 ? r : 0)
     };
     this.validNewDlta = function () {
-        var max = this.max.ndx;
-        var dlt = max - currentNdx + 1;
+        var dlt = this.maxNdx - currentNdx + 1;
         return (dlt > 0) ? dlt : 0
     };
-    /**
-     *  except for the two params, all other indexs ans deltas are communicated.
-     * @param currrentNdx: the index of the current verse.
-     * @param collection: the verses [<p> tags] of the chapter being read.
-     */
-        // local globals EARLY. They are used in .config
-    //this.verses = collection;
-    //this.curNdx = currentNdx;
-    this.cur.dlta = this.const.CUR_DLTA;
+    this.cur.dlta = self.curDlta;
     // config some definitions needed before following calcs.
     this.min.ndx = this.validMinNdx();
-    this.max.ndx = this.validMaxNdx(collection.length, this.cur.dlta);
+    this.max.ndx = this.maxNdx;  // already defined
     // now the rest
     this.old.ndx = this.validOldNdx();
     this.cur.ndx = this.validCurNdx(this.max.ndx);  // already assigned
