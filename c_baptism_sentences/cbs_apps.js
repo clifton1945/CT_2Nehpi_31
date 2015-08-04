@@ -101,11 +101,11 @@ function keypressSetNdxCur( event, ptags, ndxCur, ndxDelta ) {
 
 /**
  * class:
- * @param currrentNdx: the current index of a collection. e.g. a verse.
+ * @param currentNdx: the current index of a collection. e.g. a verse.
  * @param collection: typically a jQuery selection of <p> verses.
  * @constructor
  */
-function OneVerse(currrentNdx, collection) {
+function OneVerse(currentNdx, collection) {
     this.const = {
         CUR_DLTA: 2,
         MIN_NDX: 0
@@ -117,22 +117,19 @@ function OneVerse(currrentNdx, collection) {
     this.new = {};
     //TODO  HEY DO NOT usE 'new'
     this.max = {};
-    //validMinNdx: function validMinNdx() {
-    //    return this.const.MIN_NDX;
-    //},
     this.validMinNdx = function () {
         return this.const.MIN_NDX;
     };
     this.validOldNdx = function () {
         return this.const.MIN_NDX;
     };
-    this.validCurNdx = function (curNdx, maxNdx) {
-        curNdx = (curNdx >= 0 ) ? curNdx : 0;
-        curNdx = (curNdx <= maxNdx ) ? curNdx : maxNdx;
-        return curNdx
+    this.validCurNdx = function (maxNdx) {
+        currentNdx = (currentNdx >= 0 ) ? currentNdx : 0;
+        currentNdx = (currentNdx <= maxNdx ) ? currentNdx : maxNdx;
+        return currentNdx
     };
-    this.validNewNdx = function (curNdx, curDlta, maxNdx) {
-        var ndxNew = curNdx + curDlta
+    this.validNewNdx = function (curDlta, maxNdx) {
+        var ndxNew = currentNdx + curDlta
         // NOTE: e.g. 3 + dlta==2 will have cur:3,4; new:5
             ;
         return ( ndxNew < maxNdx) ? ndxNew : maxNdx
@@ -145,15 +142,15 @@ function OneVerse(currrentNdx, collection) {
         // 6 - 1 - dltaCur + 1 === len - dlta
         return arrLength - curDlta
     };
-    // deltas
+    // delta: count of index's BETWEEN  currentNdx and endpoints.
     this.validOldDlta = function () {
-        var r = currrentNdx - 1 - this.min.ndx;
+        var r = currentNdx - 1 - this.min.ndx;
         return (r > 0 ? r : 0)
     };
     this.validNewDlta = function () {
         var max = this.max.ndx;
-        var ret = max - currrentNdx + 1;
-        return (ret > max) ? ret : max
+        var dlt = max - currentNdx + 1;
+        return (dlt > 0) ? dlt : 0
     };
     /**
      *  except for the two params, all other indexs ans deltas are communicated.
@@ -161,19 +158,22 @@ function OneVerse(currrentNdx, collection) {
      * @param collection: the verses [<p> tags] of the chapter being read.
      */
         // local globals EARLY. They are used in .config
-    this.verses = collection;
-    this.curNdx = currrentNdx;
+    //this.verses = collection;
+    //this.curNdx = currentNdx;
     this.cur.dlta = this.const.CUR_DLTA;
     // config some definitions needed before following calcs.
     this.min.ndx = this.validMinNdx();
     this.max.ndx = this.validMaxNdx(collection.length, this.cur.dlta);
     // now the rest
     this.old.ndx = this.validOldNdx();
-    this.cur.ndx = this.validCurNdx(currrentNdx, this.max.ndx);  // already assigned
-    this.new.ndx = this.validNewNdx(currrentNdx, this.cur.dlta, this.max.ndx);
+    this.cur.ndx = this.validCurNdx(this.max.ndx);  // already assigned
+    this.new.ndx = this.validNewNdx(this.cur.dlta, this.max.ndx);
 
     this.old.dlta = this.validOldDlta();
     this.new.dlta = this.validNewDlta();
+    //
+    this.properties = {};
+
 }
 
 /**

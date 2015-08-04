@@ -247,26 +247,26 @@ QUnit.test("use deepEqual(): OneVerse(2, testArray)", function( assert ){
 });
 
 QUnit.module("ADD ..Delta to class OneVerse");
-QUnit.test(" use equal() OneVerse(0, testArray) class", function( assert ) {
+QUnit.test(" OneVerse(0, testArray) class", function( assert ) {
     var mv = new OneVerse(0, [0, 1, 2, 3, 4, 5, 6]);
     var ret = [mv.old.dlta];
     var exp = [0];
     logIt('ret: ' + ret + ' exp: ' + exp);
-    assert.deepEqual(ret, exp);
+    assert.deepEqual(ret, exp, "EXP a 0 delta for ndx 0");
 });
-QUnit.test(" use equal() OneVerse(2, testArray) class", function( assert ) {
+QUnit.test(" OneVerse(2, testArray) class", function( assert ) {
     var mv = new OneVerse(2, [0, 1, 2, 3, 4, 5, 6]);
     var ret = [mv.old.dlta];
     var exp = [1];
     logIt('ret: ' + ret + ' exp: ' + exp);
     assert.deepEqual(ret, exp);
 });
-QUnit.test(" use equal() OneVerse(5, testArray) class", function( assert ) {
+QUnit.test(" OneVerse(5, testArray) class", function( assert ) {
     var mv = new OneVerse(5, [0, 1, 2, 3, 4, 5, 6]);
-    var ret = [mv.old.dlta];
-    var exp = [4];
+    var ret = [mv.old.dlta, mv.new.dlta];
+    var exp = [4, 0];
     logIt('ret: ' + ret + ' exp: ' + exp);
-    assert.deepEqual(ret, exp);
+    assert.deepEqual(ret, exp, "EXP largest old.delta & 0 new.dlta");
 });
 
 
