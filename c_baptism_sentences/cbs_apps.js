@@ -151,7 +151,7 @@ function OneVerse(currentNdx, collection) {
         return (r > 0 ? r : 0)
     };
     this.validNewDlta = function () {
-        var dlt = this.maxNdx - currentNdx + 1;
+        var dlt = this.maxNdx - currentNdx;
         return (dlt > 0) ? dlt : 0
     };
     this.cur.dlta = self.curDlta;
