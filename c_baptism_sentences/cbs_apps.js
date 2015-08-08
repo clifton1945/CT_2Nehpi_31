@@ -18,7 +18,7 @@ function KeyLogger( target ) {
  */
 
 // GLOBALS
-var INDX_DELTA = 2
+var INDX_DELTA = 1
     ;
 //UTILITIES
 function roundIt(num, dPt){
