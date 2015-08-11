@@ -11,6 +11,8 @@
     font-weight: bold
 }
 .cur {
+    position: fixed;
+    top: 50%;
     color: #0cff41;
 }
 #toRed {

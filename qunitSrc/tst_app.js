@@ -8,15 +8,15 @@ QUnit.test("title.slice(0,5)", function (assert) {
 QUnit.module("in tst_index");
 QUnit.test( "see css old modified by css", function( assert ) {
     var $curs = $(".cur");
-    assert.equal($curs.length, 2);
-    assert.equal($curs.html().slice(0,5), 'first', "EXP 1st para first word.")
+    assert.equal($curs.length, 1);
+    var $p = $(".cur p");
+    assert.equal($p.length, 2);
+    assert.equal($p.html().slice(0,5), 'first', "EXP 1st para first word.")
 });
-QUnit.test( "modify css old modified by css", function( assert ) {
-    var $curs = $(".cur");
-    var $lst = $("p.cur:last");
-
-    var nwColor = $lst.attr( 'id', 'toRed');  // does set color but don't see it in a test.
-    //location.reload();
-    assert.equal($lst.html().slice(0,5), 'Secon', "EXP: the last cur elem");
+QUnit.test( "add id to affect css change.", function( assert ) {
+    // html5 doesn't like adding style to elements.
+    var $lst = $(".cur p:last");
+    $lst.attr( 'id', 'toRed');  // does set color but don't see it in a test.
+    assert.equal($lst.attr('id'), 'toRed', "EXP: if of 'Second class cur' >> 'toRed'");
 });
 
