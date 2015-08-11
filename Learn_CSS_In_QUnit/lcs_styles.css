@@ -1,0 +1,40 @@
+*{
+	/* Page reset */
+	margin:0;
+	padding:0;
+}
+
+body{
+	/* Body Styles */
+	font-size:12px;
+	color:#666;
+	background-color:#f8f8f8;
+	font-family:Arial, Helvetica, sans-serif;
+	height: 3000px;		// 3000px
+}
+
+#iAmFixed{
+	background-color:#F6E4F5;
+	border:1px solid white;
+	bottom:40%;		// 15px
+	padding:15px;
+	position:fixed;
+	/*right:200px;		// 95*/
+	height: 25%;
+	width:100%;	// 300px
+	margin: auto;  		// not in original and does not center the div
+	/*height: 1500;	// no height, inherited from body???*/
+	z-index: 20;
+}
+.console {
+	position: fixed;
+	bottom: 0;
+	background: #333;
+	left: 0;
+	right: 0;
+	padding: 5px;
+	color: #FFF
+}
+.console b {
+	font-weight: bold
+}

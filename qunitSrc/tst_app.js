@@ -16,7 +16,7 @@ QUnit.test( "see css old modified by css", function( assert ) {
 QUnit.test( "add id to affect css change.", function( assert ) {
     // html5 doesn't like adding style to elements.
     var $lst = $(".cur p:last");
-    $lst.attr( 'id', 'toRed');  // does set color but don't see it in a test.
+    $lst.attr( 'id', 'toRed');
     assert.equal($lst.attr('id'), 'toRed', "EXP: if of 'Second class cur' >> 'toRed'");
 });
 

@@ -12,7 +12,7 @@
 }
 .cur {
     position: fixed;
-    top: 50%;
+    bottom: 25%;
     color: #0cff41;
 }
 #toRed {
