@@ -26,6 +26,12 @@ body{
 	/*height: 1500;	// no height, inherited from body???*/
 	z-index: 20;
 }
+div.cur {
+	background-color: rgb(245, 255, 191);
+}
+div.new {
+    background-color: rgb(255, 198, 245);
+}
 .console {
 	position: fixed;
 	bottom: 0;
