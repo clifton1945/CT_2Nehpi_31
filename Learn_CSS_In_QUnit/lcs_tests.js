@@ -17,7 +17,30 @@ QUnit.test("paragraph.slice(1,3)", function (assert) {
 QUnit.test("paragraph.as array", function (assert) {
     var ary = $("p").toArray();
     assert.expect(2);
-    assert.equal(ary.length, 14);
     assert.equal(ary[2].innerHTML.slice(0, 8), '3 For my');
+    assert.equal(ary[2].outerHTML.slice(0, 8), "<p id=\"3");
 });
+QUnit.test("compare lengths.", function (assert) {
+    assert.equal($('p').length, 7);
+    assert.equal($('p').toArray().length, 7);
+});
+QUnit.test("QUnit adds an extra <p>: length is 6 not 7 <p>s.", function (assert) {
+    assert.equal($('p').length, 7);
+    assert.equal($('p').toArray().length, 7);
+    var ary = $('p').toArray();
+    assert.equal(ary[5].outerHTML.slice(0,15), "<p id=\"6\">6 And"
+    , "EXP the last <p>. ");
+    assert.equal(ary[6].outerHTML.slice(0,15)
+        , '<p id=\"qunit-te', "EXP: qunit adds another <p>");
+});
+QUnit.test("wrap pararaphs with a <div>", function (assert) {
+    // TODO: FIGURE OUT WHAT selector.add(x) adds EACH element of selector
+    // look out selector.wrap(x) wraps EACH element of selector
+    // look out selector.append(x) append EACH element of selector
+    var ary = $("p").toArray();
+    assert.expect(2);
+    assert.equal(ary[2].innerHTML.slice(0, 8), '3 For my');
+    assert.equal(ary[2].outerHTML.slice(0, 8), "<p id=\"3");
+});
+
 
