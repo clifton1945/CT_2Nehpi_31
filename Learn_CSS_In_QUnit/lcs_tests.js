@@ -51,11 +51,12 @@ QUnit.test("wrap pararaphs with a <div>", function (assert) {
     assert.equal($p.length, 7, "EXP to see all of them.");
     assert.equal($("div.new").length, 1, 'EXP one div.');
     assert.equal($("div.new p").length, 4, 'EXP two <p> in the div.new');
+    $("p#5, p#6").wrapAll("<div class='new'></div>");
+    assert.equal($("div.new").length, 2, 'EXP leftover 34 AND 56 TWO div.cur. MUST unwrap() the leftovers.');
     $("p#3, p#4").unwrap();
     $("p#3, p#4").wrapAll("<div class='cur'></div>");
-    $("p#5, p#6").wrapAll("<div class='new'></div>");
     assert.equal($p.length, 7, "EXP to see all of them.");
-    assert.equal($("div.cur").length, 1, 'EXP 34 one div.cur');
+    assert.equal($("div.cur").length, 1, 'EXP the rewrapped 34 in one div.cur');
     assert.equal($("div.cur p").length, 2, 'EXP 34 two <p> in the div cur');
     assert.equal($("div.new").length, 1, 'EXP 56 one div.new');
     assert.equal($("div.new p").length, 2, 'EXP 56 two <p> in the div new');
