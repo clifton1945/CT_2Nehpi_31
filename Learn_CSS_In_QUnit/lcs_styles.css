@@ -13,7 +13,7 @@ body{
 	height: 3000px;		// 3000px
 }
 
-#iAmFixed{
+#iAmFixed {
 	background-color:#F6E4F5;
 	border:1px solid white;
 	bottom:40%;		// 15px
@@ -28,17 +28,17 @@ body{
 }
 div.old {
 	position: fixed;
-	top: 650px;
+	top: 500px;
 	background-color: rgb(170, 255, 161);
 }
 div.cur {
 	position: fixed;
-	top:  850px;
+	top:  700px;
 	background-color: rgb(245, 255, 191);
 }
 div.new {
 	position: fixed;
-	top:  1050px;
+	top:  1000px;
 	background-color: rgb(255, 198, 245);
 }
 .console {
