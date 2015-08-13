@@ -74,11 +74,9 @@ function bindHandlers() {
             read(ptags, ndxCur, ndxDelta);
         }
     });
-    $('body').on({
-        keypress: function (e) {
+    $('body').on('keypress', function (e) {
             ndxCur = keypressSetNdxCur(e, ptags, ndxCur, ndxDelta);
             read(ptags, ndxCur, ndxDelta);
-    }
 });
 }
 
@@ -110,7 +108,7 @@ function OneVerse(currentNdx, collection) {
         CUR_DLTA: 2,
         MIN_NDX: 0
     };
-    // local GLOLBALS
+    // local GLOBALS
     this.curDlta = this.const.CUR_DLTA;
     this.validMaxNdx = function () {
         // NOTE: an array.length is 1 more than actual length: 6.
