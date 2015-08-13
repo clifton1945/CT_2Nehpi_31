@@ -26,11 +26,20 @@ body{
 	/*height: 1500;	// no height, inherited from body???*/
 	z-index: 20;
 }
+div.old {
+	position: fixed;
+	top: 650px;
+	background-color: rgb(170, 255, 161);
+}
 div.cur {
+	position: fixed;
+	top:  850px;
 	background-color: rgb(245, 255, 191);
 }
 div.new {
-    background-color: rgb(255, 198, 245);
+	position: fixed;
+	top:  1050px;
+	background-color: rgb(255, 198, 245);
 }
 .console {
 	position: fixed;
